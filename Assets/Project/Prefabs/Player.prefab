@@ -123,7 +123,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4138404676430748956}
   - component: {fileID: 5228467867432667315}
-  - component: {fileID: 4108577402209382066}
+  - component: {fileID: 6968320629646208548}
+  - component: {fileID: 4285852636140555109}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -171,8 +172,8 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4108577402209382066
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &6968320629646208548
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -181,6 +182,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 8795643183060070249}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aacbab1a3b9cf3e4abb54c5238acea7c, type: 3}
+  m_Script: {fileID: 11500000, guid: 446fbcf9209e4f7d93d1a7cc06633657, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MovementComponent
+  m_EditorClassIdentifier: Assembly-CSharp::Project.Code.Gameplay.Player.TopDownMovementComponent
+  moveSpeed: 6
+--- !u!114 &4285852636140555109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8795643183060070249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69e08df6644453f468e36283130b47c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Project.Code.Gameplay.Player.PlayerInputHandler
