@@ -6,37 +6,42 @@ namespace Project.Code.Gameplay.Player
 {
     public class PlayerInputHandler : MonoBehaviour
     {
+        public event Action OnDashPerformed;
+        public event Action OnSimpleAttackPerformed;
+        public event Action OnSpecialAttackPerformed;
+        
+        public event Action<Vector2> OnMoveInputChanged;
+        
         public Vector2 MoveInput { get; private set; }
-        public bool DashTriggered { get; private set; }
-        public bool SimpleAttackTriggered { get; private set; }
-        public bool SpecialAttackTriggered { get; private set;}
         
         private PlayerControls _controls;
         
         private void Awake()
         {
             _controls = new PlayerControls();
-            
-            // Move
-            _controls.Player.Move.performed += ctx => MoveInput = ctx.ReadValue<Vector2>();
-            _controls.Player.Move.canceled += ctx => MoveInput = Vector2.zero;
-
-            // Dash
-            _controls.Player.Dash.performed += ctx => DashTriggered = true;
-
-            // Attacks
-            _controls.Player.SimpleAttack.performed += ctx => SimpleAttackTriggered = true;
-            _controls.Player.SpecialAttack.performed += ctx => SpecialAttackTriggered = true;
+            BindInputActions();
         }
 
-        private void OnEnable() => _controls.Enable();
-        private void OnDisable() => _controls.Disable();
-
-        private void LateUpdate()
+        private void BindInputActions()
         {
-            DashTriggered = false;
-            SimpleAttackTriggered = false;
-            SpecialAttackTriggered = false;
+            _controls.Player.Move.performed += ctx => 
+            {
+                MoveInput = ctx.ReadValue<Vector2>();
+                OnMoveInputChanged?.Invoke(MoveInput);
+            };
+            
+            _controls.Player.Move.canceled += ctx => 
+            {
+                MoveInput = Vector2.zero;
+                OnMoveInputChanged?.Invoke(MoveInput);
+            };
+
+            _controls.Player.Dash.performed += ctx => OnDashPerformed?.Invoke();
+            _controls.Player.SimpleAttack.performed += ctx => OnSimpleAttackPerformed?.Invoke();
+            _controls.Player.SpecialAttack.performed += ctx => OnSpecialAttackPerformed?.Invoke();
         }
+
+        private void OnEnable() => _controls?.Enable();
+        private void OnDisable() => _controls?.Disable();
     }
 }
