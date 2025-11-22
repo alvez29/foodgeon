@@ -64,7 +64,7 @@ namespace InputActions
     ///         Debug.Log($"OnMove: {context.ReadValue&lt;Vector2&gt;()}");
     ///     }
     ///
-    ///     // Invoked when "Attack" action is either started, performed or canceled.
+    ///     // Invoked when "Ability" action is either started, performed or canceled.
     ///     public void OnAttack(InputAction.CallbackContext context)
     ///     {
     ///         Debug.Log($"OnAttack: {context.ReadValue&lt;float&gt;()}");

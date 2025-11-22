@@ -1,35 +1,36 @@
-﻿using UnityEngine;
+﻿using Project.Code.Core;
+using UnityEngine;
+using Project.Code.Gameplay.Stats;
 
 namespace Project.Code.Gameplay.Player
 {
     [RequireComponent(typeof(CharacterController))]
     [RequireComponent(typeof(PlayerInputHandler))]
+    [RequireComponent(typeof(BaseStats))]
     public class MovementComponent : MonoBehaviour
     {
-        [Header("Movement Setting")]
-        [SerializeField] private float moveSpeed = 6f;
+        [Header("Movement Setting")] 
+        [SerializeField] private float moveSpeed = 0f;
         [SerializeField] private float acceleration = 3f;
         [SerializeField] private float deceleration = 12f;
         [SerializeField] private float rotationSpeed = 10f;
-
-        public float CurrentSpeed => _currentSpeed;
-        public Vector3 MoveDirection => _moveDirection;
-        public bool IsMoving => _currentSpeed > MovementInputThreshold;
-
-        private const float MovementInputThreshold = 0.001f;
         
-        private Vector3 _moveDirection = Vector3.zero;
+        private float CurrentSpeed { get; set; } = 0f;
+        public Vector3 MoveDirection { get; private set; } = Vector3.zero;
+        public bool IsMoving => CurrentSpeed > Constants.Movement.MovementInputThreshold;
+
         private Vector3 _targetDirection = Vector3.zero;
-        private float _currentSpeed = 0f;
         private float _targetSpeed = 0f;
-        
+
         private CharacterController _controller;
         private PlayerInputHandler _inputHandler;
+        private BaseStats _stats;
 
         private void Awake()
         {
             _controller = GetComponent<CharacterController>();
             _inputHandler = GetComponent<PlayerInputHandler>();
+            _stats = GetComponent<BaseStats>();
         }
 
         private void OnEnable()
@@ -45,11 +46,19 @@ namespace Project.Code.Gameplay.Player
         private void HandleMoveInputChanged(Vector2 input)
         {
             var inputMagnitude = Mathf.Clamp01(input.magnitude);
-            
-            if (inputMagnitude > MovementInputThreshold)
+
+            if (inputMagnitude > Constants.Movement.MovementInputThreshold)
             {
                 _targetDirection = new Vector3(input.x, 0f, input.y).normalized;
-                _targetSpeed = moveSpeed * inputMagnitude;
+
+                var finalSpeed = moveSpeed;
+                
+                if (_stats != null)
+                {
+                    finalSpeed = _stats.Speed;
+                }
+
+                _targetSpeed = finalSpeed * inputMagnitude;
             }
             else
             {
@@ -64,32 +73,26 @@ namespace Project.Code.Gameplay.Player
 
         private void UpdateMovement()
         {
-            var speedChange = _targetSpeed > _currentSpeed ? acceleration : deceleration;
-            _currentSpeed = Mathf.Lerp(_currentSpeed, _targetSpeed, speedChange * Time.deltaTime);
-            
-            if (_currentSpeed > MovementInputThreshold)
+            var speedChange = _targetSpeed > CurrentSpeed ? acceleration : deceleration;
+            CurrentSpeed = Mathf.Lerp(CurrentSpeed, _targetSpeed, speedChange * Time.deltaTime);
+
+            if (CurrentSpeed > Constants.Movement.MovementInputThreshold)
             {
-                _moveDirection = _targetDirection;
-                
+                MoveDirection = _targetDirection;
+
                 transform.rotation = Quaternion.Slerp(
                     transform.rotation,
-                    Quaternion.LookRotation(_moveDirection),
+                    Quaternion.LookRotation(MoveDirection),
                     rotationSpeed * Time.deltaTime
                 );
             }
-            
-            _controller.Move(_moveDirection * (_currentSpeed * Time.deltaTime));
+
+            _controller.Move(MoveDirection * (CurrentSpeed * Time.deltaTime));
         }
 
         public void SetSpeedMultiplier(float multiplier)
         {
-            _targetSpeed = moveSpeed * multiplier;
-        }
-
-        public void StopMovement()
-        {
-            _currentSpeed = 0f;
-            _targetSpeed = 0f;
+            _targetSpeed *= multiplier;
         }
     }
 }

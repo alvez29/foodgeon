@@ -9,7 +9,6 @@ namespace Project.Code.Gameplay.Player
         public event Action OnDashPerformed;
         public event Action OnSimpleAttackPerformed;
         public event Action OnSpecialAttackPerformed;
-        
         public event Action<Vector2> OnMoveInputChanged;
         
         public Vector2 MoveInput { get; private set; }

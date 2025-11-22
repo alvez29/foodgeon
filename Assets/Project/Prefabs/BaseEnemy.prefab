@@ -67,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 1959414bd899f3b48997556ba4de673d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -123,13 +123,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4138404676430748956}
   - component: {fileID: 5228467867432667315}
-  - component: {fileID: 6968320629646208548}
-  - component: {fileID: 3165333103404173559}
-  - component: {fileID: 4285852636140555109}
-  - component: {fileID: 8627007030139879710}
-  - component: {fileID: 2236198029094256216}
+  - component: {fileID: 552116809821826495}
   m_Layer: 0
-  m_Name: Player
+  m_Name: BaseEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -176,7 +172,7 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &6968320629646208548
+--- !u!114 &552116809821826495
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -185,92 +181,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8795643183060070249}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 446fbcf9209e4f7d93d1a7cc06633657, type: 3}
+  m_Script: {fileID: 11500000, guid: a829c00d1ac24e29b97bcc9fc83651e0, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Project.Code.Gameplay.Player.TopDownMovementComponent
-  moveSpeed: 6
-  acceleration: 3
-  deceleration: 12
-  rotationSpeed: 10
---- !u!114 &3165333103404173559
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8795643183060070249}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85ee1f686bcf42cdad3de4df8f06de7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Project.Code.Gameplay.Player.PlayerDashAbility
-  dashDistance: 5
-  dashDuration: 0.2
-  dashCooldown: 1
-  dashCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!114 &4285852636140555109
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8795643183060070249}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69e08df6644453f468e36283130b47c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Project.Code.Gameplay.Player.PlayerInputHandler
---- !u!114 &8627007030139879710
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8795643183060070249}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d80d1b1582147b58a3a2a1fa6575efb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Project.Code.Gameplay.Player.PlayerStats
+  m_EditorClassIdentifier: Assembly-CSharp::Project.Code.Gameplay.Enemies.EnemyStats
   _maxHealth: 100
   _strength: 10
   _defense: 5
   _speed: 5
-  evolutionStage: 1
---- !u!114 &2236198029094256216
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8795643183060070249}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ee321f759edfd6479c47bfe454692cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Project.Code.Gameplay.Combat.AbilitySystem
-  basicAttack: {fileID: 11400000, guid: c31282a53d7042c43b4092a3d95d631c, type: 2}
-  specialAttack: {fileID: 0}
+  flavor: 0
+  reward: {fileID: 0}
