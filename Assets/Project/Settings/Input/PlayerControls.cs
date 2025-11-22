@@ -64,10 +64,10 @@ namespace InputActions
     ///         Debug.Log($"OnMove: {context.ReadValue&lt;Vector2&gt;()}");
     ///     }
     ///
-    ///     // Invoked when "Ability" action is either started, performed or canceled.
-    ///     public void OnAbility(InputAction.CallbackContext context)
+    ///     // Invoked when "Attack" action is either started, performed or canceled.
+    ///     public void OnAttack(InputAction.CallbackContext context)
     ///     {
-    ///         Debug.Log($"OnAbility: {context.ReadValue&lt;float&gt;()}");
+    ///         Debug.Log($"OnAttack: {context.ReadValue&lt;float&gt;()}");
     ///     }
     ///
     ///     #endregion
@@ -113,7 +113,7 @@ namespace InputActions
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""SimpleAbility"",
+                    ""name"": ""SimpleAttack"",
                     ""type"": ""Button"",
                     ""id"": ""3cb3a4f9-20b6-4dd2-8c3a-6b64526ed59e"",
                     ""expectedControlType"": """",
@@ -122,13 +122,22 @@ namespace InputActions
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""SpecialAbility"",
+                    ""name"": ""SpecialAttack"",
                     ""type"": ""Button"",
                     ""id"": ""f27c59ca-9dc5-4eb1-99da-a55e9aab47d1"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Aim"",
+                    ""type"": ""Value"",
+                    ""id"": ""a793fa29-260c-47eb-8ca5-2e1d824903b3"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -161,7 +170,7 @@ namespace InputActions
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SimpleAbility"",
+                    ""action"": ""SimpleAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -172,18 +181,18 @@ namespace InputActions
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SimpleAbility"",
+                    ""action"": ""SimpleAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""1691eb70-59be-485c-8e1f-28f1dfa6618f"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""id"": ""a9061cb6-88d7-464b-8614-ca88f0d1c608"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SimpleAbility"",
+                    ""action"": ""SimpleAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -310,12 +319,23 @@ namespace InputActions
                 },
                 {
                     ""name"": """",
+                    ""id"": ""1691eb70-59be-485c-8e1f-28f1dfa6618f"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SpecialAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""c75bf85d-1a2a-4202-ac35-7b477d7145aa"",
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SpecialAbility"",
+                    ""action"": ""SpecialAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -326,20 +346,64 @@ namespace InputActions
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SpecialAbility"",
+                    ""action"": ""SpecialAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""a9061cb6-88d7-464b-8614-ca88f0d1c608"",
-                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""name"": ""2D Vector"",
+                    ""id"": ""5a8f4d01-3109-4ad4-9d46-16611a910e1b"",
+                    ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SpecialAbility"",
-                    ""isComposite"": false,
+                    ""action"": ""Aim"",
+                    ""isComposite"": true,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""f6f406da-b228-4f1f-8b50-bebab9ff0172"",
+                    ""path"": ""<Gamepad>/rightStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""50de5c45-7334-434b-aa96-30b8883a0343"",
+                    ""path"": ""<Gamepad>/rightStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""7be88ef1-6db0-43b6-bde5-cc40494150c4"",
+                    ""path"": ""<Gamepad>/rightStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""9f8e6e01-8f9c-4b59-a351-1c438610c490"",
+                    ""path"": ""<Gamepad>/rightStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -350,8 +414,9 @@ namespace InputActions
             m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
             m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
             m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
-            m_Player_SimpleAbility = m_Player.FindAction("SimpleAbility", throwIfNotFound: true);
-            m_Player_SpecialAbility = m_Player.FindAction("SpecialAbility", throwIfNotFound: true);
+            m_Player_SimpleAttack = m_Player.FindAction("SimpleAttack", throwIfNotFound: true);
+            m_Player_SpecialAttack = m_Player.FindAction("SpecialAttack", throwIfNotFound: true);
+            m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
         }
 
         ~@PlayerControls()
@@ -434,8 +499,9 @@ namespace InputActions
         private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
         private readonly InputAction m_Player_Move;
         private readonly InputAction m_Player_Dash;
-        private readonly InputAction m_Player_SimpleAbility;
-        private readonly InputAction m_Player_SpecialAbility;
+        private readonly InputAction m_Player_SimpleAttack;
+        private readonly InputAction m_Player_SpecialAttack;
+        private readonly InputAction m_Player_Aim;
         /// <summary>
         /// Provides access to input actions defined in input action map "Player".
         /// </summary>
@@ -456,13 +522,17 @@ namespace InputActions
             /// </summary>
             public InputAction @Dash => m_Wrapper.m_Player_Dash;
             /// <summary>
-            /// Provides access to the underlying input action "Player/SimpleAbility".
+            /// Provides access to the underlying input action "Player/SimpleAttack".
             /// </summary>
-            public InputAction @SimpleAbility => m_Wrapper.m_Player_SimpleAbility;
+            public InputAction @SimpleAttack => m_Wrapper.m_Player_SimpleAttack;
             /// <summary>
-            /// Provides access to the underlying input action "Player/SpecialAbility".
+            /// Provides access to the underlying input action "Player/SpecialAttack".
             /// </summary>
-            public InputAction @SpecialAbility => m_Wrapper.m_Player_SpecialAbility;
+            public InputAction @SpecialAttack => m_Wrapper.m_Player_SpecialAttack;
+            /// <summary>
+            /// Provides access to the underlying input action "Player/Aim".
+            /// </summary>
+            public InputAction @Aim => m_Wrapper.m_Player_Aim;
             /// <summary>
             /// Provides access to the underlying input action map instance.
             /// </summary>
@@ -495,12 +565,15 @@ namespace InputActions
                 @Dash.started += instance.OnDash;
                 @Dash.performed += instance.OnDash;
                 @Dash.canceled += instance.OnDash;
-                @SimpleAbility.started += instance.OnSimpleAbility;
-                @SimpleAbility.performed += instance.OnSimpleAbility;
-                @SimpleAbility.canceled += instance.OnSimpleAbility;
-                @SpecialAbility.started += instance.OnSpecialAbility;
-                @SpecialAbility.performed += instance.OnSpecialAbility;
-                @SpecialAbility.canceled += instance.OnSpecialAbility;
+                @SimpleAttack.started += instance.OnSimpleAttack;
+                @SimpleAttack.performed += instance.OnSimpleAttack;
+                @SimpleAttack.canceled += instance.OnSimpleAttack;
+                @SpecialAttack.started += instance.OnSpecialAttack;
+                @SpecialAttack.performed += instance.OnSpecialAttack;
+                @SpecialAttack.canceled += instance.OnSpecialAttack;
+                @Aim.started += instance.OnAim;
+                @Aim.performed += instance.OnAim;
+                @Aim.canceled += instance.OnAim;
             }
 
             /// <summary>
@@ -518,12 +591,15 @@ namespace InputActions
                 @Dash.started -= instance.OnDash;
                 @Dash.performed -= instance.OnDash;
                 @Dash.canceled -= instance.OnDash;
-                @SimpleAbility.started -= instance.OnSimpleAbility;
-                @SimpleAbility.performed -= instance.OnSimpleAbility;
-                @SimpleAbility.canceled -= instance.OnSimpleAbility;
-                @SpecialAbility.started -= instance.OnSpecialAbility;
-                @SpecialAbility.performed -= instance.OnSpecialAbility;
-                @SpecialAbility.canceled -= instance.OnSpecialAbility;
+                @SimpleAttack.started -= instance.OnSimpleAttack;
+                @SimpleAttack.performed -= instance.OnSimpleAttack;
+                @SimpleAttack.canceled -= instance.OnSimpleAttack;
+                @SpecialAttack.started -= instance.OnSpecialAttack;
+                @SpecialAttack.performed -= instance.OnSpecialAttack;
+                @SpecialAttack.canceled -= instance.OnSpecialAttack;
+                @Aim.started -= instance.OnAim;
+                @Aim.performed -= instance.OnAim;
+                @Aim.canceled -= instance.OnAim;
             }
 
             /// <summary>
@@ -579,19 +655,26 @@ namespace InputActions
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnDash(InputAction.CallbackContext context);
             /// <summary>
-            /// Method invoked when associated input action "SimpleAbility" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// Method invoked when associated input action "SimpleAttack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
             /// </summary>
             /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-            void OnSimpleAbility(InputAction.CallbackContext context);
+            void OnSimpleAttack(InputAction.CallbackContext context);
             /// <summary>
-            /// Method invoked when associated input action "SpecialAbility" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// Method invoked when associated input action "SpecialAttack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
             /// </summary>
             /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-            void OnSpecialAbility(InputAction.CallbackContext context);
+            void OnSpecialAttack(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "Aim" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnAim(InputAction.CallbackContext context);
         }
     }
 }

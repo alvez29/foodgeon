@@ -128,6 +128,7 @@ GameObject:
   - component: {fileID: 4285852636140555109}
   - component: {fileID: 8627007030139879710}
   - component: {fileID: 2236198029094256216}
+  - component: {fileID: -5896997767505611570}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -255,10 +256,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d80d1b1582147b58a3a2a1fa6575efb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Code.Gameplay.Player.PlayerStats
-  _maxHealth: 100
-  _strength: 10
-  _defense: 5
-  _speed: 5
+  maxHealth: 100
+  strength: 10
+  defense: 5
+  speed: 5
   evolutionStage: 1
 --- !u!114 &2236198029094256216
 MonoBehaviour:
@@ -274,3 +275,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Project.Code.Gameplay.Combat.AbilitySystem
   basicAbility: {fileID: 11400000, guid: c31282a53d7042c43b4092a3d95d631c, type: 2}
   specialAbility: {fileID: 0}
+--- !u!114 &-5896997767505611570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8795643183060070249}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bb9795d60f343743befac0b272f2121, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Project.Code.UI.Combat.HealthBar
+  targetStats: {fileID: 0}
+  healthFill: {fileID: 0}
+  damageFill: {fileID: 0}
+  damageShrinkDelay: 0.5
+  damageShrinkSpeed: 2

@@ -18,7 +18,6 @@ namespace Project.Code.Gameplay.Combat.Abilities.PrimaryAbilities
 
         public override void Activate(GameObject subject)
         {
-            Debug.Log("Scratch Activated"); 
             var userStats = subject.GetComponent<BaseStats>();
             var damage = userStats != null ? userStats.Strength : 10f;
 
@@ -40,11 +39,12 @@ namespace Project.Code.Gameplay.Combat.Abilities.PrimaryAbilities
                 var directionToTarget = (hit.transform.position - origin).normalized;
 
                 if (!(Vector3.Angle(forward, directionToTarget) < angle / 2)) continue;
-                var damageable = hit.GetComponent<IDamageable>();
                 
-                if (damageable == null) continue;
-                damageable.TakeDamage(damage, subject);
-                Debug.Log($"[ScratchAbility] Damaged {hit.name} for {damage}");
+                if (hit.TryGetComponent(out IDamageable damageable))
+                {
+                    damageable.TakeDamage(damage, subject);
+                    Debug.Log($"[ScratchAbility] Damaged {hit.name} for {damage}");
+                }
             }
         }
     }

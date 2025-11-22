@@ -19,6 +19,9 @@ namespace Project.Code.Core
         {
             public const int MaxBelly = 50;
             public const int MaxEvolutionStage = 3;
+            public const float MaxStrength = 60.0f;
+            public const float MaxDefense = 60.0f;
+            public const float MaxSpeed = 60.0f;
             
             private const float FirstEvolutionHealth = 10.0f;
             private const float SecondEvolutionHealth = 15.0f;

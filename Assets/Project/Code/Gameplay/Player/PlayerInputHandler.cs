@@ -36,8 +36,8 @@ namespace Project.Code.Gameplay.Player
             };
 
             _controls.Player.Dash.performed += ctx => OnDashPerformed?.Invoke();
-            _controls.Player.SimpleAbility.performed += ctx => OnSimpleAbilityPerformed?.Invoke();
-            _controls.Player.SpecialAbility.performed += ctx => OnSpecialAbilityPerformed?.Invoke();
+            _controls.Player.SimpleAttack.performed += ctx => OnSimpleAbilityPerformed?.Invoke();
+            _controls.Player.SpecialAttack.performed += ctx => OnSpecialAbilityPerformed?.Invoke();
         }
 
         private void OnEnable() => _controls?.Enable();
