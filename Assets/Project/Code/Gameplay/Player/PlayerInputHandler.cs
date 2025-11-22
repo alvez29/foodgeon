@@ -7,8 +7,8 @@ namespace Project.Code.Gameplay.Player
     public class PlayerInputHandler : MonoBehaviour
     {
         public event Action OnDashPerformed;
-        public event Action OnSimpleAttackPerformed;
-        public event Action OnSpecialAttackPerformed;
+        public event Action OnSimpleAbilityPerformed;
+        public event Action OnSpecialAbilityPerformed;
         public event Action<Vector2> OnMoveInputChanged;
         
         public Vector2 MoveInput { get; private set; }
@@ -36,8 +36,8 @@ namespace Project.Code.Gameplay.Player
             };
 
             _controls.Player.Dash.performed += ctx => OnDashPerformed?.Invoke();
-            _controls.Player.SimpleAttack.performed += ctx => OnSimpleAttackPerformed?.Invoke();
-            _controls.Player.SpecialAttack.performed += ctx => OnSpecialAttackPerformed?.Invoke();
+            _controls.Player.SimpleAbility.performed += ctx => OnSimpleAbilityPerformed?.Invoke();
+            _controls.Player.SpecialAbility.performed += ctx => OnSpecialAbilityPerformed?.Invoke();
         }
 
         private void OnEnable() => _controls?.Enable();

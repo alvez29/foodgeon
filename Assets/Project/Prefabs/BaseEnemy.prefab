@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 171332834740181274}
   - component: {fileID: 8030311578150230848}
   - component: {fileID: 8947777968436770417}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 4138404676430748956}
   - component: {fileID: 5228467867432667315}
   - component: {fileID: 552116809821826495}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BaseEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}

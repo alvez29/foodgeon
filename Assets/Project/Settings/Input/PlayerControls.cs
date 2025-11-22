@@ -65,9 +65,9 @@ namespace InputActions
     ///     }
     ///
     ///     // Invoked when "Ability" action is either started, performed or canceled.
-    ///     public void OnAttack(InputAction.CallbackContext context)
+    ///     public void OnAbility(InputAction.CallbackContext context)
     ///     {
-    ///         Debug.Log($"OnAttack: {context.ReadValue&lt;float&gt;()}");
+    ///         Debug.Log($"OnAbility: {context.ReadValue&lt;float&gt;()}");
     ///     }
     ///
     ///     #endregion
@@ -113,7 +113,7 @@ namespace InputActions
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""SimpleAttack"",
+                    ""name"": ""SimpleAbility"",
                     ""type"": ""Button"",
                     ""id"": ""3cb3a4f9-20b6-4dd2-8c3a-6b64526ed59e"",
                     ""expectedControlType"": """",
@@ -122,7 +122,7 @@ namespace InputActions
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""SpecialAttack"",
+                    ""name"": ""SpecialAbility"",
                     ""type"": ""Button"",
                     ""id"": ""f27c59ca-9dc5-4eb1-99da-a55e9aab47d1"",
                     ""expectedControlType"": """",
@@ -161,7 +161,7 @@ namespace InputActions
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SimpleAttack"",
+                    ""action"": ""SimpleAbility"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -172,7 +172,7 @@ namespace InputActions
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SimpleAttack"",
+                    ""action"": ""SimpleAbility"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -183,7 +183,7 @@ namespace InputActions
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SimpleAttack"",
+                    ""action"": ""SimpleAbility"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -315,7 +315,7 @@ namespace InputActions
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SpecialAttack"",
+                    ""action"": ""SpecialAbility"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -326,7 +326,7 @@ namespace InputActions
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SpecialAttack"",
+                    ""action"": ""SpecialAbility"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -337,7 +337,7 @@ namespace InputActions
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SpecialAttack"",
+                    ""action"": ""SpecialAbility"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -350,8 +350,8 @@ namespace InputActions
             m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
             m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
             m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
-            m_Player_SimpleAttack = m_Player.FindAction("SimpleAttack", throwIfNotFound: true);
-            m_Player_SpecialAttack = m_Player.FindAction("SpecialAttack", throwIfNotFound: true);
+            m_Player_SimpleAbility = m_Player.FindAction("SimpleAbility", throwIfNotFound: true);
+            m_Player_SpecialAbility = m_Player.FindAction("SpecialAbility", throwIfNotFound: true);
         }
 
         ~@PlayerControls()
@@ -434,8 +434,8 @@ namespace InputActions
         private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
         private readonly InputAction m_Player_Move;
         private readonly InputAction m_Player_Dash;
-        private readonly InputAction m_Player_SimpleAttack;
-        private readonly InputAction m_Player_SpecialAttack;
+        private readonly InputAction m_Player_SimpleAbility;
+        private readonly InputAction m_Player_SpecialAbility;
         /// <summary>
         /// Provides access to input actions defined in input action map "Player".
         /// </summary>
@@ -456,13 +456,13 @@ namespace InputActions
             /// </summary>
             public InputAction @Dash => m_Wrapper.m_Player_Dash;
             /// <summary>
-            /// Provides access to the underlying input action "Player/SimpleAttack".
+            /// Provides access to the underlying input action "Player/SimpleAbility".
             /// </summary>
-            public InputAction @SimpleAttack => m_Wrapper.m_Player_SimpleAttack;
+            public InputAction @SimpleAbility => m_Wrapper.m_Player_SimpleAbility;
             /// <summary>
-            /// Provides access to the underlying input action "Player/SpecialAttack".
+            /// Provides access to the underlying input action "Player/SpecialAbility".
             /// </summary>
-            public InputAction @SpecialAttack => m_Wrapper.m_Player_SpecialAttack;
+            public InputAction @SpecialAbility => m_Wrapper.m_Player_SpecialAbility;
             /// <summary>
             /// Provides access to the underlying input action map instance.
             /// </summary>
@@ -495,12 +495,12 @@ namespace InputActions
                 @Dash.started += instance.OnDash;
                 @Dash.performed += instance.OnDash;
                 @Dash.canceled += instance.OnDash;
-                @SimpleAttack.started += instance.OnSimpleAttack;
-                @SimpleAttack.performed += instance.OnSimpleAttack;
-                @SimpleAttack.canceled += instance.OnSimpleAttack;
-                @SpecialAttack.started += instance.OnSpecialAttack;
-                @SpecialAttack.performed += instance.OnSpecialAttack;
-                @SpecialAttack.canceled += instance.OnSpecialAttack;
+                @SimpleAbility.started += instance.OnSimpleAbility;
+                @SimpleAbility.performed += instance.OnSimpleAbility;
+                @SimpleAbility.canceled += instance.OnSimpleAbility;
+                @SpecialAbility.started += instance.OnSpecialAbility;
+                @SpecialAbility.performed += instance.OnSpecialAbility;
+                @SpecialAbility.canceled += instance.OnSpecialAbility;
             }
 
             /// <summary>
@@ -518,12 +518,12 @@ namespace InputActions
                 @Dash.started -= instance.OnDash;
                 @Dash.performed -= instance.OnDash;
                 @Dash.canceled -= instance.OnDash;
-                @SimpleAttack.started -= instance.OnSimpleAttack;
-                @SimpleAttack.performed -= instance.OnSimpleAttack;
-                @SimpleAttack.canceled -= instance.OnSimpleAttack;
-                @SpecialAttack.started -= instance.OnSpecialAttack;
-                @SpecialAttack.performed -= instance.OnSpecialAttack;
-                @SpecialAttack.canceled -= instance.OnSpecialAttack;
+                @SimpleAbility.started -= instance.OnSimpleAbility;
+                @SimpleAbility.performed -= instance.OnSimpleAbility;
+                @SimpleAbility.canceled -= instance.OnSimpleAbility;
+                @SpecialAbility.started -= instance.OnSpecialAbility;
+                @SpecialAbility.performed -= instance.OnSpecialAbility;
+                @SpecialAbility.canceled -= instance.OnSpecialAbility;
             }
 
             /// <summary>
@@ -579,19 +579,19 @@ namespace InputActions
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnDash(InputAction.CallbackContext context);
             /// <summary>
-            /// Method invoked when associated input action "SimpleAttack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// Method invoked when associated input action "SimpleAbility" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
             /// </summary>
             /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-            void OnSimpleAttack(InputAction.CallbackContext context);
+            void OnSimpleAbility(InputAction.CallbackContext context);
             /// <summary>
-            /// Method invoked when associated input action "SpecialAttack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// Method invoked when associated input action "SpecialAbility" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
             /// </summary>
             /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-            void OnSpecialAttack(InputAction.CallbackContext context);
+            void OnSpecialAbility(InputAction.CallbackContext context);
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Project.Code.Core.Data
 {
-    [CreateAssetMenu(fileName = "EnemyReward", menuName = "EnemyReward", order = 0)]
+    [CreateAssetMenu(fileName = "New Enemy Reward", menuName = "Foodgeon/Reward/Enemy Reward", order = 0)]
     public class EnemyReward : ScriptableObject
     {
         private float Strength { get; set; } = 0.0f;

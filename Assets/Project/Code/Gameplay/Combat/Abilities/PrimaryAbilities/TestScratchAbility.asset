@@ -9,14 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbb71002499f5df4cadb1cefa9061dca, type: 3}
+  m_Script: {fileID: 11500000, guid: fbdc3330d4b660545be5d0892db1c58b, type: 3}
   m_Name: TestScratchAbility
   m_EditorClassIdentifier: Assembly-CSharp::Project.Code.Gameplay.Combat.Abilities.PrimaryAbilities.ScratchAbility
   abilityName: 
   cooldown: 1
-  damageMultiplier: 1
   range: 1.5
   angle: 90
   targetLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64

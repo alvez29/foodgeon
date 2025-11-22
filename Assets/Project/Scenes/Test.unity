@@ -127,6 +127,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2236198029094256216, guid: bc5b1e50200f8074f87bc6354a3eff18, type: 3}
+      propertyPath: basicAbility
+      value: 
+      objectReference: {fileID: 11400000, guid: c31282a53d7042c43b4092a3d95d631c, type: 2}
     - target: {fileID: 3165333103404173559, guid: bc5b1e50200f8074f87bc6354a3eff18, type: 3}
       propertyPath: dashDistance
       value: 5
