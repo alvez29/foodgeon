@@ -50,18 +50,20 @@ namespace Project.Code.Gameplay.Player.Stats
             return true;
         }
 
-        public void AddToBelly(EatenEnemyData enemyData)
+        public bool AddToBelly(EatenEnemyData enemyData)
         {
             if (_bellyContents.Count >= Constants.Stats.MaxBelly)
             {
                 Debug.Log("Belly is full!");
-                return;
+                return false;
             }
             
             Debug.Log($"Belly: {_bellyContents.Count}/{Constants.Stats.MaxBelly}");
             
             _bellyContents.Add(enemyData);
             OnBellyChanged?.Invoke(enemyData);
+
+            return true;
         }
     }
 }

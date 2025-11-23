@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using Project.Code.Core.Data;
+﻿using Project.Code.Core.Data;
 using Project.Code.Gameplay.Stats;
 using UnityEngine;
 
@@ -11,10 +10,14 @@ namespace Project.Code.Gameplay.Enemies
         [SerializeField] private string enemyName;
         [SerializeField] private Flavor flavor;
         [SerializeField] private EnemyReward reward;
-        [SerializeField] private bool edible = false;
+        [SerializeField] private bool isEdible = false;
 
         public string EnemyName => enemyName;
         public Flavor Flavor => flavor;
+        public EnemyReward EnemyReward => reward;
+        
+        //This can be in the StateComponent
+        public bool CanBeEaten => isEdible;
 
         public void Initialize(int depth)
         {
