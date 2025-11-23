@@ -26,7 +26,7 @@ namespace Project.Code.Utils
             public ShapeType Type;
             public Vector3 Position;
             public Quaternion Rotation;
-            public Vector3 Size; // Radius for sphere (x)
+            public Vector3 Size;
             public Color Color;
             public float ExpirationTime;
         }
@@ -60,7 +60,6 @@ namespace Project.Code.Utils
 
         private void OnDrawGizmos()
         {
-            // Cleanup expired
             if (Application.isPlaying)
             {
                 _shapes.RemoveAll(s => Time.time > s.ExpirationTime);

@@ -1,13 +1,15 @@
-﻿using Project.Code.Core;
+﻿using System.Collections.Generic;
+using Project.Code.Core;
+using Project.Code.Core.Data;
 using Project.Code.Gameplay.Stats;
 using UnityEngine;
 
-namespace Project.Code.Gameplay.Player
+namespace Project.Code.Gameplay.Player.Stats
 {
     public class PlayerStats : BaseStats
     {
         public event System.Action<int> OnMoneyChanged;
-        public event System.Action<int, int> OnBellyChanged;
+        public event System.Action<EatenEnemyData> OnBellyChanged;
         
         [Header("Player Stats")]
         [SerializeField] private int evolutionStage = 1;
@@ -15,7 +17,12 @@ namespace Project.Code.Gameplay.Player
         private const int MaxEvolutionStage = 3;
 
         private int Money { get; set; }
-        private int Belly { get; set; }
+        
+        // Belly Storage
+        private readonly List<EatenEnemyData> _bellyContents = new();
+        public int BellyCount => _bellyContents.Count;
+        public IReadOnlyList<EatenEnemyData> BellyContents => _bellyContents;
+
         private int EvolutionStage
         {
             get => evolutionStage;
@@ -25,10 +32,7 @@ namespace Project.Code.Gameplay.Player
         protected override void Awake()
         {
             SetMaxHealth(Constants.Stats.GetMaxHealthFromEvolution(evolutionStage));
-            
             base.Awake();
-            
-            Belly = 0;
         }
 
         public void AddMoney(int amount)
@@ -45,17 +49,19 @@ namespace Project.Code.Gameplay.Player
             OnMoneyChanged?.Invoke(Money);
             return true;
         }
-        
-        public void AddBelly(int amount)
-        {
-            Belly = Mathf.Clamp(Belly + amount, 0, Constants.Stats.MaxBelly);
-            OnBellyChanged?.Invoke(Belly, Constants.Stats.MaxBelly);
-        }
 
-        public void ReduceBelly(int amount)
+        public void AddToBelly(EatenEnemyData enemyData)
         {
-            Belly = Mathf.Clamp(Belly - amount, 0, Constants.Stats.MaxBelly);
-            OnBellyChanged?.Invoke(Belly, Constants.Stats.MaxBelly);
+            if (_bellyContents.Count >= Constants.Stats.MaxBelly)
+            {
+                Debug.Log("Belly is full!");
+                return;
+            }
+            
+            Debug.Log($"Belly: {_bellyContents.Count}/{Constants.Stats.MaxBelly}");
+            
+            _bellyContents.Add(enemyData);
+            OnBellyChanged?.Invoke(enemyData);
         }
     }
 }

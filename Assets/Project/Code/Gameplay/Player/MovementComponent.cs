@@ -1,4 +1,5 @@
-﻿using Project.Code.Core;
+﻿using System;
+using Project.Code.Core;
 using UnityEngine;
 using Project.Code.Gameplay.Stats;
 
@@ -65,7 +66,7 @@ namespace Project.Code.Gameplay.Player
                 _targetSpeed = 0f;
             }
         }
-
+        
         private void Update()
         {
             UpdateMovement();
