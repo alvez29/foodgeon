@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Project.Code.Gameplay.Combat.Abilities.Base
+namespace Project.Code.Core.Data.ScriptableObjects
 {
     public abstract class Ability : ScriptableObject
     {

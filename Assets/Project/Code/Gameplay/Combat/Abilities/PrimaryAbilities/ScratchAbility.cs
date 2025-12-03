@@ -1,3 +1,4 @@
+using Project.Code.Core.Data.ScriptableObjects;
 using Project.Code.Core.Interfaces;
 using Project.Code.Gameplay.Combat.Abilities.Base;
 using Project.Code.Gameplay.Stats;
@@ -46,11 +47,10 @@ namespace Project.Code.Gameplay.Combat.Abilities.PrimaryAbilities
             var userStats = subject.GetComponent<BaseStats>();
             var damage = userStats != null ? userStats.Strength : 10f;
 
-            if (hitObject.TryGetComponent(out IDamageable damageable))
-            {
-                damageable.TakeDamage(damage, subject);
-                Debug.Log($"[ScratchAbility] Damaged {hitObject.name} for {damage}");
-            }
+            if (!hitObject.TryGetComponent(out IDamageable damageable)) return;
+            
+            damageable.TakeDamage(damage, subject);
+            Debug.Log($"[ScratchAbility] Damaged {hitObject.name} for {damage}");
         }
     }
 }

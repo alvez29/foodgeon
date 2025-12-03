@@ -1,4 +1,4 @@
-using Project.Code.Gameplay.Combat.Abilities.PrimaryAbilities;
+using Project.Code.Core.Data.ScriptableObjects;
 using Project.Code.Gameplay.Player;
 using UnityEngine;
 

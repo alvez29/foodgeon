@@ -1,4 +1,5 @@
-﻿using Project.Code.Gameplay.Combat.Abilities.Base;
+﻿using Project.Code.Core.Data.ScriptableObjects;
+using Project.Code.Gameplay.Combat.Abilities.Base;
 using UnityEngine;
 
 namespace Project.Code.Gameplay.Evolution
