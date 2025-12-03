@@ -18,9 +18,9 @@ namespace Project.Code.Gameplay.Player
         
         private float CurrentSpeed { get; set; } = 0f;
         public Vector3 MoveDirection { get; private set; } = Vector3.zero;
+        private Vector3 TargetDirection { get; set; } = Vector3.zero;
         public bool IsMoving => CurrentSpeed > Constants.Movement.MovementInputThreshold;
 
-        private Vector3 _targetDirection = Vector3.zero;
         private float _targetSpeed = 0f;
 
         private CharacterController _controller;
@@ -37,6 +37,12 @@ namespace Project.Code.Gameplay.Player
         private void OnEnable()
         {
             _inputHandler.OnMoveInputChanged += HandleMoveInputChanged;
+            _inputHandler.OnAimInputChanged += HandleAimInputChanged;
+        }
+
+        private void HandleAimInputChanged(Vector2 aimVector)
+        {
+            TargetDirection = new Vector3(aimVector.x, 0f, aimVector.y).normalized;
         }
 
         private void OnDisable()
@@ -50,8 +56,6 @@ namespace Project.Code.Gameplay.Player
 
             if (inputMagnitude > Constants.Movement.MovementInputThreshold)
             {
-                _targetDirection = new Vector3(input.x, 0f, input.y).normalized;
-
                 var finalSpeed = moveSpeed;
                 
                 if (_stats != null)
@@ -60,6 +64,7 @@ namespace Project.Code.Gameplay.Player
                 }
 
                 _targetSpeed = finalSpeed * inputMagnitude;
+                MoveDirection = new Vector3(input.x, 0f, input.y).normalized;
             }
             else
             {
@@ -79,21 +84,14 @@ namespace Project.Code.Gameplay.Player
 
             if (CurrentSpeed > Constants.Movement.MovementInputThreshold)
             {
-                MoveDirection = _targetDirection;
-
                 transform.rotation = Quaternion.Slerp(
                     transform.rotation,
-                    Quaternion.LookRotation(MoveDirection),
+                    Quaternion.LookRotation(TargetDirection),
                     rotationSpeed * Time.deltaTime
                 );
             }
 
             _controller.Move(MoveDirection * (CurrentSpeed * Time.deltaTime));
-        }
-
-        public void SetSpeedMultiplier(float multiplier)
-        {
-            _targetSpeed *= multiplier;
         }
     }
 }

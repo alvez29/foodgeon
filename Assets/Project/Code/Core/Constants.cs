@@ -7,6 +7,7 @@ namespace Project.Code.Core
         public static class Movement
         {
             public const float MovementInputThreshold = 0.001f;
+            public const float AimInputThreshold = 0.01f;
         }
         
         public static class Tags
