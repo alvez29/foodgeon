@@ -1,4 +1,6 @@
 ﻿using Project.Code.Core.Data;
+using Project.Code.Core.Data.ScriptableObjects;
+using Project.Code.Core.Interfaces;
 using Project.Code.Gameplay.Stats;
 using UnityEngine;
 

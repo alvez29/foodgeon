@@ -16,11 +16,8 @@ namespace Project.Code.Gameplay.Combat.Abilities.PrimaryAbilities
 
         private readonly Collider[] _hitResults = new Collider[10];
 
-        public override void Activate(GameObject subject)
+        public override void Use(GameObject subject)
         {
-            var userStats = subject.GetComponent<BaseStats>();
-            var damage = userStats != null ? userStats.Strength : 10f;
-
             var origin = subject.transform.position;
             var forward = subject.transform.forward;
 
@@ -40,11 +37,19 @@ namespace Project.Code.Gameplay.Combat.Abilities.PrimaryAbilities
 
                 if (!(Vector3.Angle(forward, directionToTarget) < angle / 2)) continue;
                 
-                if (hit.TryGetComponent(out IDamageable damageable))
-                {
-                    damageable.TakeDamage(damage, subject);
-                    Debug.Log($"[ScratchAbility] Damaged {hit.name} for {damage}");
-                }
+                OnHit(subject, hit.gameObject);
+            }
+        }
+
+        public override void OnHit(GameObject subject, GameObject hitObject)
+        {
+            var userStats = subject.GetComponent<BaseStats>();
+            var damage = userStats != null ? userStats.Strength : 10f;
+
+            if (hitObject.TryGetComponent(out IDamageable damageable))
+            {
+                damageable.TakeDamage(damage, subject);
+                Debug.Log($"[ScratchAbility] Damaged {hitObject.name} for {damage}");
             }
         }
     }

@@ -5,21 +5,22 @@ using UnityEngine;
 namespace Project.Code.Gameplay.Combat.Abilities.Base
 {
     [RequireComponent(typeof(PlayerInputHandler))]
+    [RequireComponent(typeof(PlayerEvolutionComponent))]
     public class AbilitySystem : MonoBehaviour
     {
         [Header("Abilities")]
         [SerializeField] private Ability basicAbility;
-        [SerializeField] private Ability specialAbility;
 
         private float _lastBasicAbilityTime = -999f;
         private float _lastSpecialAbilityTime = -999f;
 
         private PlayerInputHandler _inputHandler;
+        private PlayerEvolutionComponent _playerEvolutionComponent;
 
         private void Awake()
         {
             _inputHandler = GetComponent<PlayerInputHandler>();
-            if (!basicAbility) basicAbility = ScriptableObject.CreateInstance<ScratchAbility>();
+            _playerEvolutionComponent = GetComponent<PlayerEvolutionComponent>();
         }
 
         private void OnEnable()
@@ -40,16 +41,24 @@ namespace Project.Code.Gameplay.Combat.Abilities.Base
             if (basicAbility == null) return;
             if (!(Time.time >= _lastBasicAbilityTime + basicAbility.Cooldown)) return;
             
-            basicAbility.Activate(gameObject);
+            basicAbility.Use(gameObject);
             _lastBasicAbilityTime = Time.time;
         }
 
         private void TryUseSpecialAbility()
         {
-            if (specialAbility == null) return;
-            if (!(Time.time >= _lastSpecialAbilityTime + specialAbility.Cooldown)) return;
+            if (!_playerEvolutionComponent)
+            {
+                Debug.LogError("Player has no evolution component is null");
+            }
+
+            if (!(Time.time >= _lastSpecialAbilityTime + _playerEvolutionComponent.GetCurrentEvolutionCooldown()))
+            {
+                Debug.LogWarning("Special ability is in cooldown");
+                return;
+            }
             
-            specialAbility.Activate(gameObject);
+            _playerEvolutionComponent.UseSpecialAbility();
             _lastSpecialAbilityTime = Time.time;
         }
     }

@@ -1,5 +1,4 @@
-﻿using System;
-using Project.Code.Core.Data;
+﻿using Project.Code.Core.Data;
 using Project.Code.Core.Interfaces;
 using Project.Code.Gameplay.Eating.Base;
 using Project.Code.Gameplay.Enemies;

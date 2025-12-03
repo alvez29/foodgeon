@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Project.Code.Core.Data
+namespace Project.Code.Core.Data.ScriptableObjects
 {
     [CreateAssetMenu(fileName = "New Enemy Reward", menuName = "Foodgeon/Reward/Enemy Reward", order = 0)]
     public class EnemyReward : ScriptableObject
