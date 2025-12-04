@@ -18,8 +18,11 @@ namespace Project.Code.Gameplay.Player
 
         private const float AimIdleTimeout = 2.0f;
 
+        public bool IsUsingMouse { get; private set; }
+        public Vector3 MouseRaycastPosition { get; private set; }
+        public Vector2 AimInput { get; private set; }
+
         private Vector2 MoveInput { get; set; }
-        private bool _isUsingMouse;
         private Coroutine _aimTimeoutCoroutine;
         
         private PlayerControls _controls;
@@ -39,18 +42,22 @@ namespace Project.Code.Gameplay.Player
 
         private void OnGamepadAimPerformed(InputAction.CallbackContext ctx)
         {
-            _isUsingMouse = false;
+            IsUsingMouse = false;
             if (_aimTimeoutCoroutine != null) StopCoroutine(_aimTimeoutCoroutine);
             
             var input = ctx.ReadValue<Vector2>();
             var shouldApplyAiming = input.sqrMagnitude > Constants.Movement.AimInputThreshold;
 
-            if (shouldApplyAiming) OnAimInputChanged?.Invoke(input.normalized);
+            if (shouldApplyAiming)
+            {
+                AimInput = input.normalized;
+                OnAimInputChanged?.Invoke(AimInput);
+            }
         }
 
         private void OnGamepadAimCanceled(InputAction.CallbackContext ctx)
         {
-            if (!_isUsingMouse)
+            if (!IsUsingMouse)
             {
                 _aimTimeoutCoroutine = StartCoroutine(AimTimeoutRoutine());
             }
@@ -60,9 +67,10 @@ namespace Project.Code.Gameplay.Player
         {
             yield return new WaitForSeconds(AimIdleTimeout);
 
-            if (!_isUsingMouse && MoveInput.sqrMagnitude > Constants.Movement.AimInputThreshold)
+            if (!IsUsingMouse && MoveInput.sqrMagnitude > Constants.Movement.AimInputThreshold)
             {
-                OnAimInputChanged?.Invoke(MoveInput.normalized);
+                AimInput = MoveInput.normalized;
+                OnAimInputChanged?.Invoke(AimInput);
             }    
         }
 
@@ -72,11 +80,11 @@ namespace Project.Code.Gameplay.Player
             {
                 if (Mouse.current != null && Mouse.current.delta.ReadValue().sqrMagnitude > 0.1f)
                 {
-                    _isUsingMouse = true;
+                    IsUsingMouse = true;
                     if (_aimTimeoutCoroutine != null) StopCoroutine(_aimTimeoutCoroutine);
                 }
 
-                if (_isUsingMouse)
+                if (IsUsingMouse)
                 {
                     HandleMouseAim();
                 }
@@ -95,10 +103,12 @@ namespace Project.Code.Gameplay.Player
             if (!groundPlane.Raycast(ray, out var enter)) return;
             
             var hitPoint = ray.GetPoint(enter);
+            MouseRaycastPosition = hitPoint;
             var direction3D = hitPoint - transform.position;
             var direction2D = new Vector2(direction3D.x, direction3D.z).normalized;
                 
-            OnAimInputChanged?.Invoke(direction2D);
+            AimInput = direction2D;
+            OnAimInputChanged?.Invoke(AimInput);
         }
 
         private void BindInputActions()

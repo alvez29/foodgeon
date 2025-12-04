@@ -5,11 +5,13 @@ namespace Project.Code.Gameplay.Camera
     public class CameraFollow : MonoBehaviour
     {
         [Header("Target Settings")]
-        [SerializeField] private Transform target;
-        [SerializeField] private Vector3 offset = new Vector3(0f, 8f, -10f);
+        [SerializeField]
+        protected Transform target;
+        [SerializeField] protected Vector3 offset = new Vector3(0f, 8f, -10f);
         
         [Header("Movement Settings")]
-        [SerializeField] private float smoothSpeed = 5f;
+        [SerializeField]
+        protected float smoothSpeed = 5f;
         [SerializeField] private bool useFixedUpdate = true;
 
         private Vector3 _currentVelocity;
@@ -19,7 +21,7 @@ namespace Project.Code.Gameplay.Camera
             target = newTarget;
         }
 
-        private void Start()
+        protected void Start()
         {
             if (target != null) return;
             
@@ -47,7 +49,7 @@ namespace Project.Code.Gameplay.Camera
             }
         }
 
-        private void FollowTarget(float deltaTime)
+        protected virtual void FollowTarget(float deltaTime)
         {
             if (!target) return;
 
