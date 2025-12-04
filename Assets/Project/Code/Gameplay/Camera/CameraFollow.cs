@@ -23,7 +23,7 @@ namespace Project.Code.Gameplay.Camera
         {
             if (target != null) return;
             
-            var player = FindAnyObjectByType<Project.Code.Gameplay.Player.PlayerInputHandler>();
+            var player = FindAnyObjectByType<Player.PlayerInputHandler>();
             
             if (player != null)
             {

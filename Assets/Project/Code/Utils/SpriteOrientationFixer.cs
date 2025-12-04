@@ -7,7 +7,7 @@ namespace Project.Code.Utils
     [RequireComponent(typeof(SpriteRenderer))]
     public class SpriteOrientationFixer : MonoBehaviour
     {
-        [SerializeField] private MovementComponent movementComponent;
+        [SerializeField] private PlayerMovementComponent playerMovementComponent;
 
         private SpriteRenderer _spriteRenderer;
         
@@ -18,9 +18,9 @@ namespace Project.Code.Utils
 
         private void LateUpdate()
         {
-            if (_spriteRenderer && movementComponent)
+            if (_spriteRenderer && playerMovementComponent)
             {
-                _spriteRenderer.flipX = movementComponent.MoveDirection.x < 0;
+                _spriteRenderer.flipX = playerMovementComponent.MoveDirection.x < 0;
             }
             else
             {

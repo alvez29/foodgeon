@@ -9,6 +9,12 @@ namespace Project.Code.Core
             public const float MovementInputThreshold = 0.001f;
             public const float AimInputThreshold = 0.01f;
         }
+
+        public static class Knockback
+        {
+            public const float KnockbackDuration = 0.05f;
+            public const float KnockbackDistance = 1f;
+        }
         
         public static class Tags
         {

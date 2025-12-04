@@ -20,13 +20,13 @@ namespace Project.Code.Gameplay.Player
         
         private CharacterController _controller;
         private PlayerInputHandler _inputHandler;
-        private MovementComponent _movementComponent;
+        private PlayerMovementComponent _playerMovementComponent;
 
         private void Awake()
         {
             _controller = GetComponent<CharacterController>();
             _inputHandler = GetComponent<PlayerInputHandler>();
-            _movementComponent = GetComponent<MovementComponent>();
+            _playerMovementComponent = GetComponent<PlayerMovementComponent>();
         }
 
         private void OnEnable()
@@ -52,8 +52,8 @@ namespace Project.Code.Gameplay.Player
             IsDashing = true;
             _lastDashTime = Time.time;
             
-            var dashDirection = _movementComponent.IsMoving 
-                ? _movementComponent.MoveDirection 
+            var dashDirection = _playerMovementComponent.IsMoving 
+                ? _playerMovementComponent.MoveDirection 
                 : transform.forward;
 
             var elapsedTime = 0f;

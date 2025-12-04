@@ -8,10 +8,9 @@ namespace Project.Code.Gameplay.Player
     [RequireComponent(typeof(CharacterController))]
     [RequireComponent(typeof(PlayerInputHandler))]
     [RequireComponent(typeof(BaseStats))]
-    public class MovementComponent : MonoBehaviour
+    public class PlayerMovementComponent : MonoBehaviour
     {
         [Header("Movement Setting")] 
-        [SerializeField] private float moveSpeed = 0f;
         [SerializeField] private float acceleration = 3f;
         [SerializeField] private float deceleration = 12f;
         [SerializeField] private float rotationSpeed = 10f;
@@ -56,13 +55,7 @@ namespace Project.Code.Gameplay.Player
 
             if (inputMagnitude > Constants.Movement.MovementInputThreshold)
             {
-                var finalSpeed = moveSpeed;
-                
-                if (_stats != null)
-                {
-                    finalSpeed = _stats.Speed;
-                }
-
+                var finalSpeed = _stats ? _stats.Speed : 0f;
                 _targetSpeed = finalSpeed * inputMagnitude;
                 MoveDirection = new Vector3(input.x, 0f, input.y).normalized;
             }
@@ -81,16 +74,13 @@ namespace Project.Code.Gameplay.Player
         {
             var speedChange = _targetSpeed > CurrentSpeed ? acceleration : deceleration;
             CurrentSpeed = Mathf.Lerp(CurrentSpeed, _targetSpeed, speedChange * Time.deltaTime);
-
-            if (CurrentSpeed > Constants.Movement.MovementInputThreshold)
-            {
-                transform.rotation = Quaternion.Slerp(
-                    transform.rotation,
-                    Quaternion.LookRotation(TargetDirection),
-                    rotationSpeed * Time.deltaTime
-                );
-            }
-
+            
+            transform.rotation = Quaternion.Slerp(
+                transform.rotation,
+                Quaternion.LookRotation(TargetDirection),
+                rotationSpeed * Time.deltaTime
+            );
+            
             _controller.Move(MoveDirection * (CurrentSpeed * Time.deltaTime));
         }
     }

@@ -125,6 +125,7 @@ GameObject:
   - component: {fileID: 5228467867432667315}
   - component: {fileID: 552116809821826495}
   - component: {fileID: 182040767517528236}
+  - component: {fileID: 8408581187049384316}
   m_Layer: 6
   m_Name: BaseEnemy
   m_TagString: Untagged
@@ -190,7 +191,7 @@ MonoBehaviour:
   strength: 10
   defense: 5
   speed: 5
-  enemyName: 
+  enemyName: Base
   flavor: 0
   reward: {fileID: 0}
   isEdible: 0
@@ -206,6 +207,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f3fa1060fe4262bb73922e6fa62e7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Code.Gameplay.Enemies.EnemyEdibleComponent
+--- !u!114 &8408581187049384316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8795643183060070249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a7c0acde294be5b168b4ff9b8907b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Project.Code.Gameplay.Combat.Knockback.KnockbackComponent
+  knockbackForce: 1
+  knockbackDuration: 0.1
 --- !u!1001 &3158873753897465908
 PrefabInstance:
   m_ObjectHideFlags: 0

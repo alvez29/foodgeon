@@ -846,7 +846,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc74b32ae06263a40a7d63f2604475aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  _playerStats: {fileID: 0}
+  playerStats: {fileID: 2104654725}
 --- !u!4 &2104654722 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4138404676430748956, guid: bc5b1e50200f8074f87bc6354a3eff18, type: 3}

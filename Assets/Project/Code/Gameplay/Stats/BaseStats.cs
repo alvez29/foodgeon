@@ -1,5 +1,6 @@
 ﻿using Project.Code.Core;
 using Project.Code.Core.Interfaces;
+using Project.Code.Gameplay.Managers;
 using UnityEngine;
 
 namespace Project.Code.Gameplay.Stats
@@ -33,6 +34,7 @@ namespace Project.Code.Gameplay.Stats
         }
 
         public event System.Action<float, float> OnHealthChanged;
+        public event System.Action<float, float, float, GameObject> OnDamageTaken;
         public event System.Action OnDeath;
 
         protected virtual void Awake()
@@ -48,6 +50,9 @@ namespace Project.Code.Gameplay.Stats
             
             CurrentHealth = Mathf.Clamp(CurrentHealth - damageTaken, 0, MaxHealth);
             OnHealthChanged?.Invoke(CurrentHealth, MaxHealth);
+            HitStopManager.Instance.HitStop(0.1f);
+            
+            if (damageTaken > 0) OnDamageTaken?.Invoke(CurrentHealth, MaxHealth, damageTaken, source);
 
             if (CurrentHealth <= 0)
             {

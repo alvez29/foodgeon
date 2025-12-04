@@ -40,15 +40,12 @@ namespace Project.Code.Gameplay.Player
         private void OnGamepadAimPerformed(InputAction.CallbackContext ctx)
         {
             _isUsingMouse = false;
-            
             if (_aimTimeoutCoroutine != null) StopCoroutine(_aimTimeoutCoroutine);
             
             var input = ctx.ReadValue<Vector2>();
-            
-            if (input.sqrMagnitude > Constants.Movement.AimInputThreshold)
-            {
-                OnAimInputChanged?.Invoke(input.normalized);
-            }
+            var shouldApplyAiming = input.sqrMagnitude > Constants.Movement.AimInputThreshold;
+
+            if (shouldApplyAiming) OnAimInputChanged?.Invoke(input.normalized);
         }
 
         private void OnGamepadAimCanceled(InputAction.CallbackContext ctx)
@@ -62,11 +59,11 @@ namespace Project.Code.Gameplay.Player
         private IEnumerator AimTimeoutRoutine()
         {
             yield return new WaitForSeconds(AimIdleTimeout);
-            
+
             if (!_isUsingMouse && MoveInput.sqrMagnitude > Constants.Movement.AimInputThreshold)
             {
                 OnAimInputChanged?.Invoke(MoveInput.normalized);
-            }
+            }    
         }
 
         private IEnumerator MousePollRoutine()
