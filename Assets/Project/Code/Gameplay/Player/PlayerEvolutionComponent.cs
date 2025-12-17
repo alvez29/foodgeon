@@ -8,7 +8,7 @@ namespace Project.Code.Gameplay.Player
     [RequireComponent(typeof(PlayerStats))]
     public class PlayerEvolutionComponent : MonoBehaviour
     {
-        private EvolutionData _currentEvolution;
+        private Evolution.Evolution _currentEvolution;
 
         private PlayerStats _playerStats;
         
@@ -17,13 +17,13 @@ namespace Project.Code.Gameplay.Player
             _playerStats = GetComponent<PlayerStats>();
         }
 
-        public void Evolve(EvolutionData evolutionData)
+        public void Evolve(Evolution.Evolution evolution)
         {
-            _playerStats.AddDefense(evolutionData.defenseReward);
-            _playerStats.AddSpeed(evolutionData.speedReward);
-            _playerStats.AddStrength(evolutionData.strengthReward);
+            _playerStats.AddDefense(evolution.defenseReward);
+            _playerStats.AddSpeed(evolution.speedReward);
+            _playerStats.AddStrength(evolution.strengthReward);
             
-            _currentEvolution = evolutionData;
+            _currentEvolution = evolution;
         }
 
         public void UseSpecialAbility()

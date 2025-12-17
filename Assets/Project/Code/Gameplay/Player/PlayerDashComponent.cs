@@ -13,7 +13,7 @@ namespace Project.Code.Gameplay.Player
         [SerializeField] private float dashCooldown = 1f;
         [SerializeField] private AnimationCurve dashCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
 
-        private bool IsDashing { get; set; }
+        public bool IsDashing { get; private set; }
         private bool CanDash => !IsDashing && Time.time >= _lastDashTime + dashCooldown;
 
         private float _lastDashTime = -999f;

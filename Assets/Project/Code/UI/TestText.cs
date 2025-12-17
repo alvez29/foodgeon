@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
+using Project.Code.Core.Data;
 using Project.Code.Gameplay.Player.Stats;
+using Project.Code.Gameplay.States;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +12,7 @@ namespace Project.Code.UI
     {
 
         [SerializeField] private PlayerStats playerStats;
+        [SerializeField] private PlayerStateManager playerState;
         
         private Text _text;
 
@@ -30,8 +33,9 @@ namespace Project.Code.UI
                 var strength = playerStats.Strength;
                 var speed = playerStats.Speed;
                 var belly = playerStats.BellyCount;
+                var state = playerState.CurrentState;
 
-                var printText = $"Strength: {strength}, \nSpeed: {speed}, \nBelly: {belly}";
+                var printText = $"Strength: {strength}, \nSpeed: {speed}, \nBelly: {belly}, \nState: {state.ToString()}";
             
                 _text.text = printText;
                 yield return new WaitForSeconds(0.5f);    

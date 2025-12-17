@@ -1,0 +1,54 @@
+﻿using Project.Code.Core.Data.ScriptableObjects;
+using Project.Code.Core.Interfaces;
+using Project.Code.Gameplay.Stats;
+using Project.Code.Utils;
+using UnityEngine;
+
+namespace Project.Code.Gameplay.Combat.Abilities.SpecialAbilites.Bite
+{
+    [CreateAssetMenu(fileName = "New Bite Ability", menuName = "Foodgeon/Abilities/Bite Ability")]
+    public class BiteAbility : Ability
+    {
+        [SerializeField] private float range = 3f;
+        [SerializeField] private float angle = 90f;
+        [SerializeField] private LayerMask targetLayer;
+        
+        private readonly Collider[] _hitResults = new Collider[10];
+
+        public override void Use(GameObject subject)
+        {
+            var origin = subject.transform.position;
+            var forward = subject.transform.forward;
+
+            HitboxDebugger.Instance.DrawSphere(origin, range, Color.red, 0.5f);
+
+            var hitCount = Physics.OverlapSphereNonAlloc(origin, range, _hitResults, targetLayer);
+            
+            Debug.Log($"[ScratchAbility] Hit Count: {hitCount} | LayerMask: {targetLayer.value} | Origin: {origin}");
+
+            for (var i = 0; i < hitCount; i++)
+            {
+                var hit = _hitResults[i];
+                
+                if (hit.gameObject == subject) continue;
+
+                var directionToTarget = (hit.transform.position - origin).normalized;
+
+                if (!(Vector3.Angle(forward, directionToTarget) < angle / 2)) continue;
+                
+                OnHit(subject, hit.gameObject);
+            }
+        }
+
+        public override void OnHit(GameObject subject, GameObject hitObject)
+        {
+            var userStats = subject.GetComponent<BaseStats>();
+            var damage = userStats?.Strength ?? 10f;
+
+            if (!hitObject.TryGetComponent(out IDamageable damageable)) return;
+            
+            damageable.TakeDamage(damage, subject);
+            Debug.Log($"[ScratchAbility] Damaged {hitObject.name} for {damage}");
+        }
+    }
+}
