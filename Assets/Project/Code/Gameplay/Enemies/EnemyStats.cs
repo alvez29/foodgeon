@@ -1,6 +1,5 @@
 ﻿using Project.Code.Core.Data;
 using Project.Code.Core.Data.ScriptableObjects;
-using Project.Code.Core.Interfaces;
 using Project.Code.Gameplay.Stats;
 using UnityEngine;
 
@@ -18,7 +17,6 @@ namespace Project.Code.Gameplay.Enemies
         public Flavor Flavor => flavor;
         public EnemyReward EnemyReward => reward;
         
-        //This can be in the StateComponent
         public bool CanBeEaten => isEdible;
 
         public void Initialize(int depth)

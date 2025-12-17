@@ -1,6 +1,4 @@
-﻿using System;
-using Project.Code.Gameplay.Evolution;
-using Project.Code.Gameplay.Player.Stats;
+﻿using Project.Code.Gameplay.Player.Stats;
 using UnityEngine;
 
 namespace Project.Code.Gameplay.Player
@@ -8,32 +6,44 @@ namespace Project.Code.Gameplay.Player
     [RequireComponent(typeof(PlayerStats))]
     public class PlayerEvolutionComponent : MonoBehaviour
     {
-        private Evolution.Evolution _currentEvolution;
+        [SerializeField] private Evolution.Evolution initialEvolution;
+        
+        public Evolution.Evolution CurrentEvolution { get; private set; }
 
         private PlayerStats _playerStats;
-        
+
+        #region Unity Functions
+
         private void Awake()
         {
             _playerStats = GetComponent<PlayerStats>();
+
+            CurrentEvolution = initialEvolution;
         }
 
+        #endregion
+        
+        #region Public Functions
+        
         public void Evolve(Evolution.Evolution evolution)
         {
             _playerStats.AddDefense(evolution.defenseReward);
             _playerStats.AddSpeed(evolution.speedReward);
             _playerStats.AddStrength(evolution.strengthReward);
             
-            _currentEvolution = evolution;
+            CurrentEvolution = evolution;
         }
 
         public void UseSpecialAbility()
         {
-            _currentEvolution.specialAbility.Use(gameObject);
+            CurrentEvolution.specialAbility.Use(gameObject);
         }
-
+        
         public float GetCurrentEvolutionCooldown()
         {
-            return _currentEvolution.specialAbility.Cooldown;
+            return CurrentEvolution.specialAbility.Cooldown;
         }
+        
+        #endregion
     }
 }

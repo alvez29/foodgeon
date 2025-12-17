@@ -551,6 +551,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32b0959a483a4c72a319de009cb87b88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Code.Gameplay.Player.PlayerEvolutionComponent
+  initialEvolution: {fileID: 11400000, guid: 7b21f9f1428da03428f8b91871c8c43e, type: 2}
 --- !u!1001 &2077607110402139511
 PrefabInstance:
   m_ObjectHideFlags: 0
