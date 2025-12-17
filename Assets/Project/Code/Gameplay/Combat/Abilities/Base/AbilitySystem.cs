@@ -9,7 +9,7 @@ namespace Project.Code.Gameplay.Combat.Abilities.Base
     public class AbilitySystem : MonoBehaviour
     {
         [Header("Abilities")]
-        [SerializeField] private Ability basicAbility;
+        [SerializeField] private AbilityData basicAbility;
 
         private float _lastBasicAbilityTime = -999f;
         private float _lastSpecialAbilityTime = -999f;

@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1260eb611724e739a414ffc2875ac4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Code.Utils.SpriteOrientationFixer
-  movementComponent: {fileID: 6968320629646208548}
+  playerMovementComponent: {fileID: 0}
 --- !u!95 &1321973488020953321
 Animator:
   serializedVersion: 7
@@ -360,6 +360,7 @@ GameObject:
   - component: {fileID: 2236198029094256216}
   - component: {fileID: 3165333103404173559}
   - component: {fileID: 4285852636140555109}
+  - component: {fileID: 2414604028690692743}
   - component: {fileID: 8627007030139879710}
   - component: {fileID: 7247364498119055964}
   - component: {fileID: 5618588461053617313}
@@ -426,7 +427,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 446fbcf9209e4f7d93d1a7cc06633657, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Code.Gameplay.Player.TopDownMovementComponent
-  moveSpeed: 6
   acceleration: 3
   deceleration: 12
   rotationSpeed: 10
@@ -442,7 +442,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ee321f759edfd6479c47bfe454692cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Code.Gameplay.Combat.AbilitySystem
-  basicAbility: {fileID: 11400000, guid: c31282a53d7042c43b4092a3d95d631c, type: 2}
+  basicAbility: {fileID: 11400000, guid: e45e859bec2835547b971d7c2a40aefe, type: 2}
 --- !u!114 &3165333103404173559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -494,6 +494,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69e08df6644453f468e36283130b47c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Code.Gameplay.Player.PlayerInputHandler
+--- !u!114 &2414604028690692743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8795643183060070249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c35762fb41b4a29a4384bd92ec5bdc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Project.Code.Gameplay.States.PlayerStateManager
+  ownerStats: {fileID: 8627007030139879710}
+  dashAbility: {fileID: 3165333103404173559}
+  movementComponent: {fileID: 6968320629646208548}
+  inputHandler: {fileID: 4285852636140555109}
 --- !u!114 &8627007030139879710
 MonoBehaviour:
   m_ObjectHideFlags: 0

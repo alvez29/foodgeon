@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using Project.Code.Core.Data;
 using Project.Code.Gameplay.Player.Stats;
 using Project.Code.Gameplay.States;
 using UnityEngine;

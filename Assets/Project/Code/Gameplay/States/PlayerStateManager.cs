@@ -11,7 +11,6 @@ namespace Project.Code.Gameplay.States
     {
         // Components
         public PlayerDashAbility dashAbility;
-
         public PlayerMovementComponent movementComponent;
         public PlayerInputHandler inputHandler;
         

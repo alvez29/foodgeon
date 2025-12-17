@@ -1,6 +1,7 @@
 ﻿using Project.Code.Core;
 using Project.Code.Core.Interfaces;
 using Project.Code.Gameplay.Managers;
+using Unity.Mathematics.Geometry;
 using UnityEngine;
 
 namespace Project.Code.Gameplay.Stats
@@ -8,7 +9,7 @@ namespace Project.Code.Gameplay.Stats
     public abstract class BaseStats : MonoBehaviour, IDamageable
     {
         [Header("Base Stats")]
-        [SerializeField] private float maxHealth = 100f;
+        [SerializeField] private float maxHealth = 10f;
         [SerializeField] private float strength = 10f;
         [SerializeField] private float defense = 5f;
         [SerializeField] private float speed = 5f;
@@ -41,23 +42,28 @@ namespace Project.Code.Gameplay.Stats
         {
             CurrentHealth = MaxHealth;
         }
-
-        public virtual void TakeDamage(float amount, GameObject source)
+        
+        public virtual float TakeDamage(float amount, float abilityPower, GameObject source)
         {
-            if (CurrentHealth <= 0) return;
+            if (CurrentHealth <= 0) return 0f;
 
-            var damageTaken = Mathf.Max(amount - Defense, 1f);
-            
+            // TODO: Refactor this formula 
+            var damageTaken =
+                Mathf.Clamp(Mathf.Floor((float)(((amount - (Defense / 1.2)) / 2.5) + ((abilityPower + 3.0) / 3.0))), 1,
+                    10);
+
             CurrentHealth = Mathf.Clamp(CurrentHealth - damageTaken, 0, MaxHealth);
             OnHealthChanged?.Invoke(CurrentHealth, MaxHealth);
             HitStopManager.Instance.HitStop(0.1f);
-            
+
             if (damageTaken > 0) OnDamageTaken?.Invoke(CurrentHealth, MaxHealth, damageTaken, source);
 
             if (CurrentHealth <= 0)
             {
                 Die();
             }
+
+            return damageTaken;
         }
 
         public void AddDefense(float amount)
@@ -93,7 +99,7 @@ namespace Project.Code.Gameplay.Stats
         [ContextMenu("Test Damage (10)")]
         private void TestDamage()
         {
-            TakeDamage(10f, gameObject);
+            TakeDamage(1f, 2f, gameObject);
         }
     }
 }

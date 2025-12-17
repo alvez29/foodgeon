@@ -12,6 +12,6 @@ namespace Project.Code.Gameplay.Evolution
         public float defenseReward;
         public float speedReward;
         
-        public Ability specialAbility;
+        public AbilityData specialAbility;
     }
 }
