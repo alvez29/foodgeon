@@ -7,14 +7,32 @@ namespace Project.Code.Gameplay.Combat.HitFlash
     [RequireComponent(typeof(BaseStats))]
     public class HitFlashComponent : MonoBehaviour
     {
+        #region Events
+
+        public event System.Action OnFlashFinished;
+
+        #endregion
+
+        #region Serialized Fields
+
         [Header("Flash Settings")]
         [SerializeField] private Material flashMaterial;
         [SerializeField] private float flashDuration = 0.1f;
         [SerializeField] private Renderer targetRenderer;
 
+        #endregion
+
+        #region Properties
+
+        public bool IsFlashing = false;
+        
         private BaseStats _stats;
         private Material _originalMaterial;
         private Coroutine _flashCoroutine;
+        
+        #endregion
+        
+        #region Unity Functions
 
         private void Awake()
         {
@@ -42,6 +60,11 @@ namespace Project.Code.Gameplay.Combat.HitFlash
             }
         }
 
+        #endregion
+
+
+        #region Private Functions
+
         private void HandleDamageTaken(float current, float max, float damage, GameObject source)
         {
             if (targetRenderer == null || flashMaterial == null) return;
@@ -54,8 +77,15 @@ namespace Project.Code.Gameplay.Combat.HitFlash
             _flashCoroutine = StartCoroutine(FlashRoutine());
         }
 
+        #endregion
+
+
+        #region Routine
+
         private IEnumerator FlashRoutine()
         {
+            IsFlashing = true;
+            
             _originalMaterial = targetRenderer.material;
             targetRenderer.material = flashMaterial;
 
@@ -63,6 +93,13 @@ namespace Project.Code.Gameplay.Combat.HitFlash
 
             targetRenderer.material = _originalMaterial;
             _flashCoroutine = null;
+
+            IsFlashing = false;
+            
+            OnFlashFinished?.Invoke();
         }
+
+        #endregion
+        
     }
 }

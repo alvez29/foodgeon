@@ -4,6 +4,8 @@ namespace Project.Code.Gameplay.States.StatesLibrary.Player.Grounded.Base
 {
     public abstract class PlayerGroundedState : PlayerBaseState
     {
+        #region Override Methods
+        
         protected override void OnPlayerStateUpdate(PlayerStateManager manager)
         {
             // any grounded to stash
@@ -12,5 +14,7 @@ namespace Project.Code.Gameplay.States.StatesLibrary.Player.Grounded.Base
                 manager.SwitchState(manager.PlayerDashState);
             }
         }
+        
+        #endregion
     }
 }

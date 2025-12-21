@@ -8,18 +8,31 @@ namespace Project.Code.Gameplay.Player.Stats
 {
     public class PlayerStats : BaseStats
     {
+        #region Constants
+        
+        private const int MaxEvolutionStage = 3;
+        
+        #endregion
+
+        #region Events
+        
         public event System.Action<int> OnMoneyChanged;
         public event System.Action<EatenEnemyData> OnBellyChanged;
+        
+        #endregion
+        
+        #region Serialized Fields
         
         [Header("Player Stats")]
         [SerializeField] private int evolutionStage = 1;
         
-        private const int MaxEvolutionStage = 3;
+        #endregion
+
+        #region Properties
 
         private int Money { get; set; }
         
         // Belly Storage
-        private readonly List<EatenEnemyData> _bellyContents = new();
         public int BellyCount => _bellyContents.Count;
         public IReadOnlyList<EatenEnemyData> BellyContents => _bellyContents;
 
@@ -28,12 +41,26 @@ namespace Project.Code.Gameplay.Player.Stats
             get => evolutionStage;
             set => evolutionStage = value;
         }
+        
+        #endregion
+
+        #region Fields
+        
+        private readonly List<EatenEnemyData> _bellyContents = new();
+        
+        #endregion
+
+        #region Unity Functions
 
         protected override void Awake()
         {
             SetMaxHealth(Constants.Stats.GetMaxHealthFromEvolution(evolutionStage));
             base.Awake();
         }
+        
+        #endregion
+
+        #region Public Methods
 
         public void AddMoney(int amount)
         {
@@ -65,5 +92,7 @@ namespace Project.Code.Gameplay.Player.Stats
 
             return true;
         }
+        
+        #endregion
     }
 }

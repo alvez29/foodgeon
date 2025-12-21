@@ -5,6 +5,8 @@ namespace Project.Code.Gameplay.States.StatesLibrary.Player.Grounded
 {
     public class PlayerIdleState : PlayerGroundedState
     {
+        #region Override Methods
+        
         // ReSharper disable Unity.PerformanceAnalysis
         protected override void OnPlayerStateUpdate(PlayerStateManager manager)
         {
@@ -16,5 +18,7 @@ namespace Project.Code.Gameplay.States.StatesLibrary.Player.Grounded
                 manager.SwitchState(manager.PlayerRunState);
             }
         }
+        
+        #endregion
     }
 }

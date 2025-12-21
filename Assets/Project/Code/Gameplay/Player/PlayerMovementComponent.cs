@@ -10,21 +10,35 @@ namespace Project.Code.Gameplay.Player
     [RequireComponent(typeof(BaseStats))]
     public class PlayerMovementComponent : MonoBehaviour
     {
+        #region Serialized Fields
+        
         [Header("Movement Setting")] 
         [SerializeField] private float acceleration = 3f;
         [SerializeField] private float deceleration = 12f;
         [SerializeField] private float rotationSpeed = 10f;
         
+        #endregion
+
+        #region Properties
+        
         private float CurrentSpeed { get; set; } = 0f;
         public Vector3 MoveDirection { get; private set; } = Vector3.zero;
         private Vector3 TargetDirection { get; set; } = Vector3.zero;
         public bool IsMoving => CurrentSpeed > Constants.Movement.MovementInputThreshold;
+        
+        #endregion
+
+        #region Fields
 
         private float _targetSpeed = 0f;
 
         private CharacterController _controller;
         private PlayerInputHandler _inputHandler;
         private BaseStats _stats;
+        
+        #endregion
+
+        #region Unity Functions
 
         private void Awake()
         {
@@ -39,14 +53,23 @@ namespace Project.Code.Gameplay.Player
             _inputHandler.OnAimInputChanged += HandleAimInputChanged;
         }
 
-        private void HandleAimInputChanged(Vector2 aimVector)
-        {
-            TargetDirection = new Vector3(aimVector.x, 0f, aimVector.y).normalized;
-        }
-
         private void OnDisable()
         {
             _inputHandler.OnMoveInputChanged -= HandleMoveInputChanged;
+        }
+        
+        private void Update()
+        {
+            UpdateMovement();
+        }
+        
+        #endregion
+
+        #region Private Methods
+
+        private void HandleAimInputChanged(Vector2 aimVector)
+        {
+            TargetDirection = new Vector3(aimVector.x, 0f, aimVector.y).normalized;
         }
 
         private void HandleMoveInputChanged(Vector2 input)
@@ -64,11 +87,6 @@ namespace Project.Code.Gameplay.Player
                 _targetSpeed = 0f;
             }
         }
-        
-        private void Update()
-        {
-            UpdateMovement();
-        }
 
         private void UpdateMovement()
         {
@@ -83,5 +101,7 @@ namespace Project.Code.Gameplay.Player
             
             _controller.Move(MoveDirection * (CurrentSpeed * Time.deltaTime));
         }
+        
+        #endregion
     }
 }

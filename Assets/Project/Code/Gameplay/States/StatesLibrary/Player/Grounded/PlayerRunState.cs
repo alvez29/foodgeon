@@ -5,6 +5,8 @@ namespace Project.Code.Gameplay.States.StatesLibrary.Player.Grounded
 {
     public class PlayerRunState : PlayerGroundedState
     {
+        #region Override Methods
+        
         protected override void OnPlayerStateUpdate(PlayerStateManager manager)
         {
             base.OnPlayerStateUpdate(manager);
@@ -17,5 +19,7 @@ namespace Project.Code.Gameplay.States.StatesLibrary.Player.Grounded
                 manager.SwitchState(manager.PlayerIdleState);
             }
         }
+        
+        #endregion
     }
 }

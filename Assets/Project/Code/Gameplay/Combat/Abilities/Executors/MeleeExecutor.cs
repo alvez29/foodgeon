@@ -13,7 +13,13 @@ namespace Project.Code.Gameplay.Combat.Abilities.Executors
     [CreateAssetMenu(fileName = "New Melee Executor", menuName = "Foodgeon/Executors/Melee Executor")]
     public class MeleeExecutor : AbilityExecutor
     {
+        #region Fields
+        
         private readonly Collider[] _hitResults = new Collider[10];
+        
+        #endregion
+
+        #region Override Methods
 
         public override void Execute(GameObject caster, AbilityData data)
         {
@@ -58,5 +64,7 @@ namespace Project.Code.Gameplay.Combat.Abilities.Executors
             var damageDealt = damageable.TakeDamage(baseDamage, data.Power, caster);
             Debug.Log($"[MeleeExecutor] Damaged {target.name} for {damageDealt} (base: {baseDamage}, power: {abilityPower})");
         }
+        
+        #endregion
     }
 }

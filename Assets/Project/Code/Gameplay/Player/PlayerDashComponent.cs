@@ -7,20 +7,34 @@ namespace Project.Code.Gameplay.Player
     [RequireComponent(typeof(PlayerInputHandler))]
     public class PlayerDashAbility : MonoBehaviour
     {
+        #region Serialized Fields
+        
         [Header("Dash Settings")]
         [SerializeField] private float dashDistance = 5f;
         [SerializeField] private float dashDuration = 0.2f;
         [SerializeField] private float dashCooldown = 1f;
         [SerializeField] private AnimationCurve dashCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
+        
+        #endregion
+
+        #region Properties
 
         public bool IsDashing { get; private set; }
         private bool CanDash => !IsDashing && Time.time >= _lastDashTime + dashCooldown;
+        
+        #endregion
+
+        #region Fields
 
         private float _lastDashTime = -999f;
         
         private CharacterController _controller;
         private PlayerInputHandler _inputHandler;
         private PlayerMovementComponent _playerMovementComponent;
+        
+        #endregion
+
+        #region Unity Functions
 
         private void Awake()
         {
@@ -38,6 +52,10 @@ namespace Project.Code.Gameplay.Player
         {
             _inputHandler.OnDashPerformed -= TryPerformDash;
         }
+        
+        #endregion
+
+        #region Private Methods
 
         private void TryPerformDash()
         {
@@ -72,5 +90,7 @@ namespace Project.Code.Gameplay.Player
 
             IsDashing = false;
         }
+        
+        #endregion
     }
 }

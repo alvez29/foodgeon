@@ -8,11 +8,25 @@ namespace Project.Code.Gameplay.Stats
 {
     public abstract class BaseStats : MonoBehaviour, IDamageable
     {
+        #region Events
+
+        public event System.Action<float, float> OnHealthChanged;
+        public event System.Action<float, float, float, GameObject> OnDamageTaken;
+        public event System.Action OnDeath;
+        
+        #endregion
+        
+        #region Serialized Fields
+        
         [Header("Base Stats")]
         [SerializeField] private float maxHealth = 10f;
         [SerializeField] private float strength = 10f;
         [SerializeField] private float defense = 5f;
         [SerializeField] private float speed = 5f;
+        
+        #endregion
+
+        #region Properties
 
         public float CurrentHealth { get; private set; }
         public float MaxHealth => maxHealth;
@@ -33,25 +47,28 @@ namespace Project.Code.Gameplay.Stats
             get => speed;
             private set => speed = value;
         }
+        
+        public bool IsDead => CurrentHealth <= 0;
+        
+        #endregion
 
-        public event System.Action<float, float> OnHealthChanged;
-        public event System.Action<float, float, float, GameObject> OnDamageTaken;
-        public event System.Action OnDeath;
+        #region Unity Functions
 
         protected virtual void Awake()
         {
             CurrentHealth = MaxHealth;
         }
         
+        #endregion
+        
+        #region Public Methods
+        
         public virtual float TakeDamage(float amount, float abilityPower, GameObject source)
         {
             if (CurrentHealth <= 0) return 0f;
 
-            // TODO: Refactor this formula 
-            var damageTaken =
-                Mathf.Clamp(Mathf.Floor((float)(((amount - (Defense / 1.2)) / 2.5) + ((abilityPower + 3.0) / 3.0))), 1,
-                    10);
-
+            var damageTaken = Constants.GetDamageValue(amount, Defense, abilityPower);
+            
             CurrentHealth = Mathf.Clamp(CurrentHealth - damageTaken, 0, MaxHealth);
             OnHealthChanged?.Invoke(CurrentHealth, MaxHealth);
             HitStopManager.Instance.HitStop(0.1f);
@@ -88,6 +105,10 @@ namespace Project.Code.Gameplay.Stats
             CurrentHealth = Mathf.Clamp(CurrentHealth + amount, 0, MaxHealth);
             OnHealthChanged?.Invoke(CurrentHealth, MaxHealth);
         }
+        
+        #endregion
+
+        #region Protected Methods
 
         protected virtual void Die()
         {
@@ -95,11 +116,17 @@ namespace Project.Code.Gameplay.Stats
         }
 
         protected void SetMaxHealth(float value) => maxHealth = value;
+        
+        #endregion
+
+        #region Private Methods
 
         [ContextMenu("Test Damage (10)")]
         private void TestDamage()
         {
             TakeDamage(1f, 2f, gameObject);
         }
+        
+        #endregion
     }
 }

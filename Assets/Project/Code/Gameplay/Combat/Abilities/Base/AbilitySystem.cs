@@ -8,14 +8,24 @@ namespace Project.Code.Gameplay.Combat.Abilities.Base
     [RequireComponent(typeof(PlayerEvolutionComponent))]
     public class AbilitySystem : MonoBehaviour
     {
+        #region Serialized Fields
+        
         [Header("Abilities")]
         [SerializeField] private AbilityData basicAbility;
+        
+        #endregion
+
+        #region Fields
 
         private float _lastBasicAbilityTime = -999f;
         private float _lastSpecialAbilityTime = -999f;
 
         private PlayerInputHandler _inputHandler;
         private PlayerEvolutionComponent _playerEvolutionComponent;
+        
+        #endregion
+
+        #region Unity Functions
 
         private void Awake()
         {
@@ -35,6 +45,10 @@ namespace Project.Code.Gameplay.Combat.Abilities.Base
             _inputHandler.OnSimpleAbilityPerformed -= TryUseBasicAbility;
             _inputHandler.OnSpecialAbilityPerformed -= TryUseSpecialAbility;
         }
+        
+        #endregion
+
+        #region Private Methods
 
         private void TryUseBasicAbility()
         {
@@ -61,5 +75,7 @@ namespace Project.Code.Gameplay.Combat.Abilities.Base
             _playerEvolutionComponent.UseSpecialAbility();
             _lastSpecialAbilityTime = Time.time;
         }
+        
+        #endregion
     }
 }

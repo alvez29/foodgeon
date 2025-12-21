@@ -2,6 +2,8 @@
 {
     public class PlayerDashState : PlayerBaseState
     {
+        #region Override Methods
+        
         protected override void OnPlayerStateUpdate(PlayerStateManager manager)
         {
             //dash to idle
@@ -10,5 +12,7 @@
                 manager.SwitchState(manager.PlayerIdleState);
             }
         }
+        
+        #endregion
     }
 }

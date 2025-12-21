@@ -10,17 +10,31 @@ namespace Project.Code.Gameplay.Player
 {
     public class PlayerInputHandler : MonoBehaviour
     {
+        #region Constants
+        
+        private const float AimIdleTimeout = 2.0f;
+        
+        #endregion
+
+        #region Events
+        
         public event Action OnDashPerformed;
         public event Action OnSimpleAbilityPerformed;
         public event Action OnSpecialAbilityPerformed;
         public event Action<Vector2> OnMoveInputChanged;
         public event Action<Vector2> OnAimInputChanged;
+        
+        #endregion
 
-        private const float AimIdleTimeout = 2.0f;
+        #region Properties
 
         public bool IsUsingMouse { get; private set; }
         public Vector3 MouseRaycastPosition { get; private set; }
         public Vector2 AimInput { get; private set; }
+        
+        #endregion
+
+        #region Fields
 
         private Vector2 MoveInput { get; set; }
         private Coroutine _aimTimeoutCoroutine;
@@ -28,6 +42,10 @@ namespace Project.Code.Gameplay.Player
         private PlayerControls _controls;
         private UnityEngine.Camera _mainCamera;
         
+        #endregion
+        
+        #region Unity Functions
+
         private void Awake()
         {
             _controls = new PlayerControls();
@@ -39,6 +57,13 @@ namespace Project.Code.Gameplay.Player
         {
             StartCoroutine(MousePollRoutine());
         }
+
+        private void OnEnable() => _controls?.Enable();
+        private void OnDisable() => _controls?.Disable();
+        
+        #endregion
+
+        #region Private Methods
 
         private void OnGamepadAimPerformed(InputAction.CallbackContext ctx)
         {
@@ -135,8 +160,7 @@ namespace Project.Code.Gameplay.Player
             MoveInput = Vector2.zero;
             OnMoveInputChanged?.Invoke(MoveInput);
         }
-
-        private void OnEnable() => _controls?.Enable();
-        private void OnDisable() => _controls?.Disable();
+        
+        #endregion
     }
 }

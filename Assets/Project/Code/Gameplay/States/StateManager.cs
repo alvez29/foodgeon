@@ -6,18 +6,21 @@ namespace Project.Code.Gameplay.States
     [RequireComponent(typeof(BaseStats))]
     public abstract class StateManager : MonoBehaviour
     {
-        public BaseState CurrentState;
+        #region Fields
         
+        public BaseState CurrentState;
         public BaseStats ownerStats;
+        
+        #endregion
 
-        protected virtual void BindComponents()
-        {
-            ownerStats = GetComponent<BaseStats>();
-            // Derived classes will bind their own states/components
-        }
+        #region Abstract Methods
 
         protected abstract void SetDefaultState();
         
+        #endregion
+
+        #region Unity Functions
+
         private void Awake()
         {
             BindComponents();
@@ -33,6 +36,20 @@ namespace Project.Code.Gameplay.States
         {
             CurrentState?.UpdateState(this);
         }
+        
+        #endregion
+
+        #region Protected Methods
+
+        protected virtual void BindComponents()
+        {
+            ownerStats = GetComponent<BaseStats>();
+            // Derived classes will bind their own states/components
+        }
+        
+        #endregion
+
+        #region Public Methods
 
         public void SwitchState(BaseState newState)
         {
@@ -40,5 +57,7 @@ namespace Project.Code.Gameplay.States
             CurrentState = newState;
             CurrentState.OnStateEntered(this);
         }
+        
+        #endregion
     }
 }

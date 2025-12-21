@@ -196,6 +196,7 @@ MonoBehaviour:
   flavor: 0
   reward: {fileID: 0}
   isEdible: 0
+  deathMaterial: {fileID: 2100000, guid: afbefaeab674f2c49bbe13d7561bc218, type: 2}
 --- !u!114 &182040767517528236
 MonoBehaviour:
   m_ObjectHideFlags: 0

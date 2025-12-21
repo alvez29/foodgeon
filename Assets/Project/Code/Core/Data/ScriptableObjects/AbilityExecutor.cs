@@ -8,6 +8,8 @@ namespace Project.Code.Core.Data.ScriptableObjects
     /// </summary>
     public abstract class AbilityExecutor : ScriptableObject
     {
+        #region Abstract Methods
+        
         /// <summary>
         /// Execute the ability logic
         /// </summary>
@@ -22,5 +24,7 @@ namespace Project.Code.Core.Data.ScriptableObjects
         /// <param name="target">The GameObject that was hit</param>
         /// <param name="data">The ability data containing parameters</param>
         public abstract void OnHit(GameObject caster, GameObject target, AbilityData data);
+        
+        #endregion
     }
 }

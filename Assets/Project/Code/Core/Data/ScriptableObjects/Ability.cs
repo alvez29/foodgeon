@@ -5,6 +5,8 @@ namespace Project.Code.Core.Data.ScriptableObjects
     [CreateAssetMenu(fileName = "New Ability", menuName = "Foodgeon/Abilities/Ability Data")]
     public class AbilityData : ScriptableObject
     {
+        #region Serialized Fields
+        
         [Header("Ability Settings")]
         [SerializeField] private string abilityName;
         [SerializeField] private float cooldown = 1f;
@@ -17,6 +19,10 @@ namespace Project.Code.Core.Data.ScriptableObjects
         [SerializeField] private float angle = 90f;
         [SerializeField] private LayerMask targetLayer;
         [SerializeField] private float power = 1f;
+        
+        #endregion
+
+        #region Properties
 
         public string AbilityName => abilityName;
         public float Cooldown => cooldown;
@@ -25,6 +31,10 @@ namespace Project.Code.Core.Data.ScriptableObjects
         public float Angle => angle;
         public LayerMask TargetLayer => targetLayer;
         public float Power => power;
+        
+        #endregion
+        
+        #region Public Methods
         
         public void Use(GameObject subject)
         {
@@ -47,5 +57,7 @@ namespace Project.Code.Core.Data.ScriptableObjects
             
             executor.OnHit(subject, hitObject, this);
         }
+        
+        #endregion
     }
 }

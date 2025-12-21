@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace Project.Code.Core
 {
@@ -44,6 +45,16 @@ namespace Project.Code.Core
                     _ => FirstEvolutionHealth
                 };
             }
+        }
+
+        /// <summary>
+        /// Centered damage formula
+        /// </summary>
+        /// <returns>The value of the damage dealt</returns>
+        public static float GetDamageValue(float damageAmount, float defense, float abilityPower)
+        {
+            return Mathf.Clamp(Mathf.Floor((float)(((damageAmount - (defense / 1.2)) / 2.5) + ((abilityPower + 3.0) / 3.0))), 1,
+                10);;
         }
     }
 }

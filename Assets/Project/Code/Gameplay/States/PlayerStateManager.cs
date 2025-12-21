@@ -9,6 +9,8 @@ namespace Project.Code.Gameplay.States
     [RequireComponent(typeof(PlayerMovementComponent))]
     public class PlayerStateManager : StateManager
     {
+        #region Fields
+        
         // Components
         public PlayerDashAbility dashAbility;
         public PlayerMovementComponent movementComponent;
@@ -18,6 +20,10 @@ namespace Project.Code.Gameplay.States
         public readonly PlayerIdleState PlayerIdleState = new PlayerIdleState();
         public readonly PlayerRunState PlayerRunState = new PlayerRunState();
         public readonly PlayerDashState PlayerDashState = new PlayerDashState();
+        
+        #endregion
+
+        #region Override Methods
 
         protected override void BindComponents()
         {
@@ -32,5 +38,7 @@ namespace Project.Code.Gameplay.States
         {
             CurrentState = PlayerIdleState;
         }
+        
+        #endregion
     }
 }

@@ -5,7 +5,13 @@ namespace Project.Code.Gameplay.States
 {
     public abstract class PlayerBaseState : BaseState
     {
+        #region Fields
+        
         protected PlayerStateManager PlayerStateManager;
+        
+        #endregion
+
+        #region Override Methods
 
         public override void OnStateEntered(StateManager contextManager)
         {
@@ -34,11 +40,17 @@ namespace Project.Code.Gameplay.States
         {
             if (PlayerStateManager != null) OnPlayerStateCollision(PlayerStateManager);
         }
+        
+        #endregion
+
+        #region Virtual Methods
 
         // Virtual methods for subclasses
         protected virtual void OnPlayerStateEntered(PlayerStateManager manager) { }
         protected virtual void OnPlayerStateUpdate(PlayerStateManager manager) { }
         protected virtual void OnPlayerStateExited(PlayerStateManager manager) { }
         protected virtual void OnPlayerStateCollision(PlayerStateManager manager) { }
+        
+        #endregion
     }
 }
