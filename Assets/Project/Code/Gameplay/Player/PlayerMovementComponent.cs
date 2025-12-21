@@ -7,6 +7,7 @@ namespace Project.Code.Gameplay.Player
 {
     [RequireComponent(typeof(CharacterController))]
     [RequireComponent(typeof(PlayerInputHandler))]
+    [RequireComponent(typeof(PlayerAimComponent))]
     [RequireComponent(typeof(BaseStats))]
     public class PlayerMovementComponent : MonoBehaviour
     {
@@ -23,7 +24,6 @@ namespace Project.Code.Gameplay.Player
         
         private float CurrentSpeed { get; set; } = 0f;
         public Vector3 MoveDirection { get; private set; } = Vector3.zero;
-        private Vector3 TargetDirection { get; set; } = Vector3.zero;
         public bool IsMoving => CurrentSpeed > Constants.Movement.MovementInputThreshold;
         
         #endregion
@@ -34,6 +34,7 @@ namespace Project.Code.Gameplay.Player
 
         private CharacterController _controller;
         private PlayerInputHandler _inputHandler;
+        private PlayerAimComponent _aimComponent;
         private BaseStats _stats;
         
         #endregion
@@ -44,13 +45,13 @@ namespace Project.Code.Gameplay.Player
         {
             _controller = GetComponent<CharacterController>();
             _inputHandler = GetComponent<PlayerInputHandler>();
+            _aimComponent = GetComponent<PlayerAimComponent>();
             _stats = GetComponent<BaseStats>();
         }
 
         private void OnEnable()
         {
             _inputHandler.OnMoveInputChanged += HandleMoveInputChanged;
-            _inputHandler.OnAimInputChanged += HandleAimInputChanged;
         }
 
         private void OnDisable()
@@ -66,11 +67,6 @@ namespace Project.Code.Gameplay.Player
         #endregion
 
         #region Private Methods
-
-        private void HandleAimInputChanged(Vector2 aimVector)
-        {
-            TargetDirection = new Vector3(aimVector.x, 0f, aimVector.y).normalized;
-        }
 
         private void HandleMoveInputChanged(Vector2 input)
         {
@@ -93,11 +89,14 @@ namespace Project.Code.Gameplay.Player
             var speedChange = _targetSpeed > CurrentSpeed ? acceleration : deceleration;
             CurrentSpeed = Mathf.Lerp(CurrentSpeed, _targetSpeed, speedChange * Time.deltaTime);
             
-            transform.rotation = Quaternion.Slerp(
-                transform.rotation,
-                Quaternion.LookRotation(TargetDirection),
-                rotationSpeed * Time.deltaTime
-            );
+            if (_aimComponent.AimDirection3D != Vector3.zero)
+            {
+                transform.rotation = Quaternion.Slerp(
+                    transform.rotation,
+                    Quaternion.LookRotation(_aimComponent.AimDirection3D),
+                    rotationSpeed * Time.deltaTime
+                );
+            }
             
             _controller.Move(MoveDirection * (CurrentSpeed * Time.deltaTime));
         }

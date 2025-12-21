@@ -364,6 +364,7 @@ GameObject:
   - component: {fileID: 8627007030139879710}
   - component: {fileID: 7247364498119055964}
   - component: {fileID: 5618588461053617313}
+  - component: {fileID: 7412036859904549875}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -552,6 +553,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Code.Gameplay.Player.PlayerEvolutionComponent
   initialEvolution: {fileID: 11400000, guid: 7b21f9f1428da03428f8b91871c8c43e, type: 2}
+--- !u!114 &7412036859904549875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8795643183060070249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ced27b9a80665364a99b4116e434e68c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Project.Code.Gameplay.Player.PlayerAimComponent
 --- !u!1001 &2077607110402139511
 PrefabInstance:
   m_ObjectHideFlags: 0

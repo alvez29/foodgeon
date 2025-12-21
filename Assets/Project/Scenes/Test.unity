@@ -692,7 +692,7 @@ MonoBehaviour:
   offset: {x: 0, y: 8, z: -10}
   smoothSpeed: 8
   useFixedUpdate: 0
-  playerInputHandler: {fileID: 2104654734}
+  playerAimComponent: {fileID: 2104654747}
   maxAimVectorLength: 0.4
 --- !u!1 &1337972517
 GameObject:
@@ -917,17 +917,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 446fbcf9209e4f7d93d1a7cc06633657, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Code.Gameplay.Player.TopDownMovementComponent
---- !u!114 &2104654734 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4285852636140555109, guid: bc5b1e50200f8074f87bc6354a3eff18, type: 3}
-  m_PrefabInstance: {fileID: 324654967}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69e08df6644453f468e36283130b47c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Project.Code.Gameplay.Player.PlayerInputHandler
 --- !u!114 &2104654741 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2414604028690692743, guid: bc5b1e50200f8074f87bc6354a3eff18, type: 3}
@@ -939,6 +928,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c35762fb41b4a29a4384bd92ec5bdc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Code.Gameplay.States.PlayerStateManager
+--- !u!114 &2104654747 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7412036859904549875, guid: bc5b1e50200f8074f87bc6354a3eff18, type: 3}
+  m_PrefabInstance: {fileID: 324654967}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ced27b9a80665364a99b4116e434e68c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Project.Code.Gameplay.Player.PlayerAimComponent
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

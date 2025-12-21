@@ -138,6 +138,15 @@ namespace InputActions
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Eat"",
+                    ""type"": ""Button"",
+                    ""id"": ""c9b5f3b8-1126-4d7a-8143-dae610af81b1"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -404,6 +413,39 @@ namespace InputActions
                     ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6b47deda-4f78-4558-8744-141a9c89cc5e"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""89367661-940f-4de4-87fd-803bb25bfb13"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Eat"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fa4c1517-4ede-438b-b992-f5de1269f1d2"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Eat"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -417,6 +459,7 @@ namespace InputActions
             m_Player_SimpleAttack = m_Player.FindAction("SimpleAttack", throwIfNotFound: true);
             m_Player_SpecialAttack = m_Player.FindAction("SpecialAttack", throwIfNotFound: true);
             m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
+            m_Player_Eat = m_Player.FindAction("Eat", throwIfNotFound: true);
         }
 
         ~@PlayerControls()
@@ -502,6 +545,7 @@ namespace InputActions
         private readonly InputAction m_Player_SimpleAttack;
         private readonly InputAction m_Player_SpecialAttack;
         private readonly InputAction m_Player_Aim;
+        private readonly InputAction m_Player_Eat;
         /// <summary>
         /// Provides access to input actions defined in input action map "Player".
         /// </summary>
@@ -533,6 +577,10 @@ namespace InputActions
             /// Provides access to the underlying input action "Player/Aim".
             /// </summary>
             public InputAction @Aim => m_Wrapper.m_Player_Aim;
+            /// <summary>
+            /// Provides access to the underlying input action "Player/Eat".
+            /// </summary>
+            public InputAction @Eat => m_Wrapper.m_Player_Eat;
             /// <summary>
             /// Provides access to the underlying input action map instance.
             /// </summary>
@@ -574,6 +622,9 @@ namespace InputActions
                 @Aim.started += instance.OnAim;
                 @Aim.performed += instance.OnAim;
                 @Aim.canceled += instance.OnAim;
+                @Eat.started += instance.OnEat;
+                @Eat.performed += instance.OnEat;
+                @Eat.canceled += instance.OnEat;
             }
 
             /// <summary>
@@ -600,6 +651,9 @@ namespace InputActions
                 @Aim.started -= instance.OnAim;
                 @Aim.performed -= instance.OnAim;
                 @Aim.canceled -= instance.OnAim;
+                @Eat.started -= instance.OnEat;
+                @Eat.performed -= instance.OnEat;
+                @Eat.canceled -= instance.OnEat;
             }
 
             /// <summary>
@@ -675,6 +729,13 @@ namespace InputActions
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnAim(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "Eat" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnEat(InputAction.CallbackContext context);
         }
     }
 }

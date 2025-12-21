@@ -1,23 +1,22 @@
-﻿using System;
-using Project.Code.Gameplay.Player;
+﻿using Project.Code.Gameplay.Camera;
 using UnityEngine;
 
-namespace Project.Code.Gameplay.Camera
+namespace Project.Code.Gameplay.Player.Camera
 {
     public class PlayerCameraFollow : CameraFollow
     {
         [SerializeField] [Header("Target Settings")]
-        private PlayerInputHandler playerInputHandler;
+        private PlayerAimComponent playerAimComponent;
 
         [SerializeField] private float maxAimVectorLength = 0.1f;
 
         protected override void FollowTarget(float deltaTime)
         {
-            if (!playerInputHandler || !target) return;
+            if (!playerAimComponent || !target) return;
 
 
             var targetPosition = target.position +
-                                 new Vector3(playerInputHandler.AimInput.x, 0, playerInputHandler.AimInput.y) *
+                                 new Vector3(playerAimComponent.AimDirection.x, 0, playerAimComponent.AimDirection.y) *
                                  maxAimVectorLength
                                  + offset;
 
