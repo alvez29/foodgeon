@@ -1,4 +1,6 @@
 using System.Collections;
+using Project.Code.Gameplay.Evolution;
+using Project.Code.Gameplay.Player;
 using Project.Code.Gameplay.Player.Stats;
 using Project.Code.Gameplay.States;
 using Project.Code.Gameplay.States.StatesLibrary.Player.Grounded;
@@ -12,6 +14,7 @@ namespace Project.Code.UI
 
         [SerializeField] private PlayerStats playerStats;
         [SerializeField] private PlayerStateManager playerState;
+        [SerializeField] private PlayerEvolutionComponent playerEvolutionComponent;
         
         private Text _text;
 
@@ -33,8 +36,10 @@ namespace Project.Code.UI
                 var speed = playerStats.Speed;
                 var belly = playerStats.BellyCount;
                 var state = playerState?.CurrentState ?? playerState?.PlayerIdleState ?? new PlayerIdleState();
+                var currentEvolution = playerEvolutionComponent?.CurrentEvolution.evolutionName ?? "";
 
-                var printText = $"Strength: {strength}, \nSpeed: {speed}, \nBelly: {belly}, \nState: {state.ToString()}";
+                var printText = $"Strength: {strength}, \nSpeed: {speed}, \nBelly: {belly}, \nState: {state.ToString()}" +
+                                $"\nCurrent Evolution: {currentEvolution}";
             
                 _text.text = printText;
                 yield return new WaitForSeconds(0.5f);    

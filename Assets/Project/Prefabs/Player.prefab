@@ -523,7 +523,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d80d1b1582147b58a3a2a1fa6575efb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Code.Gameplay.Player.PlayerStats
-  maxHealth: 100
+  maxHealth: 10
   strength: 10
   defense: 5
   speed: 5
@@ -557,6 +557,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Code.Gameplay.Player.PlayerEvolutionComponent
   initialEvolution: {fileID: 11400000, guid: 7b21f9f1428da03428f8b91871c8c43e, type: 2}
+  stuffCakeEvolution: {fileID: 11400000, guid: 1e2be7038d8af704da974a353130f8d1, type: 2}
+  superStuffCakeEvolution: {fileID: 11400000, guid: 7011fda9801c7b4499ff4caac90c043a, type: 2}
 --- !u!114 &7412036859904549875
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -193,8 +193,7 @@ MonoBehaviour:
   defense: 5
   speed: 5
   enemyName: Base
-  flavor: 0
-  reward: {fileID: 11400000, guid: fe57f13c768afea46b12cf4ec0396263, type: 2}
+  enemyType: 0
   deathMaterial: {fileID: 2100000, guid: afbefaeab674f2c49bbe13d7561bc218, type: 2}
 --- !u!114 &182040767517528236
 MonoBehaviour:
@@ -227,21 +226,21 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
+      value: 1
+      inSlope: 0.045455914
+      outSlope: 0.045455914
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.47857153
     - serializedVersion: 3
       time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
+      value: 0
+      inSlope: -1.555067
+      outSlope: -1.555067
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.1333332
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2

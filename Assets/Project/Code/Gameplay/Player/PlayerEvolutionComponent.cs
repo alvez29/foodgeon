@@ -11,24 +11,19 @@ namespace Project.Code.Gameplay.Player
     public class PlayerEvolutionComponent : MonoBehaviour
     {
         [SerializeField] private Evolution.Evolution initialEvolution;
+        [SerializeField] private Evolution.Evolution stuffCakeEvolution;
+        [SerializeField] private Evolution.Evolution superStuffCakeEvolution;
 
         public Evolution.Evolution CurrentEvolution { get; private set; }
 
         private PlayerStats _playerStats;
-        private Evolution.Evolution _stuffCakeEvolution;
-        private Evolution.Evolution _superStuffCakeEvolution;
+        
 
         #region Unity Functions
 
         private void Awake()
         {
             _playerStats = GetComponent<PlayerStats>();
-            _stuffCakeEvolution =
-                Resources.Load<Evolution.Evolution>("Assets/Project/Code/Gameplay/Evolution/StuffCakeEvolution.asset");
-            _superStuffCakeEvolution =
-                Resources.Load<Evolution.Evolution>(
-                    "Assets/Project/Code/Gameplay/Evolution/SuperStuffCakeEvolution.asset");
-
             CurrentEvolution = initialEvolution;
         }
 
@@ -43,11 +38,13 @@ namespace Project.Code.Gameplay.Player
                 .ToList();
 
             // If there is exactly one evolution that satisfies all conditions, evolve to it.
-            var nextEvolution = nextEvolutionList.Count == 1 ? nextEvolutionList.First() : null;
+            var randomElement = Random.Range(0, nextEvolutionList.Count - 1);
+            var nextEvolution = nextEvolutionList.Count > 1 ? nextEvolutionList[randomElement] : null;
 
             if (nextEvolution)
             {
                 Evolve(nextEvolution);
+                _playerStats.EvolutionStage = nextEvolution.evolutionDepth;
                 Debug.Log($"Evolved to ${nextEvolution.evolutionName}!!");
             }
             // If not, try to evolve to stuff cake
@@ -63,16 +60,17 @@ namespace Project.Code.Gameplay.Player
             if (DoesSatisfyStatsPrecondition(evolution, playerStats))
             {
                 var playerStatsBellyContents = playerStats.BellyContents;
-
+                var evolutionEnemiesTypePrecondition = evolution.enemiesTypePrecondition;
+               
                 //Check for every type conditions
-                foreach (var typeCondition in evolution.EnemiesTypePrecondition)
+                foreach (var typeCondition in evolutionEnemiesTypePrecondition)
                 {
-                    playerStatsBellyContents.TryGetValue(typeCondition.Type, out var bellyTypeCount);
+                    playerStatsBellyContents.TryGetValue(typeCondition.type, out var bellyTypeCount);
 
-                    if (bellyTypeCount < typeCondition.Amount)
+                    if (bellyTypeCount < typeCondition.amount)
                     {
                         Debug.Log($"[{evolution.evolutionName}] Doesn't satisfy type condition." 
-                                  + $"It was needed ${typeCondition.Amount} ${typeCondition.Type}. " 
+                                  + $"It was needed ${typeCondition.amount} ${typeCondition.type}. " 
                                   + $"And belly actually has ${bellyTypeCount}. ");
                         return false;
                     }
@@ -94,7 +92,7 @@ namespace Project.Code.Gameplay.Player
                         playerStats.Speed > Constants.Evolution.StuffCakeEvolutionStatPrecondition ||
                         playerStats.Strength > Constants.Evolution.StuffCakeEvolutionStatPrecondition)
                     {
-                        Evolve(_stuffCakeEvolution);
+                        Evolve(stuffCakeEvolution);
                         Debug.Log("Some stat are 25. Evolved to stuff cake evolution.");
                     }
                     return;
@@ -103,7 +101,7 @@ namespace Project.Code.Gameplay.Player
                         playerStats.Speed > Constants.Evolution.SuperStuffCakeEvolutionStatPrecondition ||
                         playerStats.Strength > Constants.Evolution.SuperStuffCakeEvolutionStatPrecondition)
                     {
-                        Evolve(_superStuffCakeEvolution);
+                        Evolve(superStuffCakeEvolution);
                         Debug.Log("Some stat are 50. Evolved to super stuff cake evolution.");
                     }
                     return;
@@ -127,11 +125,6 @@ namespace Project.Code.Gameplay.Player
             _playerStats.AddStrength(evolution.strengthReward);
 
             CurrentEvolution = evolution;
-        }
-
-        private void ShouldEvolveToStuffCake()
-        {
-            
         }
         
         public void UseSpecialAbility()

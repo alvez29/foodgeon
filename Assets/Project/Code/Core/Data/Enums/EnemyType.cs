@@ -2,6 +2,7 @@
 {
     public enum EnemyType
     {
+        None,
         Chocolate,
         Chilli,
         Ginger,

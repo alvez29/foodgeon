@@ -25,7 +25,7 @@ namespace Project.Code.Gameplay.Player.Stats
         #region Serialized Fields
         
         [Header("Player Stats")]
-        [SerializeField] private int evolutionStage = 1;
+        [SerializeField] private int evolutionStage = 0;
         
         #endregion
 
@@ -37,9 +37,8 @@ namespace Project.Code.Gameplay.Player.Stats
         public int BellyCount => BellyContents.Count;
         public Dictionary<EnemyType, int> BellyContents { get; } = new();
 
-        private int EvolutionStage
+        public int EvolutionStage
         {
-            get => evolutionStage;
             set => evolutionStage = value;
         }
         
@@ -49,7 +48,7 @@ namespace Project.Code.Gameplay.Player.Stats
 
         protected override void Awake()
         {
-            SetMaxHealth(Constants.Stats.GetMaxHealthFromEvolution(evolutionStage));
+            SetMaxHealth(Constants.Stats.Player.GetMaxHealthFromEvolution(evolutionStage));
             base.Awake();
         }
         
@@ -82,8 +81,8 @@ namespace Project.Code.Gameplay.Player.Stats
             
             Debug.Log($"Belly: {BellyContents.Count}/{Constants.Stats.MaxBelly}");
 
-            var currentValue = BellyContents.GetValueOrDefault(enemyData.type, 0);
-            BellyContents.Add(enemyData.type, currentValue + 1);
+            BellyContents[enemyData.type] =
+                BellyContents.TryGetValue(enemyData.type, out var currentCount) ? currentCount + 1 : 1;
             OnBellyChanged?.Invoke(enemyData);
         }
         

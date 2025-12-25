@@ -19,6 +19,9 @@ MonoBehaviour:
   strengthPrecondition: 0
   defensePrecondition: 0
   speedPrecondition: 25
+  enemiesTypePrecondition:
+  - amount: 4
+    type: 1
   specialAbility: {fileID: 0}
   evolutionDepth: 1
   possibleNextEvolution: []

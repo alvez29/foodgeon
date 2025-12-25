@@ -1,4 +1,7 @@
 using System;
+using Project.Code.Core.Data;
+using Project.Code.Core.Data.Enums;
+using Project.Code.Core.Data.ScriptableObjects;
 using UnityEngine;
 
 namespace Project.Code.Core
@@ -31,19 +34,59 @@ namespace Project.Code.Core
             public const float MaxDefense = 60.0f;
             public const float MaxSpeed = 60.0f;
             
-            private const float FirstEvolutionHealth = 10.0f;
-            private const float SecondEvolutionHealth = 15.0f;
-            private const float ThirdEvolutionHealth = 20.0f;
-            
-            public static float GetMaxHealthFromEvolution(int evolutionStage)
+            public static class Player
             {
-                return evolutionStage switch
+                private const float FirstEvolutionHealth = 10.0f;
+                private const float SecondEvolutionHealth = 15.0f;
+                private const float ThirdEvolutionHealth = 20.0f;
+
+                public static float GetMaxHealthFromEvolution(int evolutionStage)
                 {
-                    1 => FirstEvolutionHealth,
-                    2 => SecondEvolutionHealth,
-                    3 => ThirdEvolutionHealth,
-                    _ => FirstEvolutionHealth
-                };
+                    return evolutionStage switch
+                    {
+                        1 => FirstEvolutionHealth,
+                        2 => SecondEvolutionHealth,
+                        3 => ThirdEvolutionHealth,
+                        _ => FirstEvolutionHealth
+                    };
+                }    
+            }
+
+
+            public static class Enemy
+            {
+                private static readonly EnemyReward SaltyEnemyReward = new(2, 0, 2);
+                private static readonly EnemyReward SweetEnemyReward = new(0, 2, 0);
+                private static readonly EnemyReward SpicyEnemyReward = new(0, 0, 2);
+
+                public static EnemyReward GetEnemyRewardByFlavour(Flavor flavor)
+                {
+                    return flavor switch
+                    {
+                        Flavor.Salty => SaltyEnemyReward,
+                        Flavor.Sweet => SweetEnemyReward,
+                        Flavor.Spicy => SpicyEnemyReward,
+                        _ => new EnemyReward(0, 0, 0)
+                    };
+                }
+
+                public static Flavor GetFlavorByType(EnemyType type)
+                {
+                    return type switch
+                    {
+                        EnemyType.Chocolate => Flavor.Sweet,
+                        EnemyType.Chilli => Flavor.Spicy,
+                        EnemyType.Ginger => Flavor.Spicy,
+                        EnemyType.Cheese => Flavor.Salty,
+                        EnemyType.Butter => Flavor.Salty,
+                        EnemyType.SugarPowder => Flavor.Sweet,
+                        EnemyType.Orange => Flavor.Sweet,
+                        EnemyType.Bread => Flavor.Salty,
+                        EnemyType.Chorizo => Flavor.Spicy,
+                        EnemyType.Ham => Flavor.Salty,
+                        _ => Flavor.None
+                    };
+                }
             }
         }
 

@@ -8,15 +8,16 @@ namespace Project.Code.Gameplay.Evolution
     [CreateAssetMenu(fileName = "New Evolution", menuName = "Foodgeon/Evolutions/Evolution")]
     public class Evolution : ScriptableObject
     {
+        [System.Serializable]
         public struct EnemyTypePrecondition
         {
-            public readonly int Amount;
-            public readonly EnemyType Type;
+            public int amount;
+            public EnemyType type;
 
             public EnemyTypePrecondition(int amount, EnemyType type)
             {
-                Amount = amount;
-                Type = type;
+                this.amount = amount;
+                this.type = type;
             }
         }
         
@@ -36,7 +37,7 @@ namespace Project.Code.Gameplay.Evolution
         public float defensePrecondition;
         public float speedPrecondition;
         
-        public readonly List<EnemyTypePrecondition> EnemiesTypePrecondition;
+        public List<EnemyTypePrecondition> enemiesTypePrecondition;
         
         #endregion
 
@@ -49,12 +50,7 @@ namespace Project.Code.Gameplay.Evolution
         public int evolutionDepth;
         
         public List<Evolution> possibleNextEvolution = new();
-
-
-        protected Evolution(List<EnemyTypePrecondition> enemiesTypePrecondition)
-        {
-            EnemiesTypePrecondition = enemiesTypePrecondition;
-        }
+        
 
         #endregion
     }

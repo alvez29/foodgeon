@@ -73,9 +73,9 @@ namespace Project.Code.Gameplay.Player.Eating
                 {
                     if (!enemyStats.CanBeEaten) return false;
                     
-                    PlayerStats.AddDefense(enemyStats.EnemyReward.defense);
-                    PlayerStats.AddSpeed(enemyStats.EnemyReward.speed);
-                    PlayerStats.AddStrength(enemyStats.EnemyReward.strength);
+                    PlayerStats.AddDefense(enemyStats.EnemyReward.Defense);
+                    PlayerStats.AddSpeed(enemyStats.EnemyReward.Speed);
+                    PlayerStats.AddStrength(enemyStats.EnemyReward.Strength);
 
                     (PlayerStats as PlayerStats)?.AddToBelly(
                         new EatenEnemyData(enemyStats.EnemyType, enemyStats.Flavor));

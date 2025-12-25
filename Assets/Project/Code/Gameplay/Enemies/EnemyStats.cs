@@ -1,4 +1,5 @@
-﻿using Project.Code.Core.Data;
+﻿using Project.Code.Core;
+using Project.Code.Core.Data;
 using Project.Code.Core.Data.Enums;
 using Project.Code.Core.Data.ScriptableObjects;
 using Project.Code.Gameplay.Combat.HitFlash;
@@ -12,14 +13,12 @@ namespace Project.Code.Gameplay.Enemies
         [Header("Enemy Stats")]
         [SerializeField] private string enemyName;
         [SerializeField] private EnemyType enemyType;
-        [SerializeField] private Flavor flavor;
-        [SerializeField] private EnemyReward reward;
         [SerializeField] private Material deathMaterial;
 
         public string EnemyName => enemyName;
         public EnemyType EnemyType => enemyType;
-        public Flavor Flavor => flavor;
-        public EnemyReward EnemyReward => reward;
+        public Flavor Flavor => Constants.Stats.Enemy.GetFlavorByType(EnemyType);
+        public EnemyReward EnemyReward => Constants.Stats.Enemy.GetEnemyRewardByFlavour(Flavor);
         
         public bool CanBeEaten => IsDead;
         
