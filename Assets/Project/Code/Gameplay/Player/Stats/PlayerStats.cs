@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Project.Code.Core;
 using Project.Code.Core.Data;
+using Project.Code.Core.Data.Enums;
 using Project.Code.Gameplay.Stats;
 using UnityEngine;
 
@@ -33,20 +34,14 @@ namespace Project.Code.Gameplay.Player.Stats
         private int Money { get; set; }
         
         // Belly Storage
-        public int BellyCount => _bellyContents.Count;
-        public IReadOnlyList<EatenEnemyData> BellyContents => _bellyContents;
+        public int BellyCount => BellyContents.Count;
+        public Dictionary<EnemyType, int> BellyContents { get; } = new();
 
         private int EvolutionStage
         {
             get => evolutionStage;
             set => evolutionStage = value;
         }
-        
-        #endregion
-
-        #region Fields
-        
-        private readonly List<EatenEnemyData> _bellyContents = new();
         
         #endregion
 
@@ -77,20 +72,19 @@ namespace Project.Code.Gameplay.Player.Stats
             return true;
         }
 
-        public bool AddToBelly(EatenEnemyData enemyData)
+        public void AddToBelly(EatenEnemyData enemyData)
         {
-            if (_bellyContents.Count >= Constants.Stats.MaxBelly)
+            if (BellyContents.Count >= Constants.Stats.MaxBelly)
             {
                 Debug.Log("Belly is full!");
-                return false;
+                return;
             }
             
-            Debug.Log($"Belly: {_bellyContents.Count}/{Constants.Stats.MaxBelly}");
-            
-            _bellyContents.Add(enemyData);
-            OnBellyChanged?.Invoke(enemyData);
+            Debug.Log($"Belly: {BellyContents.Count}/{Constants.Stats.MaxBelly}");
 
-            return true;
+            var currentValue = BellyContents.GetValueOrDefault(enemyData.type, 0);
+            BellyContents.Add(enemyData.type, currentValue + 1);
+            OnBellyChanged?.Invoke(enemyData);
         }
         
         #endregion

@@ -34,6 +34,7 @@ namespace Project.Code.Gameplay.States
 
         private void Update()
         {
+            // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
             CurrentState?.UpdateState(this);
         }
         

@@ -1,5 +1,5 @@
-﻿using System;
-using Project.Code.Core.Data;
+﻿using Project.Code.Core.Data;
+using Project.Code.Core.Data.Enums;
 using Project.Code.Core.Data.ScriptableObjects;
 using Project.Code.Gameplay.Combat.HitFlash;
 using Project.Code.Gameplay.Stats;
@@ -11,16 +11,17 @@ namespace Project.Code.Gameplay.Enemies
     {
         [Header("Enemy Stats")]
         [SerializeField] private string enemyName;
+        [SerializeField] private EnemyType enemyType;
         [SerializeField] private Flavor flavor;
         [SerializeField] private EnemyReward reward;
-        [SerializeField] private bool isEdible = false;
         [SerializeField] private Material deathMaterial;
 
         public string EnemyName => enemyName;
+        public EnemyType EnemyType => enemyType;
         public Flavor Flavor => flavor;
         public EnemyReward EnemyReward => reward;
         
-        public bool CanBeEaten => isEdible;
+        public bool CanBeEaten => IsDead;
         
         private HitFlashComponent _hitFlashComponent;
         private MeshRenderer _meshRenderer;

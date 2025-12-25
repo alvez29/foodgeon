@@ -47,6 +47,12 @@ namespace Project.Code.Core
             }
         }
 
+        public static class Evolution
+        {
+            public const float StuffCakeEvolutionStatPrecondition = 25;
+            public const float SuperStuffCakeEvolutionStatPrecondition = 50;
+        }
+        
         /// <summary>
         /// Centered damage formula
         /// </summary>

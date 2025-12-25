@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d796403cc0484ae6bd5ae0683dbc19f4, type: 3}
-  m_Name: DefaultEvolution
+  m_Name: StuffCakeEvolution
   m_EditorClassIdentifier: Assembly-CSharp::Project.Code.Gameplay.Evolution.Evolution
-  evolutionName: Caki (Default)
-  strengthReward: 0
-  defenseReward: 0
-  speedReward: 0
-  strengthPrecondition: 0
-  defensePrecondition: 0
-  speedPrecondition: 0
-  specialAbility: {fileID: 11400000, guid: 83645e8c89d4855499a69c246d72f82a, type: 2}
-  possibleNextEvolution:
-  - {fileID: 11400000, guid: 77877d845eaa7414a9a0c14f39331b1f, type: 2}
+  evolutionName: Stuff Cake
+  strengthReward: 5
+  defenseReward: 5
+  speedReward: 5
+  strengthPrecondition: 25
+  defensePrecondition: 25
+  speedPrecondition: 25
+  specialAbility: {fileID: 0}
+  evolutionDepth: 1
+  possibleNextEvolution: []

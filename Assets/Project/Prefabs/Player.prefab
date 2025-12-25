@@ -540,6 +540,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f15699d9e4d4de0bdf384513d244a7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Code.Gameplay.Player.Eating.PlayerEatingComponent
+  eatingRange: 5
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!114 &5618588461053617313
 MonoBehaviour:
   m_ObjectHideFlags: 0

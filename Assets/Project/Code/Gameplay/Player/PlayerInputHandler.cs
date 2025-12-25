@@ -18,6 +18,7 @@ namespace Project.Code.Gameplay.Player
         public event Action<Vector2> OnMousePositionChanged;
         public event Action<Vector2> OnGamepadAimChanged;
         public event Action OnGamepadAimStopped;
+        public event Action OnEatPerformed;
         
         #endregion
 
@@ -72,6 +73,8 @@ namespace Project.Code.Gameplay.Player
             _controls.Player.Dash.performed += ctx => OnDashPerformed?.Invoke();
             _controls.Player.SimpleAttack.performed += ctx => OnSimpleAbilityPerformed?.Invoke();
             _controls.Player.SpecialAttack.performed += ctx => OnSpecialAbilityPerformed?.Invoke();
+            
+            _controls.Player.Eat.performed += ctx => OnEatPerformed?.Invoke();
         }
 
         private void OnMoveOnPerformed(InputAction.CallbackContext ctx)

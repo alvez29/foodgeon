@@ -32,6 +32,7 @@ namespace Project.Code.Gameplay.Player
         #region Fields
 
         private Vector2 _moveInput;
+        private bool _isAimingWithGamepad;
         private Coroutine _aimTimeoutCoroutine;
         
         private PlayerInputHandler _inputHandler;
@@ -70,6 +71,7 @@ namespace Project.Code.Gameplay.Player
         private void HandleMousePosition(Vector2 screenPosition)
         {
             IsUsingMouse = true;
+            _isAimingWithGamepad = false;
             
             if (_aimTimeoutCoroutine != null)
             {
@@ -104,6 +106,7 @@ namespace Project.Code.Gameplay.Player
             }
             
             var shouldApplyAiming = input.sqrMagnitude > Constants.Movement.AimInputThreshold;
+            _isAimingWithGamepad = shouldApplyAiming;
 
             if (shouldApplyAiming)
             {
@@ -115,27 +118,38 @@ namespace Project.Code.Gameplay.Player
 
         private void HandleGamepadAimStopped()
         {
-            if (!IsUsingMouse)
+            _isAimingWithGamepad = false;
+            
+            if (_aimTimeoutCoroutine != null)
             {
-                _aimTimeoutCoroutine = StartCoroutine(AimTimeoutRoutine());
+                StopCoroutine(_aimTimeoutCoroutine);
             }
+            _aimTimeoutCoroutine = StartCoroutine(AimTimeoutRoutine());
         }
 
         private void HandleMoveInput(Vector2 input)
         {
             _moveInput = input;
+            TryAimAtMovement();
+        }
+
+        private void TryAimAtMovement()
+        {
+            if (IsUsingMouse || _isAimingWithGamepad || _aimTimeoutCoroutine != null) return;
+            
+            if (_moveInput.sqrMagnitude > Constants.Movement.AimInputThreshold)
+            {
+                var direction2D = _moveInput.normalized;
+                var direction3D = new Vector3(direction2D.x, 0f, direction2D.y).normalized;
+                UpdateAimDirection(direction2D, direction3D);
+            }
         }
 
         private IEnumerator AimTimeoutRoutine()
         {
             yield return new WaitForSeconds(AimIdleTimeout);
-
-            if (!IsUsingMouse && _moveInput.sqrMagnitude > Constants.Movement.AimInputThreshold)
-            {
-                var direction2D = _moveInput.normalized;
-                var direction3D = new Vector3(direction2D.x, 0f, direction2D.y).normalized;
-                UpdateAimDirection(direction2D, direction3D);
-            }    
+            _aimTimeoutCoroutine = null;
+            TryAimAtMovement();
         }
 
         private void UpdateAimDirection(Vector2 direction2D, Vector3 direction3D)

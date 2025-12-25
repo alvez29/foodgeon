@@ -1,6 +1,7 @@
 using System.Collections;
 using Project.Code.Gameplay.Player.Stats;
 using Project.Code.Gameplay.States;
+using Project.Code.Gameplay.States.StatesLibrary.Player.Grounded;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -31,7 +32,7 @@ namespace Project.Code.UI
                 var strength = playerStats.Strength;
                 var speed = playerStats.Speed;
                 var belly = playerStats.BellyCount;
-                var state = playerState.CurrentState;
+                var state = playerState?.CurrentState ?? playerState?.PlayerIdleState ?? new PlayerIdleState();
 
                 var printText = $"Strength: {strength}, \nSpeed: {speed}, \nBelly: {belly}, \nState: {state.ToString()}";
             

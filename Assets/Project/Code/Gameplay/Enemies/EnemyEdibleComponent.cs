@@ -7,7 +7,8 @@ namespace Project.Code.Gameplay.Enemies
     {
         public override void OnBeingEaten()
         {
-            //Empty
+            Debug.Log($"[EnemyEdibleComponent] Enemy has been eaten!");
+            Destroy(gameObject);
         }
     }
 }

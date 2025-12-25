@@ -188,14 +188,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a829c00d1ac24e29b97bcc9fc83651e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Code.Gameplay.Enemies.EnemyStats
-  maxHealth: 100
+  maxHealth: 10
   strength: 10
   defense: 5
   speed: 5
   enemyName: Base
   flavor: 0
-  reward: {fileID: 0}
-  isEdible: 0
+  reward: {fileID: 11400000, guid: fe57f13c768afea46b12cf4ec0396263, type: 2}
   deathMaterial: {fileID: 2100000, guid: afbefaeab674f2c49bbe13d7561bc218, type: 2}
 --- !u!114 &182040767517528236
 MonoBehaviour:
@@ -262,6 +261,7 @@ MonoBehaviour:
   flashMaterial: {fileID: 2100000, guid: 0a3de168a8406924f8cea7ae2d1b7b1a, type: 2}
   flashDuration: 0.1
   targetRenderer: {fileID: 8030311578150230848}
+  IsFlashing: 0
 --- !u!1001 &3158873753897465908
 PrefabInstance:
   m_ObjectHideFlags: 0
