@@ -39,7 +39,7 @@ namespace Project.Code.Gameplay.Player
 
             // If there is exactly one evolution that satisfies all conditions, evolve to it.
             var randomElement = Random.Range(0, nextEvolutionList.Count - 1);
-            var nextEvolution = nextEvolutionList.Count > 1 ? nextEvolutionList[randomElement] : null;
+            var nextEvolution = nextEvolutionList.Count >= 1 ? nextEvolutionList[randomElement] : null;
 
             if (nextEvolution)
             {
@@ -70,7 +70,7 @@ namespace Project.Code.Gameplay.Player
                     if (bellyTypeCount < typeCondition.amount)
                     {
                         Debug.Log($"[{evolution.evolutionName}] Doesn't satisfy type condition." 
-                                  + $"It was needed ${typeCondition.amount} ${typeCondition.type}. " 
+                                  + $"It was needed {typeCondition.amount} {typeCondition.type}. " 
                                   + $"And belly actually has ${bellyTypeCount}. ");
                         return false;
                     }

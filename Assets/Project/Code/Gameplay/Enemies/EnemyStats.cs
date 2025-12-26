@@ -38,10 +38,14 @@ namespace Project.Code.Gameplay.Enemies
         #endregion
         
         # region Public Methods
-        public void Initialize(int depth)
+        public void Initialize(int depth, EnemyType type)
         {
+            enemyType = type;
             var multiplier = 1f + (depth * 0.1f);
             // Logic to scale stats based on depth could go here
+            
+            // Optionally update name or visual based on type if needed
+            gameObject.name = $"Enemy_{type}";
         }
         #endregion
 
