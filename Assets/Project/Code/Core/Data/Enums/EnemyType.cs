@@ -4,6 +4,7 @@
     {
         None,
         Chocolate,
+        Yeast,
         Chilli,
         Ginger,
         Cheese,

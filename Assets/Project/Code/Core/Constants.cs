@@ -75,6 +75,7 @@ namespace Project.Code.Core
                     return type switch
                     {
                         EnemyType.Chocolate => Flavor.Sweet,
+                        EnemyType.Yeast => Flavor.Salty,
                         EnemyType.Chilli => Flavor.Spicy,
                         EnemyType.Ginger => Flavor.Spicy,
                         EnemyType.Cheese => Flavor.Salty,

@@ -19,6 +19,13 @@ MonoBehaviour:
   strengthPrecondition: 0
   defensePrecondition: 0
   speedPrecondition: 0
+  enemiesTypePrecondition: []
   specialAbility: {fileID: 11400000, guid: 83645e8c89d4855499a69c246d72f82a, type: 2}
+  evolutionDepth: 0
   possibleNextEvolution:
   - {fileID: 11400000, guid: 77877d845eaa7414a9a0c14f39331b1f, type: 2}
+  - {fileID: 11400000, guid: 853d101432d8679419d18535689bb1be, type: 2}
+  - {fileID: 11400000, guid: 39b974a650039ea45832206cd963b8fc, type: 2}
+  - {fileID: 11400000, guid: 25c9fbf6c72d0e342895e767dffa0c61, type: 2}
+  - {fileID: 11400000, guid: 0c899826ddde88942989b3d68a90db47, type: 2}
+  - {fileID: 11400000, guid: b63d1af06949d8641ab63ff5477b6496, type: 2}
