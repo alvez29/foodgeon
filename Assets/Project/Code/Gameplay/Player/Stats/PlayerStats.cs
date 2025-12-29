@@ -39,9 +39,10 @@ namespace Project.Code.Gameplay.Player.Stats
 
         public int EvolutionStage
         {
+            get => evolutionStage;
             set => evolutionStage = value;
         }
-        
+
         #endregion
 
         #region Unity Functions

@@ -33,11 +33,18 @@ namespace Project.Code.Gameplay.Player
 
         public void TryEvolving()
         {
+            // Check if any stat is over threshold to prevent checking every time player eat an enemy
+            if (!DoesSatisfyEvolutionStageThreshold(_playerStats))
+            {
+                Debug.Log("Evolving stage threshold failed");
+                return;
+            };
+            
             var nextEvolutionList = CurrentEvolution.possibleNextEvolution
                 .Where(evolution => SatisfyPrecondition(evolution, _playerStats))
                 .ToList();
 
-            // If there is exactly one evolution that satisfies all conditions, evolve to it.
+            // If there is exactly one evolution that satisfies all conditions, evolve to it. If there is more than one, choose randomly
             var randomElement = Random.Range(0, nextEvolutionList.Count - 1);
             var nextEvolution = nextEvolutionList.Count >= 1 ? nextEvolutionList[randomElement] : null;
 
@@ -54,6 +61,16 @@ namespace Project.Code.Gameplay.Player
             }
         }
 
+        private static bool DoesSatisfyEvolutionStageThreshold(PlayerStats playerStats)
+        {
+            //TODO: Magic number
+            var threshold = playerStats.EvolutionStage == 0 ? 25 : 50;
+
+            return playerStats.Defense >= threshold ||
+                   playerStats.Speed >= threshold ||
+                   playerStats.Strength >= threshold;
+        }
+        
         private static bool SatisfyPrecondition(Evolution.Evolution evolution, PlayerStats playerStats)
         {
             // Does player satisfy stats preconditions?
