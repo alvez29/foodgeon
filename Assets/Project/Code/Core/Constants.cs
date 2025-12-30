@@ -93,8 +93,10 @@ namespace Project.Code.Core
 
         public static class Evolution
         {
-            public const float StuffCakeEvolutionStatPrecondition = 25;
-            public const float SuperStuffCakeEvolutionStatPrecondition = 50;
+            public const int StuffCakeEvolutionStatPrecondition = 25;
+            public const int SuperStuffCakeEvolutionStatPrecondition = 50;
+            public const int FirstDepthStatPrecondition = 25;
+            public const int SecondDepthStatPrecondition = 50;
         }
         
         /// <summary>

@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using JetBrains.Annotations;
+﻿using System.Linq;
 using Project.Code.Core;
+using Project.Code.Gameplay.Evolution;
 using Project.Code.Gameplay.Player.Stats;
 using UnityEngine;
 
@@ -11,13 +10,13 @@ namespace Project.Code.Gameplay.Player
     public class PlayerEvolutionComponent : MonoBehaviour
     {
         [SerializeField] private Evolution.Evolution initialEvolution;
-        [SerializeField] private Evolution.Evolution stuffCakeEvolution;
-        [SerializeField] private Evolution.Evolution superStuffCakeEvolution;
+        [SerializeField] private StuffCakeEvolution stuffCakeEvolution;
+        [SerializeField] private StuffCakeEvolution superStuffCakeEvolution;
 
         public Evolution.Evolution CurrentEvolution { get; private set; }
 
         private PlayerStats _playerStats;
-        
+
 
         #region Unity Functions
 
@@ -33,18 +32,18 @@ namespace Project.Code.Gameplay.Player
 
         public void TryEvolving()
         {
-            // Check if any stat is over threshold to prevent checking every time player eat an enemy
+            // 1. Check if any stat is over threshold to prevent checking every time player eat an enemy
             if (!DoesSatisfyEvolutionStageThreshold(_playerStats))
             {
                 Debug.Log("Evolving stage threshold failed");
                 return;
-            };
-            
+            }
+
             var nextEvolutionList = CurrentEvolution.possibleNextEvolution
-                .Where(evolution => SatisfyPrecondition(evolution, _playerStats))
+                .Where(evolution => evolution.CanEvolve(_playerStats))
                 .ToList();
 
-            // If there is exactly one evolution that satisfies all conditions, evolve to it. If there is more than one, choose randomly
+            // 2. If there is exactly one evolution that satisfies all conditions, evolve to it. If there is more than one, choose randomly
             var randomElement = Random.Range(0, nextEvolutionList.Count - 1);
             var nextEvolution = nextEvolutionList.Count >= 1 ? nextEvolutionList[randomElement] : null;
 
@@ -54,7 +53,8 @@ namespace Project.Code.Gameplay.Player
                 _playerStats.EvolutionStage = nextEvolution.evolutionDepth;
                 Debug.Log($"Evolved to ${nextEvolution.evolutionName}!!");
             }
-            // If not, try to evolve to stuff cake
+
+            // 3. If not, try to evolve to fallback evolution (stuff cake)
             else
             {
                 TryEvolvingToStuffCakeOrDoNothing(CurrentEvolution, _playerStats);
@@ -63,77 +63,28 @@ namespace Project.Code.Gameplay.Player
 
         private static bool DoesSatisfyEvolutionStageThreshold(PlayerStats playerStats)
         {
-            //TODO: Magic number
-            var threshold = playerStats.EvolutionStage == 0 ? 25 : 50;
+            var threshold = playerStats.EvolutionStage == 0
+                ? Constants.Evolution.FirstDepthStatPrecondition
+                : Constants.Evolution.SecondDepthStatPrecondition;
 
             return playerStats.Defense >= threshold ||
                    playerStats.Speed >= threshold ||
                    playerStats.Strength >= threshold;
         }
-        
-        private static bool SatisfyPrecondition(Evolution.Evolution evolution, PlayerStats playerStats)
+
+        private void TryEvolvingToStuffCakeOrDoNothing(Evolution.Evolution evolution, PlayerStats playerStats)
         {
-            // Does player satisfy stats preconditions?
-            if (DoesSatisfyStatsPrecondition(evolution, playerStats))
+            var cakeEvolution = evolution.evolutionDepth == 0 ? stuffCakeEvolution : superStuffCakeEvolution;
+
+            if (cakeEvolution.CanEvolve(playerStats))
             {
-                var playerStatsBellyContents = playerStats.BellyContents;
-                var evolutionEnemiesTypePrecondition = evolution.enemiesTypePrecondition;
-               
-                //Check for every type conditions
-                foreach (var typeCondition in evolutionEnemiesTypePrecondition)
-                {
-                    playerStatsBellyContents.TryGetValue(typeCondition.type, out var bellyTypeCount);
-
-                    if (bellyTypeCount < typeCondition.amount)
-                    {
-                        Debug.Log($"[{evolution.evolutionName}] Doesn't satisfy type condition." 
-                                  + $"It was needed {typeCondition.amount} {typeCondition.type}. " 
-                                  + $"And belly actually has ${bellyTypeCount}. ");
-                        return false;
-                    }
-                }
-
-                return true;
+                Evolve(cakeEvolution);
+                Debug.Log("Some stat are not satisfied. Evolved to stuff cake evolution.");
+                return;
             }
 
-            Debug.Log($"[{evolution.evolutionName}] Doesn't satisfy stats condition.");
-            return false;
-        }
-
-        private void TryEvolvingToStuffCakeOrDoNothing(Evolution.Evolution currentEvolution, PlayerStats playerStats)
-        {
-            switch (currentEvolution.evolutionDepth)
-            {
-                case 0:
-                    if (playerStats.Defense > Constants.Evolution.StuffCakeEvolutionStatPrecondition ||
-                        playerStats.Speed > Constants.Evolution.StuffCakeEvolutionStatPrecondition ||
-                        playerStats.Strength > Constants.Evolution.StuffCakeEvolutionStatPrecondition)
-                    {
-                        Evolve(stuffCakeEvolution);
-                        Debug.Log("Some stat are 25. Evolved to stuff cake evolution.");
-                    }
-                    return;
-                case 1:
-                    if (playerStats.Defense > Constants.Evolution.SuperStuffCakeEvolutionStatPrecondition ||
-                        playerStats.Speed > Constants.Evolution.SuperStuffCakeEvolutionStatPrecondition ||
-                        playerStats.Strength > Constants.Evolution.SuperStuffCakeEvolutionStatPrecondition)
-                    {
-                        Evolve(superStuffCakeEvolution);
-                        Debug.Log("Some stat are 50. Evolved to super stuff cake evolution.");
-                    }
-                    return;
-            }
-            
             Debug.Log("You can evolve into nothing!");
         }
-        
-        private static bool DoesSatisfyStatsPrecondition([CanBeNull] Evolution.Evolution evolution,
-            PlayerStats playerStats)
-        {
-            return evolution && playerStats.Speed >= evolution.speedPrecondition &&
-                   playerStats.Defense >= evolution.defensePrecondition &&
-                   playerStats.Strength >= evolution.strengthPrecondition;
-        }   
 
         private void Evolve(Evolution.Evolution evolution)
         {
@@ -143,7 +94,7 @@ namespace Project.Code.Gameplay.Player
 
             CurrentEvolution = evolution;
         }
-        
+
         public void UseSpecialAbility()
         {
             CurrentEvolution.specialAbility.Use(gameObject);

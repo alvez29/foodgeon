@@ -10,15 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d796403cc0484ae6bd5ae0683dbc19f4, type: 3}
-  m_Name: StuffCakeEvolution
+  m_Name: SpicyChocolateCake
   m_EditorClassIdentifier: Assembly-CSharp::Project.Code.Gameplay.Evolution.Evolution
-  evolutionName: Stuff Cake
-  strengthReward: 5
+  evolutionName: Spicy Chocolate Cake
+  strengthReward: 0
   defenseReward: 5
-  speedReward: 5
-  strengthPrecondition: 25
-  defensePrecondition: 25
-  speedPrecondition: 25
+  speedReward: 30
+  strengthPrecondition: 0
+  defensePrecondition: 0
+  speedPrecondition: 50
+  enemiesTypePrecondition:
+  - amount: 6
+    type: 4
+  - amount: 4
+    type: 1
   specialAbility: {fileID: 0}
-  evolutionDepth: 1
+  evolutionDepth: 2
   possibleNextEvolution: []
