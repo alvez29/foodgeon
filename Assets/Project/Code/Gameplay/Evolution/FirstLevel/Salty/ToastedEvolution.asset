@@ -26,4 +26,7 @@ MonoBehaviour:
     type: 9
   specialAbility: {fileID: 0}
   evolutionDepth: 1
-  possibleNextEvolution: []
+  possibleNextEvolution:
+  - {fileID: 11400000, guid: 2536a086a5e80fe4e9b4bb388bab9080, type: 2}
+  - {fileID: 11400000, guid: d7b62191e9d14c246ad83b1fda07df27, type: 2}
+  - {fileID: 11400000, guid: 16b8c5b2bc5a65e479c7a1b7db86cdd9, type: 2}

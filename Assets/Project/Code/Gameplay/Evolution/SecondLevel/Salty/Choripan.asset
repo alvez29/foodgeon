@@ -12,20 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d796403cc0484ae6bd5ae0683dbc19f4, type: 3}
   m_Name: Choripan
   m_EditorClassIdentifier: Assembly-CSharp::Project.Code.Gameplay.Evolution.Evolution
-  evolutionName: Veggie Galette
-  strengthReward: 25
-  defenseReward: 5
+  evolutionName: Choripan
+  strengthReward: 30
+  defenseReward: 0
   speedReward: 5
   strengthPrecondition: 50
   defensePrecondition: 0
   speedPrecondition: 0
   enemiesTypePrecondition:
-  - amount: 3
+  - amount: 7
+    type: 10
+  - amount: 5
     type: 9
-  - amount: 6
-    type: 4
-  - amount: 2
-    type: 8
   specialAbility: {fileID: 0}
   evolutionDepth: 2
   possibleNextEvolution: []

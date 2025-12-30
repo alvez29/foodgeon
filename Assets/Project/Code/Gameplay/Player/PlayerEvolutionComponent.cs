@@ -50,8 +50,8 @@ namespace Project.Code.Gameplay.Player
             if (nextEvolution)
             {
                 Evolve(nextEvolution);
-                _playerStats.EvolutionStage = nextEvolution.evolutionDepth;
-                Debug.Log($"Evolved to ${nextEvolution.evolutionName}!!");
+                _playerStats.evolutionStage = nextEvolution.evolutionDepth;
+                Debug.Log($"Evolved to {nextEvolution.evolutionName}!!");
             }
 
             // 3. If not, try to evolve to fallback evolution (stuff cake)
@@ -63,7 +63,7 @@ namespace Project.Code.Gameplay.Player
 
         private static bool DoesSatisfyEvolutionStageThreshold(PlayerStats playerStats)
         {
-            var threshold = playerStats.EvolutionStage == 0
+            var threshold = playerStats.evolutionStage == 0
                 ? Constants.Evolution.FirstDepthStatPrecondition
                 : Constants.Evolution.SecondDepthStatPrecondition;
 

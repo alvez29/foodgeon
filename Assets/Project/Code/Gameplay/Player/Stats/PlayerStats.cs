@@ -21,13 +21,6 @@ namespace Project.Code.Gameplay.Player.Stats
         public event System.Action<EatenEnemyData> OnBellyChanged;
         
         #endregion
-        
-        #region Serialized Fields
-        
-        [Header("Player Stats")]
-        [SerializeField] private int evolutionStage = 0;
-        
-        #endregion
 
         #region Properties
 
@@ -37,11 +30,7 @@ namespace Project.Code.Gameplay.Player.Stats
         public int BellyCount => BellyContents.Count;
         public Dictionary<EnemyType, int> BellyContents { get; } = new();
 
-        public int EvolutionStage
-        {
-            get => evolutionStage;
-            set => evolutionStage = value;
-        }
+        public int evolutionStage = 0;
 
         #endregion
 

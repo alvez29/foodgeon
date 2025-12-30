@@ -527,7 +527,7 @@ MonoBehaviour:
   strength: 10
   defense: 5
   speed: 5
-  evolutionStage: 1
+  evolutionStage: 0
 --- !u!114 &7247364498119055964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -558,7 +558,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Project.Code.Gameplay.Player.PlayerEvolutionComponent
   initialEvolution: {fileID: 11400000, guid: 7b21f9f1428da03428f8b91871c8c43e, type: 2}
   stuffCakeEvolution: {fileID: 11400000, guid: 1e2be7038d8af704da974a353130f8d1, type: 2}
-  superStuffCakeEvolution: {fileID: 11400000, guid: 7011fda9801c7b4499ff4caac90c043a, type: 2}
+  superStuffCakeEvolution: {fileID: 11400000, guid: 5e02cb7aad1d2b740be7e049937ecd41, type: 2}
 --- !u!114 &7412036859904549875
 MonoBehaviour:
   m_ObjectHideFlags: 0
