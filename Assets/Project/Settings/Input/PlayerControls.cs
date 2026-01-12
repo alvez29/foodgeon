@@ -147,6 +147,15 @@ namespace InputActions
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ZoomOut"",
+                    ""type"": ""Button"",
+                    ""id"": ""43046082-8d52-4a3a-a30c-5e6f7cd598e3"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -446,6 +455,28 @@ namespace InputActions
                     ""action"": ""Eat"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0b4cecaf-e6c7-4d29-b988-31dcb694bb23"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ZoomOut"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a21a14a1-ae0f-4a47-9a0b-df7efa266bf5"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ZoomOut"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -460,6 +491,7 @@ namespace InputActions
             m_Player_SpecialAttack = m_Player.FindAction("SpecialAttack", throwIfNotFound: true);
             m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
             m_Player_Eat = m_Player.FindAction("Eat", throwIfNotFound: true);
+            m_Player_ZoomOut = m_Player.FindAction("ZoomOut", throwIfNotFound: true);
         }
 
         ~@PlayerControls()
@@ -546,6 +578,7 @@ namespace InputActions
         private readonly InputAction m_Player_SpecialAttack;
         private readonly InputAction m_Player_Aim;
         private readonly InputAction m_Player_Eat;
+        private readonly InputAction m_Player_ZoomOut;
         /// <summary>
         /// Provides access to input actions defined in input action map "Player".
         /// </summary>
@@ -581,6 +614,10 @@ namespace InputActions
             /// Provides access to the underlying input action "Player/Eat".
             /// </summary>
             public InputAction @Eat => m_Wrapper.m_Player_Eat;
+            /// <summary>
+            /// Provides access to the underlying input action "Player/ZoomOut".
+            /// </summary>
+            public InputAction @ZoomOut => m_Wrapper.m_Player_ZoomOut;
             /// <summary>
             /// Provides access to the underlying input action map instance.
             /// </summary>
@@ -625,6 +662,9 @@ namespace InputActions
                 @Eat.started += instance.OnEat;
                 @Eat.performed += instance.OnEat;
                 @Eat.canceled += instance.OnEat;
+                @ZoomOut.started += instance.OnZoomOut;
+                @ZoomOut.performed += instance.OnZoomOut;
+                @ZoomOut.canceled += instance.OnZoomOut;
             }
 
             /// <summary>
@@ -654,6 +694,9 @@ namespace InputActions
                 @Eat.started -= instance.OnEat;
                 @Eat.performed -= instance.OnEat;
                 @Eat.canceled -= instance.OnEat;
+                @ZoomOut.started -= instance.OnZoomOut;
+                @ZoomOut.performed -= instance.OnZoomOut;
+                @ZoomOut.canceled -= instance.OnZoomOut;
             }
 
             /// <summary>
@@ -736,6 +779,13 @@ namespace InputActions
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnEat(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "ZoomOut" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnZoomOut(InputAction.CallbackContext context);
         }
     }
 }

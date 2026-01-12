@@ -19,6 +19,9 @@ namespace Project.Code.Gameplay.Player
         public event Action<Vector2> OnGamepadAimChanged;
         public event Action OnGamepadAimStopped;
         public event Action OnEatPerformed;
+        public event Action OnZoomStarted;
+        public event Action OnZoomStopped;
+        
         
         #endregion
 
@@ -75,6 +78,9 @@ namespace Project.Code.Gameplay.Player
             _controls.Player.SpecialAttack.performed += ctx => OnSpecialAbilityPerformed?.Invoke();
             
             _controls.Player.Eat.performed += ctx => OnEatPerformed?.Invoke();
+            
+            _controls.Player.ZoomOut.performed += ctx => OnZoomStarted?.Invoke();
+            _controls.Player.ZoomOut.canceled += ctx => OnZoomStopped?.Invoke();
         }
 
         private void OnMoveOnPerformed(InputAction.CallbackContext ctx)

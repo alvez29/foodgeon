@@ -62,6 +62,7 @@ GameObject:
   - component: {fileID: 5508340535369230666}
   - component: {fileID: 6976394611274409649}
   - component: {fileID: 8732544315155339164}
+  - component: {fileID: 104329067809859835}
   - component: {fileID: 5442393909060826051}
   m_Layer: 0
   m_Name: Main Camera
@@ -144,6 +145,22 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3756171435707119330}
   m_Enabled: 1
+--- !u!114 &104329067809859835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3756171435707119330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27c42a2bb3d3c3b4f954ac9008ce3f03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerCameraZoom
+  inputHandler: {fileID: 0}
+  cameraFollow: {fileID: 1344969014848184926}
+  zoomOutCameraOffset: {x: 0, y: 0}
+  zoomOutDuration: 0.5
 --- !u!114 &5442393909060826051
 MonoBehaviour:
   m_ObjectHideFlags: 0

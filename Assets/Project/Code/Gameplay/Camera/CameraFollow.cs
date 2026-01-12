@@ -7,7 +7,7 @@ namespace Project.Code.Gameplay.Camera
         [Header("Target Settings")]
         [SerializeField]
         protected Transform target;
-        [SerializeField] protected Vector3 offset = new Vector3(0f, 8f, -10f);
+        [SerializeField] public Vector3 offset = new(0f, 8f, -10f);
         
         [Header("Movement Settings")]
         [SerializeField]
