@@ -16,18 +16,17 @@ namespace Project.Code.Gameplay.Player.Eating
     [RequireComponent(typeof(PlayerEvolutionComponent))]
     public class PlayerEatingComponent : BaseEatingComponent
     {
-        
         private PlayerInputHandler _inputHandler;
         private PlayerEvolutionComponent _evolutionComponent;
         private readonly Collider[] _hitResults = new Collider[10];
-        
+
         #region Unity Functions
 
         private void Awake()
         {
             PlayerStats = GetComponent<PlayerStats>();
-            _inputHandler = GetComponent<PlayerInputHandler>();      
-            _evolutionComponent = GetComponent<PlayerEvolutionComponent>();      
+            _inputHandler = GetComponent<PlayerInputHandler>();
+            _evolutionComponent = GetComponent<PlayerEvolutionComponent>();
         }
 
         private void OnEnable()
@@ -52,13 +51,13 @@ namespace Project.Code.Gameplay.Player.Eating
         {
             var origin = transform.position + Vector3.forward.normalized * eatingRange;
             var hitCounts = Physics.OverlapSphereNonAlloc(origin, 10, _hitResults, targetLayer);
-            
+
             HitboxDebugger.Instance.DrawSphere(origin, 10, Color.yellow, 0.5f);
-            
+
             for (var i = 0; i < hitCounts; i++)
             {
                 var hitResultObject = _hitResults[i].gameObject;
-                
+
                 if (hitResultObject == gameObject) continue;
                 if (TryEating(hitResultObject)) break;
             }
@@ -68,20 +67,18 @@ namespace Project.Code.Gameplay.Player.Eating
         {
             if (objectToEat.TryGetComponent(out IEdible edibleComponent))
             {
-                //If it is the enemy   
+                //If it is an edible enemy   
                 if (objectToEat.TryGetComponent(out EnemyStats enemyStats))
                 {
                     if (!enemyStats.CanBeEaten) return false;
-                    
-                    PlayerStats.AddDefense(enemyStats.EnemyReward.Defense);
-                    PlayerStats.AddSpeed(enemyStats.EnemyReward.Speed);
-                    PlayerStats.AddStrength(enemyStats.EnemyReward.Strength);
+
+                    PlayerStats.AddEnemyReward(enemyStats.EnemyReward);
 
                     (PlayerStats as PlayerStats)?.AddToBelly(
                         new EatenEnemyData(enemyStats.EnemyType, enemyStats.Flavor));
-                    
+
                     edibleComponent.OnBeingEaten();
-                    
+
                     _evolutionComponent?.TryEvolving();
                 }
                 else

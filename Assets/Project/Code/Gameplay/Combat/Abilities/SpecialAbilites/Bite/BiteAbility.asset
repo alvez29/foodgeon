@@ -15,7 +15,7 @@ MonoBehaviour:
   abilityName: Bite
   cooldown: 4
   executor: {fileID: 11400000, guid: 9d4d5622a751dd34facf9dbdaa9a88be, type: 2}
-  range: 1.5
+  range: 3
   angle: 90
   targetLayer:
     serializedVersion: 2

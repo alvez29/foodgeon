@@ -26,10 +26,32 @@ namespace Project.Code.Gameplay.Camera
         private float trauma;
 
         private float _seed;
+        
+        private static CameraShake _instance;
+        public static CameraShake Instance
+        {
+            get
+            {
+                if (_instance != null) return _instance;
+                var obj = new GameObject("CameraShake");
+                _instance = obj.AddComponent<CameraShake>();
+                DontDestroyOnLoad(obj);
+                return _instance;
+            }
+        }
+
 
         private void Awake()
         {
             _seed = Random.value;
+            if (_instance != null && _instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
+            _instance = this;
+            DontDestroyOnLoad(gameObject);
         }
 
         private void Update()
@@ -43,7 +65,7 @@ namespace Project.Code.Gameplay.Camera
                 return;
             }
 
-            trauma = Mathf.Clamp01(trauma - Time.deltaTime * traumaDecay);
+            trauma = Mathf.Clamp01(trauma - Time.unscaledDeltaTime * traumaDecay);
 
             var shake = trauma * trauma;
             var noiseTime = Time.time * frequency;
