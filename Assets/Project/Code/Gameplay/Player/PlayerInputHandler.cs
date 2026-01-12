@@ -39,8 +39,8 @@ namespace Project.Code.Gameplay.Player
             BindInputActions();
         }
 
-        private void OnEnable() => _controls?.Enable();
-        private void OnDisable() => _controls?.Disable();
+        private void OnEnable() => EnableInput();
+        private void OnDisable() => DisableInput();
         
         #endregion
 
@@ -92,6 +92,17 @@ namespace Project.Code.Gameplay.Player
         private void OnMoveOnCanceled(InputAction.CallbackContext ctx)
         {
             OnMoveInputChanged?.Invoke(Vector2.zero);
+        }
+
+
+        public void DisableInput()
+        {
+            _controls?.Disable();
+        }
+
+        public void EnableInput()
+        {
+            _controls.Enable();
         }
         
         #endregion

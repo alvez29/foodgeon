@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Project.Code.Core.Data;
 using Project.Code.Core.Data.Enums;
 using Project.Code.Core.Data.ScriptableObjects;
@@ -89,24 +90,50 @@ namespace Project.Code.Core
                     };
                 }
             }
+            
+            /// <summary>
+            /// Centered damage formula
+            /// </summary>
+            /// <returns>The value of the damage dealt</returns>
+            public static float GetDamageValue(float damageAmount, float defense, float abilityPower)
+            {
+                return Mathf.Clamp(Mathf.Floor((float)(((damageAmount - (defense / 1.2)) / 2.5) + ((abilityPower + 3.0) / 3.0))), 1,
+                    10);;
+            }
         }
 
         public static class Evolution
         {
-            public const int StuffCakeEvolutionStatPrecondition = 25;
-            public const int SuperStuffCakeEvolutionStatPrecondition = 50;
             public const int FirstDepthStatPrecondition = 25;
             public const int SecondDepthStatPrecondition = 50;
         }
-        
-        /// <summary>
-        /// Centered damage formula
-        /// </summary>
-        /// <returns>The value of the damage dealt</returns>
-        public static float GetDamageValue(float damageAmount, float defense, float abilityPower)
+
+        #region Coroutines
+
+        public static class Coroutines
         {
-            return Mathf.Clamp(Mathf.Floor((float)(((damageAmount - (defense / 1.2)) / 2.5) + ((abilityPower + 3.0) / 3.0))), 1,
-                10);;
+            
+            /// <summary>
+            /// Simple coroutine for waiting certain amount of time
+            /// </summary>
+            public static IEnumerator WaitTime(float waitTime, Action onCompleted = null)
+            {
+                var elapsedTime = 0f;
+            
+                while (elapsedTime < waitTime)
+                {
+                    elapsedTime += Time.deltaTime;
+
+                    if (elapsedTime >= waitTime)
+                    {
+                        onCompleted?.Invoke();
+                    }
+                    
+                    yield return null;                    
+                }
+            }
+
         }
+        #endregion
     }
 }

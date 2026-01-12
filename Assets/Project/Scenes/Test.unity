@@ -321,6 +321,14 @@ PrefabInstance:
       propertyPath: baseStats
       value: 
       objectReference: {fileID: 2104654725}
+    - target: {fileID: 7247364498119055964, guid: bc5b1e50200f8074f87bc6354a3eff18, type: 3}
+      propertyPath: eatingTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7247364498119055964, guid: bc5b1e50200f8074f87bc6354a3eff18, type: 3}
+      propertyPath: eatingEasingPosition
+      value: 18
+      objectReference: {fileID: 0}
     - target: {fileID: 8795643183060070249, guid: bc5b1e50200f8074f87bc6354a3eff18, type: 3}
       propertyPath: m_Name
       value: Player
@@ -868,10 +876,14 @@ PrefabInstance:
       objectReference: {fileID: 2104654751}
     - target: {fileID: 104329067809859835, guid: 49c69e9b2f1650748bed7e3125c416dc, type: 3}
       propertyPath: zoomOutCameraOffset.x
-      value: 20
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 104329067809859835, guid: 49c69e9b2f1650748bed7e3125c416dc, type: 3}
       propertyPath: zoomOutCameraOffset.y
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 104329067809859835, guid: 49c69e9b2f1650748bed7e3125c416dc, type: 3}
+      propertyPath: zoomOutCameraOffset.z
       value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 1344969014848184926, guid: 49c69e9b2f1650748bed7e3125c416dc, type: 3}

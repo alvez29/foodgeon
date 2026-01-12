@@ -36,9 +36,18 @@ namespace Project.Code.Gameplay.Managers
         public void HitStop(float duration)
         {
             if (_hitStopRoutine != null)
+            {
                 StopCoroutine(_hitStopRoutine);
+                RestorePreviousState();
+            }
 
             _hitStopRoutine = StartCoroutine(DoHitStop(duration));
+        }
+
+        private void RestorePreviousState(float originalTimeScale = 1f)
+        {
+            Time.timeScale = originalTimeScale;
+            _isHitStopActive = false;
         }
 
         private IEnumerator DoHitStop(float duration)
@@ -51,9 +60,7 @@ namespace Project.Code.Gameplay.Managers
 
             Time.timeScale = 0f;
             yield return new WaitForSecondsRealtime(duration);
-            Time.timeScale = originalTimeScale;
-
-            _isHitStopActive = false;
+            RestorePreviousState(originalTimeScale);
         }
     }
 }

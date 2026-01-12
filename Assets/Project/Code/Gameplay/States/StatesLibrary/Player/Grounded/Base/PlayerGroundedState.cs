@@ -13,6 +13,10 @@ namespace Project.Code.Gameplay.States.StatesLibrary.Player.Grounded.Base
             {
                 manager.SwitchState(manager.PlayerDashState);
             }
+            else if (manager.playerEatingComponent.IsEating)
+            {
+                manager.SwitchState(manager.PlayerEatingState);
+            }
         }
         
         #endregion

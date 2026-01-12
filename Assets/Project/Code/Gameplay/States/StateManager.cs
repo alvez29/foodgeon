@@ -45,13 +45,14 @@ namespace Project.Code.Gameplay.States
         protected virtual void BindComponents()
         {
             ownerStats = GetComponent<BaseStats>();
-            // Derived classes will bind their own states/components
+            // Derived classes should bind their own states/components
         }
         
         #endregion
 
         #region Public Methods
 
+        // ReSharper disable Unity.PerformanceAnalysis
         public void SwitchState(BaseState newState)
         {
             CurrentState?.OnStateExited(this);

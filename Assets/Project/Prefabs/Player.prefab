@@ -510,6 +510,7 @@ MonoBehaviour:
   ownerStats: {fileID: 8627007030139879710}
   dashAbility: {fileID: 3165333103404173559}
   movementComponent: {fileID: 6968320629646208548}
+  playerEatingComponent: {fileID: 7247364498119055964}
   inputHandler: {fileID: 4285852636140555109}
 --- !u!114 &8627007030139879710
 MonoBehaviour:
@@ -544,6 +545,11 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 64
+  eatingTargetPositionOffest: {x: 0, y: 0, z: -2}
+  eatingLerpPositionDuration: 0.4
+  eatingEasingPosition: 18
+  eatingTime: 1
+  eatingRadius: 10
 --- !u!114 &5618588461053617313
 MonoBehaviour:
   m_ObjectHideFlags: 0

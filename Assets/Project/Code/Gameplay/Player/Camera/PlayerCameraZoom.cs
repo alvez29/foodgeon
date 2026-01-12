@@ -20,7 +20,6 @@ namespace Project.Code.Gameplay.Player.Camera
         private void Start()
         {
             _initialCameraOffset = cameraFollow?.offset ?? Vector3.down;
-            print($"Offset: {_initialCameraOffset}");
         }
 
         private void OnEnable()

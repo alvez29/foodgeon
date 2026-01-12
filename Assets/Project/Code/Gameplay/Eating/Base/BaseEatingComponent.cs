@@ -10,6 +10,8 @@ namespace Project.Code.Gameplay.Eating.Base
         [SerializeField] protected float eatingRange = 5.0f;
         [SerializeField] protected LayerMask targetLayer;
         
+        protected internal bool IsEating = false;
+        
         protected BaseStats PlayerStats;
     
         public abstract void PerformEatingAction();

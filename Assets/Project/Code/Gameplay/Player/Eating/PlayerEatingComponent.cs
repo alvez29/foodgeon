@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using NUnit.Framework;
+using DG.Tweening;
+using Project.Code.Core;
 using Project.Code.Core.Data;
 using Project.Code.Core.Interfaces;
 using Project.Code.Gameplay.Eating.Base;
@@ -16,6 +18,16 @@ namespace Project.Code.Gameplay.Player.Eating
     [RequireComponent(typeof(PlayerEvolutionComponent))]
     public class PlayerEatingComponent : BaseEatingComponent
     {
+        
+        [Header("Player eating settings")]
+        [SerializeField] protected Vector3 eatingTargetPositionOffest = Vector3.zero;
+        [SerializeField] protected float eatingLerpPositionDuration = 0.4f;
+
+        [SerializeField] protected Ease eatingEasingPosition = Ease.Linear;  
+        //TODO: Use it to wait time
+        [SerializeField] protected float eatingTime = 3f;
+        [SerializeField] protected float eatingRadius = 10f;
+        
         private PlayerInputHandler _inputHandler;
         private PlayerEvolutionComponent _evolutionComponent;
         private readonly Collider[] _hitResults = new Collider[10];
@@ -50,9 +62,9 @@ namespace Project.Code.Gameplay.Player.Eating
         public override void PerformEatingAction()
         {
             var origin = transform.position + Vector3.forward.normalized * eatingRange;
-            var hitCounts = Physics.OverlapSphereNonAlloc(origin, 10, _hitResults, targetLayer);
+            var hitCounts = Physics.OverlapSphereNonAlloc(origin, eatingRadius, _hitResults, targetLayer);
 
-            HitboxDebugger.Instance.DrawSphere(origin, 10, Color.yellow, 0.5f);
+            HitboxDebugger.Instance.DrawSphere(origin, eatingRadius, Color.yellow, 0.5f);
 
             for (var i = 0; i < hitCounts; i++)
             {
@@ -71,15 +83,24 @@ namespace Project.Code.Gameplay.Player.Eating
                 if (objectToEat.TryGetComponent(out EnemyStats enemyStats))
                 {
                     if (!enemyStats.CanBeEaten) return false;
+                    
+                    IsEating = true;
 
+                    transform.DOMove(
+                        new Vector3(objectToEat.transform.position.x - eatingTargetPositionOffest.x,
+                            objectToEat.transform.position.y - eatingTargetPositionOffest.y,
+                            objectToEat.transform.position.z - eatingTargetPositionOffest.z),
+                        eatingLerpPositionDuration).SetEase(eatingEasingPosition);
+                    
                     PlayerStats.AddEnemyReward(enemyStats.EnemyReward);
 
                     (PlayerStats as PlayerStats)?.AddToBelly(
                         new EatenEnemyData(enemyStats.EnemyType, enemyStats.Flavor));
-
-                    edibleComponent.OnBeingEaten();
-
+                    
                     _evolutionComponent?.TryEvolving();
+
+                    StartCoroutine(
+                        Constants.Coroutines.WaitTime(eatingTime, () => OnEatingWaitTimeCompleted(edibleComponent)));
                 }
                 else
                 {
@@ -92,5 +113,13 @@ namespace Project.Code.Gameplay.Player.Eating
             Debug.Log("Eww... That is not edible");
             return false;
         }
+
+        // ReSharper disable Unity.PerformanceAnalysis
+        private void OnEatingWaitTimeCompleted(IEdible edibleComponent)
+        {
+            IsEating = false;
+            edibleComponent?.OnBeingEaten();        
+        }
+
     }
 }

@@ -69,7 +69,7 @@ namespace Project.Code.Gameplay.Stats
         {
             if (CurrentHealth <= 0) return 0f;
 
-            var damageTaken = Constants.GetDamageValue(amount, Defense, abilityPower);
+            var damageTaken = Constants.Stats.GetDamageValue(amount, Defense, abilityPower);
             var hitStopDuration = Mathf.Clamp(damageTaken * 0.02f, 0.1f, 0.7f);
             var trauma = Mathf.Clamp(damageTaken * 0.03f, 0.3f, 0.6f);
             
