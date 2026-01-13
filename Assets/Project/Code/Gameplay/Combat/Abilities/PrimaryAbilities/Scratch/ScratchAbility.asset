@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ScratchAbility
   m_EditorClassIdentifier: Assembly-CSharp::Project.Code.Core.Data.ScriptableObjects.AbilityData
   abilityName: Scratch
-  cooldown: 0
+  cooldown: 0.5
   executor: {fileID: 11400000, guid: 895ea94faa4e03c4fa7513e824592258, type: 2}
   range: 1.5
   angle: 90

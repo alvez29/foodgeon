@@ -54,7 +54,7 @@ namespace Project.Code.Gameplay.Enemies
         protected override void Die()
         {
             // If in the moment of dead HitFlashComponent is flashing, wait until finish and the change material
-            if (_hitFlashComponent && _hitFlashComponent.IsFlashing)
+            if (_hitFlashComponent && _hitFlashComponent.isFlashing)
             {
                 _hitFlashComponent.OnFlashFinished += OnFlashComponentFinished;
             }

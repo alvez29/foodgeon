@@ -8,63 +8,52 @@ namespace Project.Code.Gameplay.Combat.HitFlash
     public class HitFlashComponent : MonoBehaviour
     {
         #region Events
-
         public event System.Action OnFlashFinished;
-
         #endregion
 
         #region Serialized Fields
-
         [Header("Flash Settings")]
         [SerializeField] private Material flashMaterial;
         [SerializeField] private float flashDuration = 0.1f;
         [SerializeField] private Renderer targetRenderer;
-
         #endregion
 
         #region Properties
+        public bool isFlashing = false;
 
-        public bool IsFlashing = false;
-        
         private BaseStats _stats;
-        private Material _originalMaterial;
         private Coroutine _flashCoroutine;
-        
-        #endregion
-        
-        #region Unity Functions
+        private Material _originalMaterial;
 
+        #endregion
+
+        #region Unity Functions
         private void Awake()
         {
             _stats = GetComponent<BaseStats>();
-            
+
             if (targetRenderer == null)
             {
                 targetRenderer = GetComponentInChildren<Renderer>();
             }
+            
+            _originalMaterial = targetRenderer.material;
         }
 
         private void OnEnable()
         {
             if (_stats != null)
-            {
                 _stats.OnDamageTaken += HandleDamageTaken;
-            }
         }
 
         private void OnDisable()
         {
             if (_stats != null)
-            {
                 _stats.OnDamageTaken -= HandleDamageTaken;
-            }
         }
-
         #endregion
 
-
         #region Private Functions
-
         private void HandleDamageTaken(float current, float max, float damage, GameObject source)
         {
             if (targetRenderer == null || flashMaterial == null) return;
@@ -72,34 +61,31 @@ namespace Project.Code.Gameplay.Combat.HitFlash
             if (_flashCoroutine != null)
             {
                 StopCoroutine(_flashCoroutine);
+                targetRenderer.material = targetRenderer.material;
             }
-            
+
             _flashCoroutine = StartCoroutine(FlashRoutine());
         }
-
         #endregion
 
-
         #region Routine
-
         private IEnumerator FlashRoutine()
         {
-            IsFlashing = true;
-            
-            _originalMaterial = targetRenderer.material;
+            isFlashing = true;
+
             targetRenderer.material = flashMaterial;
 
             yield return new WaitForSeconds(flashDuration);
 
-            targetRenderer.material = _originalMaterial;
-            _flashCoroutine = null;
+            if (targetRenderer)
+                targetRenderer.material = _originalMaterial;
 
-            IsFlashing = false;
+            _flashCoroutine = null;
             
             OnFlashFinished?.Invoke();
+            
+            isFlashing = false;
         }
-
         #endregion
-        
     }
 }
