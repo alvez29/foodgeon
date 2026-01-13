@@ -156,6 +156,15 @@ namespace InputActions
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MouseActivity"",
+                    ""type"": ""Button"",
+                    ""id"": ""45a21b24-da38-4843-9725-bdabf5c4c33e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -165,7 +174,7 @@ namespace InputActions
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Mouse & Keyboard Control Scheme"",
                     ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -176,7 +185,7 @@ namespace InputActions
                     ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Gamepad Control Scheme"",
                     ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -187,7 +196,7 @@ namespace InputActions
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Mouse & Keyboard Control Scheme"",
                     ""action"": ""SimpleAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -198,7 +207,7 @@ namespace InputActions
                     ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Gamepad Control Scheme"",
                     ""action"": ""SimpleAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -209,7 +218,7 @@ namespace InputActions
                     ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Gamepad Control Scheme"",
                     ""action"": ""SimpleAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -220,7 +229,7 @@ namespace InputActions
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Gamepad Control Scheme"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -242,7 +251,7 @@ namespace InputActions
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Mouse & Keyboard Control Scheme"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -253,7 +262,7 @@ namespace InputActions
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Mouse & Keyboard Control Scheme"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -264,7 +273,7 @@ namespace InputActions
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Mouse & Keyboard Control Scheme"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -275,7 +284,7 @@ namespace InputActions
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Mouse & Keyboard Control Scheme"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -297,7 +306,7 @@ namespace InputActions
                     ""path"": ""<Gamepad>/dpad/up"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Gamepad Control Scheme"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -308,7 +317,7 @@ namespace InputActions
                     ""path"": ""<Gamepad>/dpad/down"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Gamepad Control Scheme"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -319,7 +328,7 @@ namespace InputActions
                     ""path"": ""<Gamepad>/dpad/left"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Gamepad Control Scheme"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -330,7 +339,7 @@ namespace InputActions
                     ""path"": ""<Gamepad>/dpad/right"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Gamepad Control Scheme"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -341,7 +350,7 @@ namespace InputActions
                     ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Gamepad Control Scheme"",
                     ""action"": ""SpecialAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -352,7 +361,7 @@ namespace InputActions
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Mouse & Keyboard Control Scheme"",
                     ""action"": ""SpecialAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -363,7 +372,7 @@ namespace InputActions
                     ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Gamepad Control Scheme"",
                     ""action"": ""SpecialAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -385,7 +394,7 @@ namespace InputActions
                     ""path"": ""<Gamepad>/rightStick/up"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Gamepad Control Scheme"",
                     ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -396,7 +405,7 @@ namespace InputActions
                     ""path"": ""<Gamepad>/rightStick/down"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Gamepad Control Scheme"",
                     ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -407,7 +416,7 @@ namespace InputActions
                     ""path"": ""<Gamepad>/rightStick/left"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Gamepad Control Scheme"",
                     ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -418,7 +427,7 @@ namespace InputActions
                     ""path"": ""<Gamepad>/rightStick/right"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Gamepad Control Scheme"",
                     ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -429,7 +438,7 @@ namespace InputActions
                     ""path"": ""<Mouse>/position"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Mouse & Keyboard Control Scheme"",
                     ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -440,7 +449,7 @@ namespace InputActions
                     ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Mouse & Keyboard Control Scheme"",
                     ""action"": ""Eat"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -451,7 +460,7 @@ namespace InputActions
                     ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Gamepad Control Scheme"",
                     ""action"": ""Eat"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -462,7 +471,7 @@ namespace InputActions
                     ""path"": ""<Keyboard>/t"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Mouse & Keyboard Control Scheme"",
                     ""action"": ""ZoomOut"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -473,15 +482,54 @@ namespace InputActions
                     ""path"": ""<Gamepad>/select"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Gamepad Control Scheme"",
                     ""action"": ""ZoomOut"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f930ae76-e179-453b-ab69-ff5c37b45434"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Mouse & Keyboard Control Scheme;Gamepad Control Scheme"",
+                    ""action"": ""MouseActivity"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
             ]
         }
     ],
-    ""controlSchemes"": []
+    ""controlSchemes"": [
+        {
+            ""name"": ""Gamepad Control Scheme"",
+            ""bindingGroup"": ""Gamepad Control Scheme"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Gamepad>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Mouse>"",
+                    ""isOptional"": true,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Mouse & Keyboard Control Scheme"",
+            ""bindingGroup"": ""Mouse & Keyboard Control Scheme"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Mouse>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        }
+    ]
 }");
             // Player
             m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
@@ -492,6 +540,7 @@ namespace InputActions
             m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
             m_Player_Eat = m_Player.FindAction("Eat", throwIfNotFound: true);
             m_Player_ZoomOut = m_Player.FindAction("ZoomOut", throwIfNotFound: true);
+            m_Player_MouseActivity = m_Player.FindAction("MouseActivity", throwIfNotFound: true);
         }
 
         ~@PlayerControls()
@@ -579,6 +628,7 @@ namespace InputActions
         private readonly InputAction m_Player_Aim;
         private readonly InputAction m_Player_Eat;
         private readonly InputAction m_Player_ZoomOut;
+        private readonly InputAction m_Player_MouseActivity;
         /// <summary>
         /// Provides access to input actions defined in input action map "Player".
         /// </summary>
@@ -618,6 +668,10 @@ namespace InputActions
             /// Provides access to the underlying input action "Player/ZoomOut".
             /// </summary>
             public InputAction @ZoomOut => m_Wrapper.m_Player_ZoomOut;
+            /// <summary>
+            /// Provides access to the underlying input action "Player/MouseActivity".
+            /// </summary>
+            public InputAction @MouseActivity => m_Wrapper.m_Player_MouseActivity;
             /// <summary>
             /// Provides access to the underlying input action map instance.
             /// </summary>
@@ -665,6 +719,9 @@ namespace InputActions
                 @ZoomOut.started += instance.OnZoomOut;
                 @ZoomOut.performed += instance.OnZoomOut;
                 @ZoomOut.canceled += instance.OnZoomOut;
+                @MouseActivity.started += instance.OnMouseActivity;
+                @MouseActivity.performed += instance.OnMouseActivity;
+                @MouseActivity.canceled += instance.OnMouseActivity;
             }
 
             /// <summary>
@@ -697,6 +754,9 @@ namespace InputActions
                 @ZoomOut.started -= instance.OnZoomOut;
                 @ZoomOut.performed -= instance.OnZoomOut;
                 @ZoomOut.canceled -= instance.OnZoomOut;
+                @MouseActivity.started -= instance.OnMouseActivity;
+                @MouseActivity.performed -= instance.OnMouseActivity;
+                @MouseActivity.canceled -= instance.OnMouseActivity;
             }
 
             /// <summary>
@@ -730,6 +790,32 @@ namespace InputActions
         /// Provides a new <see cref="PlayerActions" /> instance referencing this action map.
         /// </summary>
         public PlayerActions @Player => new PlayerActions(this);
+        private int m_GamepadControlSchemeSchemeIndex = -1;
+        /// <summary>
+        /// Provides access to the input control scheme.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputControlScheme" />
+        public InputControlScheme GamepadControlSchemeScheme
+        {
+            get
+            {
+                if (m_GamepadControlSchemeSchemeIndex == -1) m_GamepadControlSchemeSchemeIndex = asset.FindControlSchemeIndex("Gamepad Control Scheme");
+                return asset.controlSchemes[m_GamepadControlSchemeSchemeIndex];
+            }
+        }
+        private int m_MouseKeyboardControlSchemeSchemeIndex = -1;
+        /// <summary>
+        /// Provides access to the input control scheme.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputControlScheme" />
+        public InputControlScheme MouseKeyboardControlSchemeScheme
+        {
+            get
+            {
+                if (m_MouseKeyboardControlSchemeSchemeIndex == -1) m_MouseKeyboardControlSchemeSchemeIndex = asset.FindControlSchemeIndex("Mouse & Keyboard Control Scheme");
+                return asset.controlSchemes[m_MouseKeyboardControlSchemeSchemeIndex];
+            }
+        }
         /// <summary>
         /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Player" which allows adding and removing callbacks.
         /// </summary>
@@ -786,6 +872,13 @@ namespace InputActions
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnZoomOut(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "MouseActivity" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnMouseActivity(InputAction.CallbackContext context);
         }
     }
 }

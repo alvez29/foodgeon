@@ -24,7 +24,6 @@ namespace Project.Code.Gameplay.Player.Eating
         [SerializeField] protected float eatingLerpPositionDuration = 0.4f;
 
         [SerializeField] protected Ease eatingEasingPosition = Ease.Linear;  
-        //TODO: Use it to wait time
         [SerializeField] protected float eatingTime = 3f;
         [SerializeField] protected float eatingRadius = 10f;
         

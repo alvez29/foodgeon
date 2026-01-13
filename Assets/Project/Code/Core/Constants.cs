@@ -118,6 +118,12 @@ namespace Project.Code.Core
             /// </summary>
             public static IEnumerator WaitTime(float waitTime, Action onCompleted = null)
             {
+                if (waitTime <= 0)
+                {
+                    onCompleted?.Invoke();
+                    yield break;
+                }
+                
                 var elapsedTime = 0f;
             
                 while (elapsedTime < waitTime)
