@@ -49,8 +49,9 @@ namespace Project.Code.Gameplay.Stats
             get => speed;
             private set => speed = value;
         }
-        
-        public bool IsDead => CurrentHealth <= 0;
+
+        protected bool IsDead => CurrentHealth <= 0;
+        private bool _isInvincible = false;
         
         #endregion
 
@@ -67,7 +68,7 @@ namespace Project.Code.Gameplay.Stats
         
         public virtual float TakeDamage(float amount, float abilityPower, GameObject source)
         {
-            if (CurrentHealth <= 0) return 0f;
+            if (_isInvincible || IsDead) return 0f;
 
             var damageTaken = Constants.Stats.GetDamageValue(amount, Defense, abilityPower);
             var hitStopDuration = Mathf.Clamp(damageTaken * 0.02f, 0.1f, 0.7f);
@@ -109,6 +110,11 @@ namespace Project.Code.Gameplay.Stats
             AddDefense(enemyReward.Defense);
             AddSpeed(enemyReward.Speed);
             AddStrength(enemyReward.Defense);
+        }
+
+        public void SetInvincibility(bool newInvincibility)
+        {
+            _isInvincible = newInvincibility;
         }
         
         public virtual void Heal(float amount)

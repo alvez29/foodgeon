@@ -1,6 +1,4 @@
-﻿using Project.Code.Gameplay.Player;
-
-namespace Project.Code.Gameplay.States.StatesLibrary.Player.Grounded.Base
+﻿namespace Project.Code.Gameplay.States.StatesLibrary.Player.Grounded.Base
 {
     public abstract class PlayerGroundedState : PlayerBaseState
     {

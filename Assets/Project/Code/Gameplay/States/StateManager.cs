@@ -1,8 +1,10 @@
-﻿using Project.Code.Gameplay.Stats;
+﻿using System;
+using Project.Code.Gameplay.Stats;
 using UnityEngine;
 
 namespace Project.Code.Gameplay.States
 {
+    // This manager should work as a router
     [RequireComponent(typeof(BaseStats))]
     public abstract class StateManager : MonoBehaviour
     {
@@ -13,10 +15,25 @@ namespace Project.Code.Gameplay.States
         
         #endregion
 
-        #region Abstract Methods
+        #region Abstract and Virtual Methods
 
         protected abstract void SetDefaultState();
-        
+
+        protected virtual void BindEvents()
+        {
+            if (ownerStats != null) ownerStats.OnDamageTaken += OnOwnerStatsOnOnDamageTaken;
+        }
+
+        private void OnOwnerStatsOnOnDamageTaken(float currentHealth, float maxHealth, float amount, GameObject source)
+        {
+            CurrentState?.OnDamageTaken(this, currentHealth, maxHealth, amount, source);
+        }
+
+        protected virtual void BindComponents()
+        {
+            ownerStats =  GetComponent<BaseStats>();
+        }
+
         #endregion
 
         #region Unity Functions
@@ -24,6 +41,7 @@ namespace Project.Code.Gameplay.States
         private void Awake()
         {
             BindComponents();
+            BindEvents();
         }
 
         private void Start()
@@ -32,20 +50,15 @@ namespace Project.Code.Gameplay.States
             CurrentState?.OnStateEntered(this);
         }
 
+        private void OnDisable()
+        {
+            if (ownerStats != null) ownerStats.OnDamageTaken -= OnOwnerStatsOnOnDamageTaken;
+        }
+
         private void Update()
         {
             // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
             CurrentState?.UpdateState(this);
-        }
-        
-        #endregion
-
-        #region Protected Methods
-
-        protected virtual void BindComponents()
-        {
-            ownerStats = GetComponent<BaseStats>();
-            // Derived classes should bind their own states/components
         }
         
         #endregion

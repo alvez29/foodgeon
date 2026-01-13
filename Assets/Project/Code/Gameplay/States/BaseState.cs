@@ -1,4 +1,6 @@
-﻿namespace Project.Code.Gameplay.States
+﻿using UnityEngine;
+
+namespace Project.Code.Gameplay.States
 {
     public abstract class BaseState
     {
@@ -7,8 +9,9 @@
         public abstract void OnStateEntered(StateManager contextManager);
         public abstract void UpdateState(StateManager contextManager);
         public abstract void OnStateExited(StateManager contextManager);
+        public abstract void OnDamageTaken(StateManager contextManager, float currentHealth, float maxHealth, float amount, GameObject source);
         public abstract void OnCollisionEnter(StateManager contextManager);
-        
+
         #endregion
     }
 }

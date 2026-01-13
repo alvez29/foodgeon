@@ -26,6 +26,11 @@ namespace Project.Code.Core
             public const string Player = "Player";
             public const string Enemy = "Enemy";
         }
+
+        public static class Hit
+        {
+            public const float PlayerHitStunDuration = 0.2f;
+        }
         
         public static class Stats
         {
@@ -40,7 +45,7 @@ namespace Project.Code.Core
                 private const float FirstEvolutionHealth = 10.0f;
                 private const float SecondEvolutionHealth = 15.0f;
                 private const float ThirdEvolutionHealth = 20.0f;
-
+                
                 public static float GetMaxHealthFromEvolution(int evolutionStage)
                 {
                     return evolutionStage switch

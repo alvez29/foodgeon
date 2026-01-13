@@ -1,4 +1,3 @@
-using Project.Code.Gameplay.Player;
 using UnityEngine;
 
 namespace Project.Code.Gameplay.States
@@ -6,8 +5,8 @@ namespace Project.Code.Gameplay.States
     public abstract class PlayerBaseState : BaseState
     {
         #region Fields
-        
-        protected PlayerStateManager PlayerStateManager;
+
+        private PlayerStateManager _playerStateManager;
         
         #endregion
 
@@ -15,32 +14,37 @@ namespace Project.Code.Gameplay.States
 
         public override void OnStateEntered(StateManager contextManager)
         {
-            PlayerStateManager = contextManager as PlayerStateManager;
-            if (!PlayerStateManager)
+            _playerStateManager = contextManager as PlayerStateManager;
+            if (!_playerStateManager)
             {
                 Debug.LogError($"State {GetType().Name} expected PlayerStateManager!");
                 return;
             }
-            OnPlayerStateEntered(PlayerStateManager);
+            OnPlayerStateEntered(_playerStateManager);
         }
 
         public override void UpdateState(StateManager contextManager)
         {
-            if (PlayerStateManager) OnPlayerStateUpdate(PlayerStateManager);
+            if (_playerStateManager) OnPlayerStateUpdate(_playerStateManager);
         }
 
         public override void OnStateExited(StateManager contextManager)
         {
-            if (PlayerStateManager) OnPlayerStateExited(PlayerStateManager);
+            if (_playerStateManager) OnPlayerStateExited(_playerStateManager);
             
-            PlayerStateManager = null;
+            _playerStateManager = null;
         }
 
         public override void OnCollisionEnter(StateManager contextManager)
         {
-            if (PlayerStateManager != null) OnPlayerStateCollision(PlayerStateManager);
+            if (_playerStateManager != null) OnPlayerStateCollision(_playerStateManager);
         }
-        
+
+        public override void OnDamageTaken(StateManager contextManager, float currentHealth, float maxHealth, float amount, GameObject source)
+        {
+            if (_playerStateManager != null) OnPlayerDamageTaken(_playerStateManager, currentHealth, maxHealth, amount, source);
+        }
+
         #endregion
 
         #region Virtual Methods
@@ -50,6 +54,10 @@ namespace Project.Code.Gameplay.States
         protected virtual void OnPlayerStateUpdate(PlayerStateManager manager) { }
         protected virtual void OnPlayerStateExited(PlayerStateManager manager) { }
         protected virtual void OnPlayerStateCollision(PlayerStateManager manager) { }
+        protected virtual void OnPlayerDamageTaken(PlayerStateManager manager , float currentHealth, float maxHealth, float amount, GameObject source)
+        {
+            manager.SwitchState(manager.PlayerHitState);
+        }
         
         #endregion
     }
