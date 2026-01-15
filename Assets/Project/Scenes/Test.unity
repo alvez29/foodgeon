@@ -246,9 +246,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1260340203013677898, guid: bc5b1e50200f8074f87bc6354a3eff18, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1260340203013677898, guid: bc5b1e50200f8074f87bc6354a3eff18, type: 3}
       propertyPath: playerMovementComponent
       value: 
       objectReference: {fileID: 2104654731}
+    - target: {fileID: 1321973488020953321, guid: bc5b1e50200f8074f87bc6354a3eff18, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1837980732351382163, guid: bc5b1e50200f8074f87bc6354a3eff18, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -265,6 +273,22 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: d88ceef2f67bb954c8ca522a093c164a, type: 2}
+    - target: {fileID: 2480546936009891670, guid: bc5b1e50200f8074f87bc6354a3eff18, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2480546936009891670, guid: bc5b1e50200f8074f87bc6354a3eff18, type: 3}
+      propertyPath: m_Size.x
+      value: 5.59
+      objectReference: {fileID: 0}
+    - target: {fileID: 2480546936009891670, guid: bc5b1e50200f8074f87bc6354a3eff18, type: 3}
+      propertyPath: m_Size.y
+      value: 4.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 2480546936009891670, guid: bc5b1e50200f8074f87bc6354a3eff18, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2791991763051193339, guid: bc5b1e50200f8074f87bc6354a3eff18, type: 3}
       propertyPath: m_Camera
       value: 
@@ -334,7 +358,8 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4161966640927920769, guid: bc5b1e50200f8074f87bc6354a3eff18, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5691796591133314095, guid: bc5b1e50200f8074f87bc6354a3eff18, type: 3}

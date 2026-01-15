@@ -1,3 +1,4 @@
+using System.Data;
 using Project.Code.Core.Data.ScriptableObjects;
 using Project.Code.Core.Interfaces;
 using Project.Code.Gameplay.Stats;
@@ -26,9 +27,6 @@ namespace Project.Code.Gameplay.Combat.Abilities.Executors
             var origin = caster.transform.position;
             var forward = caster.transform.forward;
 
-            // Debug visualization
-            HitboxDebugger.Instance.DrawSphere(origin, data.Range, Color.red, 0.5f);
-
             // Detect all colliders in range
             var hitCount = Physics.OverlapSphereNonAlloc(origin, data.Range, _hitResults, data.TargetLayer);
             
@@ -48,6 +46,8 @@ namespace Project.Code.Gameplay.Combat.Abilities.Executors
                 if (!(Vector3.Angle(forward, directionToTarget) < data.Angle / 2)) continue;
                 
                 OnHit(caster, hit.gameObject, data);
+                
+                HitboxDebugger.Instance.DrawCone(origin, directionToTarget, data.Range, data.Angle, Color.red);
             }
         }
 

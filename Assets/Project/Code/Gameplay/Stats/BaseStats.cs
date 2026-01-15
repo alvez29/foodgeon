@@ -72,7 +72,7 @@ namespace Project.Code.Gameplay.Stats
 
             var damageTaken = Constants.Stats.GetDamageValue(amount, Defense, abilityPower);
             var hitStopDuration = Mathf.Clamp(damageTaken * 0.02f, 0.1f, 0.7f);
-            var trauma = Mathf.Clamp(damageTaken * 0.03f, 0.3f, 0.6f);
+            var trauma = Mathf.Clamp(damageTaken * 0.03f, 0.5f, 0.8f);
             
             CurrentHealth = Mathf.Clamp(CurrentHealth - damageTaken, 0, MaxHealth);
             OnHealthChanged?.Invoke(CurrentHealth, MaxHealth);

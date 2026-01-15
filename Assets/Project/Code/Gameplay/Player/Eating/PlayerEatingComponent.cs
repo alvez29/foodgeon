@@ -89,17 +89,7 @@ namespace Project.Code.Gameplay.Player.Eating
                         new Vector3(objectToEat.transform.position.x - eatingTargetPositionOffest.x,
                             objectToEat.transform.position.y - eatingTargetPositionOffest.y,
                             objectToEat.transform.position.z - eatingTargetPositionOffest.z),
-                        eatingLerpPositionDuration).SetEase(eatingEasingPosition);
-                    
-                    PlayerStats.AddEnemyReward(enemyStats.EnemyReward);
-
-                    (PlayerStats as PlayerStats)?.AddToBelly(
-                        new EatenEnemyData(enemyStats.EnemyType, enemyStats.Flavor));
-                    
-                    _evolutionComponent?.TryEvolving();
-
-                    StartCoroutine(
-                        Constants.Coroutines.WaitTime(eatingTime, () => OnEatingWaitTimeCompleted(edibleComponent)));
+                        eatingLerpPositionDuration).SetEase(eatingEasingPosition).OnComplete(OnMovedToEatingTarget(enemyStats, edibleComponent));
                 }
                 else
                 {
@@ -111,6 +101,18 @@ namespace Project.Code.Gameplay.Player.Eating
 
             Debug.Log("Eww... That is not edible");
             return false;
+        }
+
+        private TweenCallback OnMovedToEatingTarget(EnemyStats enemyStats)
+        {
+            PlayerStats.AddEnemyReward(enemyStats.EnemyReward);
+
+            (PlayerStats as PlayerStats)?.AddToBelly(
+                new EatenEnemyData(enemyStats.EnemyType, enemyStats.Flavor));
+                    
+            _evolutionComponent?.TryEvolving();
+            
+            return null;
         }
 
         // ReSharper disable Unity.PerformanceAnalysis
