@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7665638001643256395}
+  - component: {fileID: 2338045233101602495}
   - component: {fileID: 1344969014848184926}
   - component: {fileID: 8786273154768086673}
   m_Layer: 0
@@ -34,6 +35,18 @@ Transform:
   - {fileID: 5508340535369230666}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2338045233101602495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3588765376096716026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77246120873c41d18a6929455d3f9872, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Project.Code.Gameplay.Player.Camera.PlayerCameraFeedback
 --- !u!114 &1344969014848184926
 MonoBehaviour:
   m_ObjectHideFlags: 0

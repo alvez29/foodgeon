@@ -26,32 +26,10 @@ namespace Project.Code.Gameplay.Camera
         private float trauma;
 
         private float _seed;
-        
-        private static CameraShake _instance;
-        public static CameraShake Instance
-        {
-            get
-            {
-                if (_instance != null) return _instance;
-                var obj = new GameObject("CameraShake");
-                _instance = obj.AddComponent<CameraShake>();
-                DontDestroyOnLoad(obj);
-                return _instance;
-            }
-        }
-
 
         private void Awake()
         {
             _seed = Random.value;
-            if (_instance != null && _instance != this)
-            {
-                Destroy(gameObject);
-                return;
-            }
-
-            _instance = this;
-            DontDestroyOnLoad(gameObject);
         }
 
         private void Update()

@@ -1,9 +1,7 @@
 ﻿using Project.Code.Core;
 using Project.Code.Core.Data;
 using Project.Code.Core.Interfaces;
-using Project.Code.Gameplay.Camera;
 using Project.Code.Gameplay.Managers;
-using Unity.Mathematics.Geometry;
 using UnityEngine;
 
 namespace Project.Code.Gameplay.Stats
@@ -72,15 +70,17 @@ namespace Project.Code.Gameplay.Stats
 
             var damageTaken = Constants.Stats.GetDamageValue(amount, Defense, abilityPower);
             var hitStopDuration = Mathf.Clamp(damageTaken * 0.02f, 0.1f, 0.7f);
-            var trauma = Mathf.Clamp(damageTaken * 0.03f, 0.5f, 0.8f);
             
             CurrentHealth = Mathf.Clamp(CurrentHealth - damageTaken, 0, MaxHealth);
             OnHealthChanged?.Invoke(CurrentHealth, MaxHealth);
             
             HitStopManager.Instance.HitStop(hitStopDuration);
-            CameraShake.Instance.AddTrauma(trauma);
 
-            if (damageTaken > 0) OnDamageTaken?.Invoke(CurrentHealth, MaxHealth, damageTaken, source);
+            if (damageTaken > 0)
+            {
+                GameEvents.RaiseDamage(CurrentHealth, MaxHealth, damageTaken, source);
+                OnDamageTaken?.Invoke(CurrentHealth, MaxHealth, damageTaken, source);
+            }
 
             if (CurrentHealth <= 0)
             {

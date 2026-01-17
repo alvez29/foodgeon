@@ -755,6 +755,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad34c1432cfa46fb8a979a4bd1bc7295, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Code.Gameplay.Player.Camera.PlayerCameraRotator
+--- !u!114 &1610075645 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5442393909060826051, guid: 49c69e9b2f1650748bed7e3125c416dc, type: 3}
+  m_PrefabInstance: {fileID: 3414971368976853983}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da6a7659b561d414d8d10d0abde02f0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Project.Code.Gameplay.Camera.CameraShake
 --- !u!114 &1610075646 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 104329067809859835, guid: 49c69e9b2f1650748bed7e3125c416dc, type: 3}
@@ -932,6 +943,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69e08df6644453f468e36283130b47c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Code.Gameplay.Player.PlayerInputHandler
+--- !u!114 &2104654752 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7247364498119055964, guid: bc5b1e50200f8074f87bc6354a3eff18, type: 3}
+  m_PrefabInstance: {fileID: 324654967}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f15699d9e4d4de0bdf384513d244a7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Project.Code.Gameplay.Player.Eating.PlayerEatingComponent
 --- !u!1001 &3414971368976853983
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -952,6 +974,26 @@ PrefabInstance:
       propertyPath: playerAimComponent
       value: 
       objectReference: {fileID: 2104654747}
+    - target: {fileID: 2338045233101602495, guid: 49c69e9b2f1650748bed7e3125c416dc, type: 3}
+      propertyPath: eating
+      value: 
+      objectReference: {fileID: 2104654752}
+    - target: {fileID: 2338045233101602495, guid: 49c69e9b2f1650748bed7e3125c416dc, type: 3}
+      propertyPath: cameraZoom
+      value: 
+      objectReference: {fileID: 1610075646}
+    - target: {fileID: 2338045233101602495, guid: 49c69e9b2f1650748bed7e3125c416dc, type: 3}
+      propertyPath: cameraShake
+      value: 
+      objectReference: {fileID: 1610075645}
+    - target: {fileID: 2338045233101602495, guid: 49c69e9b2f1650748bed7e3125c416dc, type: 3}
+      propertyPath: playerStats
+      value: 
+      objectReference: {fileID: 2104654725}
+    - target: {fileID: 2338045233101602495, guid: 49c69e9b2f1650748bed7e3125c416dc, type: 3}
+      propertyPath: cameraRotator
+      value: 
+      objectReference: {fileID: 1523427101}
     - target: {fileID: 3588765376096716026, guid: 49c69e9b2f1650748bed7e3125c416dc, type: 3}
       propertyPath: m_Name
       value: CameraRig
@@ -998,7 +1040,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7665638001643256395, guid: 49c69e9b2f1650748bed7e3125c416dc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 7665638001643256395, guid: 49c69e9b2f1650748bed7e3125c416dc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y

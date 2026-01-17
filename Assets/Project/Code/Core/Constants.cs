@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Project.Code.Core.Data;
 using Project.Code.Core.Data.Enums;
+using Project.Code.Gameplay.Player.Camera;
 using UnityEngine;
 
 namespace Project.Code.Core
@@ -146,6 +147,15 @@ namespace Project.Code.Core
             }
 
         }
+        #endregion
+
+        #region Utils
+
+        public static T GetComponentInChildrenOrSelf<T>(this Component self) where T : Component
+        {
+            return self.GetComponentInChildren<T>() ?? self.GetComponent<T>();
+        }
+
         #endregion
     }
 }

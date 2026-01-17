@@ -1,12 +1,11 @@
 ﻿using System;
 using DG.Tweening;
+using NUnit.Framework.Constraints;
 using Project.Code.Core;
 using Project.Code.Core.Data;
 using Project.Code.Core.Interfaces;
-using Project.Code.Gameplay.Camera;
 using Project.Code.Gameplay.Eating.Base;
 using Project.Code.Gameplay.Enemies;
-using Project.Code.Gameplay.Player.Camera;
 using Project.Code.Gameplay.Player.Stats;
 using Project.Code.Utils;
 using UnityEngine;
@@ -27,20 +26,19 @@ namespace Project.Code.Gameplay.Player.Eating
         
         [Header("Player eating settings")]
         [SerializeField] protected Vector3 eatingTargetPositionOffest = Vector3.zero;
-        [SerializeField] protected float eatingLerpPositionDuration = 0.4f;
+        [SerializeField] protected float eatingLerpPositionDuration = 0.2f;
 
         [SerializeField] protected Ease eatingEasingPosition = Ease.Linear;  
         //[SerializeField] protected float eatingTime = 3f;
         [SerializeField] protected float eatingRadius = 10f;
         
-        [SerializeField] private PlayerCameraZoom cameraZoom;
-        [SerializeField] private PlayerCameraRotator cameraRotator;
-        
+        public int currentBiteNumber;
+
         private PlayerInputHandler _inputHandler;
         private PlayerEvolutionComponent _evolutionComponent;
-
-        private float _eatingComboTimes;
-        private Action _currentComboAction;
+        
+        private Action _currentBiteAction;
+        private Action _currentCancelBiteAction;
         
         private readonly Collider[] _hitResults = new Collider[10];
 
@@ -75,9 +73,6 @@ namespace Project.Code.Gameplay.Player.Eating
         
         public override void PerformEatingAction()
         {
-            Debug.Log("PerformEatingAction called");
-            if (IsEating) return;
-
             var origin = transform.position + transform.forward.normalized * eatingRange;
             var hitCounts = Physics.OverlapSphereNonAlloc(origin, eatingRadius, _hitResults, targetLayer);
 
@@ -106,10 +101,7 @@ namespace Project.Code.Gameplay.Player.Eating
                 if (objectToEat.TryGetComponent(out EnemyStats enemyStats))
                 {
                     if (!enemyStats.CanBeEaten) return false;
-                    
-                    IsEating = true;
-                    _inputHandler.DisableInputs(PlayerInputHandler.PlayerConfigurableInputs.Aim,
-                        PlayerInputHandler.PlayerConfigurableInputs.Dash, PlayerInputHandler.PlayerConfigurableInputs.Move);
+                    ChangeInputConfigurationToBitingAndBindEvents(enemyStats, edibleComponent);
                     MoveToTarget(objectToEat, enemyStats, edibleComponent);
                 }
                 else
@@ -131,27 +123,29 @@ namespace Project.Code.Gameplay.Player.Eating
                 new Vector3(objectToEat.transform.position.x - eatingTargetPositionOffest.x,
                     objectToEat.transform.position.y - eatingTargetPositionOffest.y,
                     objectToEat.transform.position.z - eatingTargetPositionOffest.z),
-                eatingLerpPositionDuration).SetEase(eatingEasingPosition).OnComplete(OnMovedToEatingTarget(enemyStats, edibleComponent));
+                eatingLerpPositionDuration).SetEase(eatingEasingPosition);
         }
 
-        private TweenCallback OnMovedToEatingTarget(EnemyStats enemyStats, IEdible edibleComponent)
+        private void ChangeInputConfigurationToBitingAndBindEvents(EnemyStats enemyStats, IEdible edibleComponent)
         {
-            return () =>
-            {
-                _inputHandler.OnEatPerformed -= PerformEatingAction;
-                _currentComboAction = () => PerformBite(enemyStats, edibleComponent);
-                _inputHandler.OnEatPerformed += _currentComboAction;
-            };
+            _inputHandler.DisableInputs(PlayerInputHandler.PlayerConfigurableInputs.Aim,
+                PlayerInputHandler.PlayerConfigurableInputs.Dash,
+                PlayerInputHandler.PlayerConfigurableInputs.Move,
+                PlayerInputHandler.PlayerConfigurableInputs.Eat);
+            _currentBiteAction = () => PerformBite(enemyStats, edibleComponent);
+            _currentCancelBiteAction = ResetEatingState;
+            
+            _inputHandler.OnBitePerformed += _currentBiteAction;
+            _inputHandler.OnCancelBitePerformed += _currentCancelBiteAction;
         }
         
         private void PerformBite(EnemyStats enemyStats, IEdible edibleComponent)
         {
-            _eatingComboTimes++;
+            currentBiteNumber++;
             OnBitePerformed?.Invoke();
-            DoCameraEffect();
+            var isBiteComboFinished = currentBiteNumber >= Constants.Stats.Player.EatingComboTimes;
 
-            // If the combo has finished
-            if (_eatingComboTimes >= Constants.Stats.Player.EatingComboTimes)
+            if (isBiteComboFinished)
             {
                 CompleteEating(enemyStats, edibleComponent);
             }
@@ -167,29 +161,26 @@ namespace Project.Code.Gameplay.Player.Eating
             ResetEatingState();
         }
 
-        private void DoCameraEffect()
+        private void ResetInputConfigurationToEating()
         {
-            CameraShake.Instance.AddTrauma(0.4f);
-            var eatingComboTimes = _eatingComboTimes + 1;
-            cameraZoom?.DoCustomZoom(new Vector3(0f, 8f, -10f)/eatingComboTimes, 0.2f);
-            cameraRotator?.RotateIncrement(new Vector3(0f, 0f, 1.43f), 0.2f);
+            if (_currentBiteAction != null)
+            {
+                _inputHandler.OnBitePerformed -= _currentBiteAction;
+                _inputHandler.OnCancelBitePerformed -= _currentCancelBiteAction;
+                _currentBiteAction = null;
+                _currentCancelBiteAction = null;
+            }
+
+            _inputHandler.EnableInputs(PlayerInputHandler.PlayerConfigurableInputs.Aim,
+                PlayerInputHandler.PlayerConfigurableInputs.Dash, PlayerInputHandler.PlayerConfigurableInputs.Move,
+                PlayerInputHandler.PlayerConfigurableInputs.Eat);
         }
 
+        
         private void ResetEatingState()
         {
-            if (_currentComboAction != null)
-            {
-                _inputHandler.OnEatPerformed -= _currentComboAction;
-                _currentComboAction = null;
-            }
-                
-            _inputHandler.OnEatPerformed += PerformEatingAction;
-            cameraZoom?.ResetZoom();
-            cameraRotator?.ResetRotation();
-            _inputHandler.EnableInputs(PlayerInputHandler.PlayerConfigurableInputs.Aim,
-                PlayerInputHandler.PlayerConfigurableInputs.Dash, PlayerInputHandler.PlayerConfigurableInputs.Move);
-            _eatingComboTimes = 0;
-            IsEating = false;
+            ResetInputConfigurationToEating();
+            currentBiteNumber = 0;
             OnEatingCompleted?.Invoke();
         }
 

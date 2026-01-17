@@ -165,6 +165,24 @@ namespace InputActions
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Bite"",
+                    ""type"": ""Button"",
+                    ""id"": ""b32a405f-98ad-47ee-bd54-75264bb3f43e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CancelBite"",
+                    ""type"": ""Button"",
+                    ""id"": ""b5b1927b-e696-426b-bcd9-74aedfee77ea"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -464,6 +482,50 @@ namespace InputActions
                     ""action"": ""MouseActivity"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""710b1d87-25d1-488d-b432-f62be1c7b560"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Mouse & Keyboard Control Scheme"",
+                    ""action"": ""Bite"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5d8052b5-106e-4245-9eb8-28fa72583a31"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad Control Scheme"",
+                    ""action"": ""Bite"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c864544f-4910-42a5-b483-b5c3878bad79"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse & Keyboard Control Scheme"",
+                    ""action"": ""CancelBite"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ae82ce67-5799-40e9-82b6-6e417790588e"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad Control Scheme"",
+                    ""action"": ""CancelBite"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -508,6 +570,8 @@ namespace InputActions
             m_Player_Eat = m_Player.FindAction("Eat", throwIfNotFound: true);
             m_Player_ZoomOut = m_Player.FindAction("ZoomOut", throwIfNotFound: true);
             m_Player_MouseActivity = m_Player.FindAction("MouseActivity", throwIfNotFound: true);
+            m_Player_Bite = m_Player.FindAction("Bite", throwIfNotFound: true);
+            m_Player_CancelBite = m_Player.FindAction("CancelBite", throwIfNotFound: true);
         }
 
         ~@PlayerControls()
@@ -596,6 +660,8 @@ namespace InputActions
         private readonly InputAction m_Player_Eat;
         private readonly InputAction m_Player_ZoomOut;
         private readonly InputAction m_Player_MouseActivity;
+        private readonly InputAction m_Player_Bite;
+        private readonly InputAction m_Player_CancelBite;
         /// <summary>
         /// Provides access to input actions defined in input action map "Player".
         /// </summary>
@@ -639,6 +705,14 @@ namespace InputActions
             /// Provides access to the underlying input action "Player/MouseActivity".
             /// </summary>
             public InputAction @MouseActivity => m_Wrapper.m_Player_MouseActivity;
+            /// <summary>
+            /// Provides access to the underlying input action "Player/Bite".
+            /// </summary>
+            public InputAction @Bite => m_Wrapper.m_Player_Bite;
+            /// <summary>
+            /// Provides access to the underlying input action "Player/CancelBite".
+            /// </summary>
+            public InputAction @CancelBite => m_Wrapper.m_Player_CancelBite;
             /// <summary>
             /// Provides access to the underlying input action map instance.
             /// </summary>
@@ -689,6 +763,12 @@ namespace InputActions
                 @MouseActivity.started += instance.OnMouseActivity;
                 @MouseActivity.performed += instance.OnMouseActivity;
                 @MouseActivity.canceled += instance.OnMouseActivity;
+                @Bite.started += instance.OnBite;
+                @Bite.performed += instance.OnBite;
+                @Bite.canceled += instance.OnBite;
+                @CancelBite.started += instance.OnCancelBite;
+                @CancelBite.performed += instance.OnCancelBite;
+                @CancelBite.canceled += instance.OnCancelBite;
             }
 
             /// <summary>
@@ -724,6 +804,12 @@ namespace InputActions
                 @MouseActivity.started -= instance.OnMouseActivity;
                 @MouseActivity.performed -= instance.OnMouseActivity;
                 @MouseActivity.canceled -= instance.OnMouseActivity;
+                @Bite.started -= instance.OnBite;
+                @Bite.performed -= instance.OnBite;
+                @Bite.canceled -= instance.OnBite;
+                @CancelBite.started -= instance.OnCancelBite;
+                @CancelBite.performed -= instance.OnCancelBite;
+                @CancelBite.canceled -= instance.OnCancelBite;
             }
 
             /// <summary>
@@ -846,6 +932,20 @@ namespace InputActions
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnMouseActivity(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "Bite" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnBite(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "CancelBite" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnCancelBite(InputAction.CallbackContext context);
         }
     }
 }

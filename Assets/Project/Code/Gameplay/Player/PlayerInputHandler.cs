@@ -31,6 +31,8 @@ namespace Project.Code.Gameplay.Player
         public event Action<Vector2> OnGamepadAimChanged;
         public event Action OnGamepadAimStopped;
         public event Action OnEatPerformed;
+        public event Action OnBitePerformed;
+        public event Action OnCancelBitePerformed;
         public event Action OnZoomStarted;
         public event Action OnZoomStopped;
 
@@ -122,6 +124,9 @@ namespace Project.Code.Gameplay.Player
             controls.Player.SpecialAttack.performed += ctx => OnSpecialAbilityPerformed?.Invoke();
             
             controls.Player.Eat.performed += ctx => OnEatPerformed?.Invoke();
+
+            controls.Player.Bite.performed += ctx => OnBitePerformed?.Invoke();
+            controls.Player.CancelBite.performed += ctx => OnCancelBitePerformed?.Invoke();
             
             controls.Player.ZoomOut.performed += ctx => OnZoomStarted?.Invoke();
             controls.Player.ZoomOut.canceled += ctx => OnZoomStopped?.Invoke();
