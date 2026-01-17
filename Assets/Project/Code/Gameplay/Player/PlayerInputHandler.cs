@@ -12,6 +12,14 @@ namespace Project.Code.Gameplay.Player
     {
         private const string GamepadScheme = "Gamepad Control Scheme";
         private const string MouseAndKeyboardScheme = "Mouse & Keyboard Control Scheme";
+
+        public enum PlayerConfigurableInputs
+        {
+            Dash,
+            Move,
+            Aim,
+            Eat,
+        }
         
         #region Events
         
@@ -46,8 +54,8 @@ namespace Project.Code.Gameplay.Player
             _controls.asset.bindingMask = null;
         }
 
-        private void OnEnable() => EnableInput();
-        private void OnDisable() => DisableInput();
+        private void OnEnable() => EnableAllInputs();
+        private void OnDisable() => DisableAllInputs();
 
         private void Update()
         {
@@ -131,15 +139,61 @@ namespace Project.Code.Gameplay.Player
         }
 
 
-        public void DisableInput()
+        public void DisableAllInputs()
         {
             _controls?.Disable();
             OnInputDisabled?.Invoke();
         }
 
-        public void EnableInput()
+        public void EnableInputs(params PlayerConfigurableInputs[] inputActions)
         {
-            _controls.Enable();
+            ChangeInputsState(true, inputActions);
+        }
+        
+        public void DisableInputs(params PlayerConfigurableInputs[] inputActions)
+        {
+            ChangeInputsState(false, inputActions);
+        }
+        
+        private static void ChangeInputState(InputAction inputAction, bool shouldEnable)
+        {
+            if (shouldEnable)
+            {
+                inputAction.Enable();
+            }
+            else
+            {
+                inputAction.Disable();
+            }
+        }
+        
+        private void ChangeInputsState(bool shouldEnable, params PlayerConfigurableInputs[] inputActions)
+        {
+            foreach (var  inputAction in inputActions)
+            {
+                switch (inputAction)
+                {
+                    case PlayerConfigurableInputs.Dash:
+                        ChangeInputState(_controls.Player.Dash, shouldEnable);
+                        break;
+                    case PlayerConfigurableInputs.Move:
+                        ChangeInputState(_controls.Player.Move, shouldEnable);
+                        break;
+                    case PlayerConfigurableInputs.Aim:
+                        ChangeInputState(_controls.Player.Aim, shouldEnable);
+                        break;
+                    case PlayerConfigurableInputs.Eat:
+                        ChangeInputState(_controls.Player.Eat, shouldEnable);
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+        }
+        
+        public void EnableAllInputs()
+        {
+            _controls?.Enable();
             OnInputEnabled?.Invoke();
         }
         

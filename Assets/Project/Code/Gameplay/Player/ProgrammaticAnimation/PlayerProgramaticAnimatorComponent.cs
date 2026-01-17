@@ -35,8 +35,6 @@ namespace Project.Code.Gameplay.Player.ProgrammaticAnimation
 
             var offSetX = Mathf.Lerp(0.5f, -0.5f, lookXMap);
             var offSetY = Mathf.Lerp(-0.2f, 0.2f, lookYMap);
-
-            print(lookY);
             
             face.transform.localPosition = new Vector3(offSetX, offSetY, 0);
             _faceSpriteRenderer.sortingOrder = lookY >= 0 ? -1 : 1;

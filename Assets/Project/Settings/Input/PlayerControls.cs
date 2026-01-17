@@ -185,18 +185,18 @@ namespace InputActions
                     ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Gamepad Control Scheme"",
                     ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""db6135d0-b87d-4241-87f8-3435f48079e6"",
+                    ""id"": ""6fe5a17d-ac7d-442b-9f66-b26ae92f273f"",
                     ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Gamepad Control Scheme"",
                     ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -229,7 +229,7 @@ namespace InputActions
                     ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Gamepad Control Scheme"",
                     ""action"": ""SimpleAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -380,10 +380,10 @@ namespace InputActions
                 {
                     ""name"": """",
                     ""id"": ""4db775d5-0058-457b-97f1-a3f7ed986ae4"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Gamepad Control Scheme"",
                     ""action"": ""SpecialAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false

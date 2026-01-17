@@ -1,12 +1,14 @@
 ﻿using System.Linq;
 using Project.Code.Core;
 using Project.Code.Gameplay.Evolution;
+using Project.Code.Gameplay.Player.Eating;
 using Project.Code.Gameplay.Player.Stats;
 using UnityEngine;
 
 namespace Project.Code.Gameplay.Player
 {
     [RequireComponent(typeof(PlayerStats))]
+    [RequireComponent(typeof(PlayerEatingComponent))]
     public class PlayerEvolutionComponent : MonoBehaviour
     {
         [SerializeField] private Evolution.Evolution initialEvolution;
@@ -16,13 +18,14 @@ namespace Project.Code.Gameplay.Player
         public Evolution.Evolution CurrentEvolution { get; private set; }
 
         private PlayerStats _playerStats;
-
-
+        private PlayerEatingComponent _playerEatingComponent;
+        
         #region Unity Functions
 
         private void Awake()
         {
             _playerStats = GetComponent<PlayerStats>();
+            _playerEatingComponent = GetComponent<PlayerEatingComponent>();
             CurrentEvolution = initialEvolution;
         }
 

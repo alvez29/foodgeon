@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using Project.Code.Core.Data;
 using Project.Code.Core.Data.Enums;
-using Project.Code.Core.Data.ScriptableObjects;
 using UnityEngine;
 
 namespace Project.Code.Core
@@ -45,6 +44,8 @@ namespace Project.Code.Core
                 private const float FirstEvolutionHealth = 10.0f;
                 private const float SecondEvolutionHealth = 15.0f;
                 private const float ThirdEvolutionHealth = 20.0f;
+                
+                public const int EatingComboTimes = 3;
                 
                 public static float GetMaxHealthFromEvolution(int evolutionStage)
                 {

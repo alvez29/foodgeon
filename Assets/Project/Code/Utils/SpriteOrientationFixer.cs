@@ -20,7 +20,6 @@ namespace Project.Code.Utils
         {
             if (_spriteRenderer && _playerAimComponent)
             {
-                print($"aim direction is {_playerAimComponent.AimDirection}");
                 _spriteRenderer.flipX = _playerAimComponent.AimDirection is { x: > 0 };
             }
             else
