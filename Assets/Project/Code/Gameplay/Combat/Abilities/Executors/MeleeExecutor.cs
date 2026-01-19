@@ -1,4 +1,3 @@
-using System.Data;
 using Project.Code.Core.Data.ScriptableObjects;
 using Project.Code.Core.Interfaces;
 using Project.Code.Gameplay.Stats;
@@ -22,15 +21,18 @@ namespace Project.Code.Gameplay.Combat.Abilities.Executors
 
         #region Override Methods
 
-        public override void Execute(GameObject caster, AbilityData data)
+        public override void Execute(GameObject caster, CharacterController controller, AbilityData data)
         {
             var origin = caster.transform.position;
             var forward = caster.transform.forward;
+            var abilityRange = data.GetRangeValue(controller);
 
             // Detect all colliders in range
-            var hitCount = Physics.OverlapSphereNonAlloc(origin, data.Range, _hitResults, data.TargetLayer);
+            var hitCount = Physics.OverlapSphereNonAlloc(origin, abilityRange, _hitResults, data.TargetLayer);
             
-            Debug.Log($"[MeleeExecutor] Hit Count: {hitCount} | LayerMask: {data.TargetLayer.value} | Origin: {origin}");
+            HitboxDebugger.Instance.DrawSphere(origin, abilityRange, Color.darkRed, 3f);
+            
+            Debug.Log($"[MeleeExecutor] Hit Count: {hitCount} | LayerMask: {data.TargetLayer.value} | Origin: {origin} | Range: {abilityRange}");
 
             // Filter by cone angle
             for (var i = 0; i < hitCount; i++)
@@ -43,11 +45,11 @@ namespace Project.Code.Gameplay.Combat.Abilities.Executors
                 // Check if target is within cone angle
                 var directionToTarget = (hit.transform.position - origin).normalized;
 
+                HitboxDebugger.Instance.DrawCone(origin, forward, abilityRange, data.Angle, Color.red);
+                
                 if (!(Vector3.Angle(forward, directionToTarget) < data.Angle / 2)) continue;
                 
                 OnHit(caster, hit.gameObject, data);
-                
-                HitboxDebugger.Instance.DrawCone(origin, directionToTarget, data.Range, data.Angle, Color.red);
             }
         }
 

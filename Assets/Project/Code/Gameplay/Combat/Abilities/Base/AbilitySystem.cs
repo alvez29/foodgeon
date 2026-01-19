@@ -6,6 +6,7 @@ namespace Project.Code.Gameplay.Combat.Abilities.Base
 {
     [RequireComponent(typeof(PlayerInputHandler))]
     [RequireComponent(typeof(PlayerEvolutionComponent))]
+    [RequireComponent(typeof(CharacterController))]
     public class AbilitySystem : MonoBehaviour
     {
         #region Serialized Fields
@@ -22,6 +23,7 @@ namespace Project.Code.Gameplay.Combat.Abilities.Base
 
         private PlayerInputHandler _inputHandler;
         private PlayerEvolutionComponent _playerEvolutionComponent;
+        private CharacterController _characterController;
         
         #endregion
 
@@ -31,6 +33,7 @@ namespace Project.Code.Gameplay.Combat.Abilities.Base
         {
             _inputHandler = GetComponent<PlayerInputHandler>();
             _playerEvolutionComponent = GetComponent<PlayerEvolutionComponent>();
+            _characterController = GetComponent<CharacterController>();
         }
 
         private void OnEnable()
@@ -55,7 +58,7 @@ namespace Project.Code.Gameplay.Combat.Abilities.Base
             if (basicAbility == null) return;
             if (!(Time.time >= _lastBasicAbilityTime + basicAbility.Cooldown)) return;
             
-            basicAbility.Use(gameObject);
+            basicAbility.Use(gameObject, _characterController);
             _lastBasicAbilityTime = Time.time;
         }
 

@@ -9,6 +9,7 @@ namespace Project.Code.Gameplay.Player
 {
     [RequireComponent(typeof(PlayerStats))]
     [RequireComponent(typeof(PlayerEatingComponent))]
+    [RequireComponent(typeof(CharacterController))]
     public class PlayerEvolutionComponent : MonoBehaviour
     {
         [SerializeField] private Evolution.Evolution initialEvolution;
@@ -18,14 +19,14 @@ namespace Project.Code.Gameplay.Player
         public Evolution.Evolution CurrentEvolution { get; private set; }
 
         private PlayerStats _playerStats;
-        private PlayerEatingComponent _playerEatingComponent;
+        private CharacterController _characterController;
         
         #region Unity Functions
 
         private void Awake()
         {
             _playerStats = GetComponent<PlayerStats>();
-            _playerEatingComponent = GetComponent<PlayerEatingComponent>();
+            _characterController = GetComponent<CharacterController>();
             CurrentEvolution = initialEvolution;
         }
 
@@ -100,7 +101,7 @@ namespace Project.Code.Gameplay.Player
 
         public void UseSpecialAbility()
         {
-            CurrentEvolution.specialAbility.Use(gameObject);
+            CurrentEvolution.specialAbility.Use(gameObject, _characterController);
         }
 
         public float GetCurrentEvolutionCooldown()

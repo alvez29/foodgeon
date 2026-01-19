@@ -20,7 +20,7 @@ namespace Project.Code.Core
             public const float KnockbackDuration = 0.05f;
             public const float KnockbackDistance = 1f;
         }
-        
+
         public static class Tags
         {
             public const string Player = "Player";
@@ -31,23 +31,38 @@ namespace Project.Code.Core
         {
             public const float PlayerHitStunDuration = 0.2f;
         }
-        
+
         public static class Stats
         {
             public const int MaxBelly = 50;
-            public const int MaxEvolutionStage = 3;
             public const float MaxStrength = 60.0f;
             public const float MaxDefense = 60.0f;
             public const float MaxSpeed = 60.0f;
             
+            public static readonly Func<CharacterController, float> Height =
+                characterController => characterController.height;
+
+            public static readonly Func<CharacterController, float> Radius =
+                    characterController => characterController.radius;
+
+            public static readonly Func<CharacterController, float> Width = characterController =>
+                Radius(characterController) * 2;
+
+            public static readonly Func<CharacterController, float> RangeBaseUnit = characterController =>
+                Width(characterController);
+            
             public static class Player
             {
+                // in m/s
+                public const float BaseSpeed = 1f;
+                public const float SpeedUnit = 0.4f;
+
                 private const float FirstEvolutionHealth = 10.0f;
                 private const float SecondEvolutionHealth = 15.0f;
                 private const float ThirdEvolutionHealth = 20.0f;
-                
+
                 public const int EatingComboTimes = 3;
-                
+
                 public static float GetMaxHealthFromEvolution(int evolutionStage)
                 {
                     return evolutionStage switch
@@ -57,7 +72,7 @@ namespace Project.Code.Core
                         3 => ThirdEvolutionHealth,
                         _ => FirstEvolutionHealth
                     };
-                }    
+                }
             }
 
 
@@ -97,15 +112,17 @@ namespace Project.Code.Core
                     };
                 }
             }
-            
+
             /// <summary>
             /// Centered damage formula
             /// </summary>
             /// <returns>The value of the damage dealt</returns>
             public static float GetDamageValue(float damageAmount, float defense, float abilityPower)
             {
-                return Mathf.Clamp(Mathf.Floor((float)(((damageAmount - (defense / 1.2)) / 2.5) + ((abilityPower + 3.0) / 3.0))), 1,
-                    10);;
+                return Mathf.Clamp(
+                    Mathf.Floor((float)(((damageAmount - (defense / 1.2)) / 2.5) + ((abilityPower + 3.0) / 3.0))), 1,
+                    10);
+                ;
             }
         }
 
@@ -119,7 +136,6 @@ namespace Project.Code.Core
 
         public static class Coroutines
         {
-            
             /// <summary>
             /// Simple coroutine for waiting certain amount of time
             /// </summary>
@@ -130,9 +146,9 @@ namespace Project.Code.Core
                     onCompleted?.Invoke();
                     yield break;
                 }
-                
+
                 var elapsedTime = 0f;
-            
+
                 while (elapsedTime < waitTime)
                 {
                     elapsedTime += Time.deltaTime;
@@ -141,12 +157,12 @@ namespace Project.Code.Core
                     {
                         onCompleted?.Invoke();
                     }
-                    
-                    yield return null;                    
+
+                    yield return null;
                 }
             }
-
         }
+
         #endregion
 
         #region Utils

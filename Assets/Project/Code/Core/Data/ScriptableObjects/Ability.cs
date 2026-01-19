@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Project.Code.Core.Data.ScriptableObjects
@@ -27,7 +28,7 @@ namespace Project.Code.Core.Data.ScriptableObjects
         public string AbilityName => abilityName;
         public float Cooldown => cooldown;
         public AbilityExecutor Executor => executor;
-        public float Range => range;
+        
         public float Angle => angle;
         public LayerMask TargetLayer => targetLayer;
         public float Power => power;
@@ -36,7 +37,7 @@ namespace Project.Code.Core.Data.ScriptableObjects
         
         #region Public Methods
         
-        public void Use(GameObject subject)
+        public void Use(GameObject subject, CharacterController controller)
         {
             if (executor == null)
             {
@@ -44,7 +45,7 @@ namespace Project.Code.Core.Data.ScriptableObjects
                 return;
             }
             
-            executor.Execute(subject, this);
+            executor.Execute(subject, controller, this);
         }
         
         public void OnHit(GameObject subject, GameObject hitObject)
@@ -57,7 +58,12 @@ namespace Project.Code.Core.Data.ScriptableObjects
             
             executor.OnHit(subject, hitObject, this);
         }
-        
+
+
+        public float GetRangeValue(CharacterController controller)
+        {
+            return Constants.Stats.Radius(controller) + (range * Constants.Stats.RangeBaseUnit(controller));
+        }
         #endregion
     }
 }

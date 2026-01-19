@@ -74,7 +74,7 @@ namespace Project.Code.Gameplay.Player
 
             if (inputMagnitude > Constants.Movement.MovementInputThreshold)
             {
-                var finalSpeed = _stats ? _stats.Speed : 0f;
+                var finalSpeed = _stats ? Constants.Stats.Player.BaseSpeed + _stats.Speed * Constants.Stats.Player.SpeedUnit : 0f;
                 _targetSpeed = finalSpeed * inputMagnitude;
                 MoveDirection = new Vector3(input.x, 0f, input.y).normalized;
             }

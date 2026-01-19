@@ -9,13 +9,14 @@ namespace Project.Code.Core.Data.ScriptableObjects
     public abstract class AbilityExecutor : ScriptableObject
     {
         #region Abstract Methods
-        
+
         /// <summary>
         /// Execute the ability logic
         /// </summary>
         /// <param name="caster">The GameObject using the ability</param>
+        /// <param name="controller">The game controller associated to the caster</param>
         /// <param name="data">The ability data containing parameters</param>
-        public abstract void Execute(GameObject caster, AbilityData data);
+        public abstract void Execute(GameObject caster, CharacterController controller, AbilityData data);
         
         /// <summary>
         /// Called when the ability hits a target
