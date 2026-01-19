@@ -1,22 +1,35 @@
-using Project.Code.Gameplay.Player;
+using System;
 using Project.Code.Gameplay.States.StatesLibrary.Player.Grounded.Base;
 
 namespace Project.Code.Gameplay.States.StatesLibrary.Player.Grounded
 {
     public class PlayerEatingState : PlayerGroundedState
     {
+        #region Fields
+
+        private Action _onPlayerEatingComponentFinishedEating;
+
+        #endregion
+        
+        
         #region Override Methods
 
-        // ReSharper disable Unity.PerformanceAnalysis
-        protected override void OnPlayerStateUpdate(PlayerStateManager manager)
+        protected override void OnPlayerStateEntered(PlayerStateManager manager)
         {
             base.OnPlayerStateUpdate(manager);
             
-            // idle to run
-            if (!manager.playerEatingComponent.IsEating)
-            {
-                manager.SwitchState(manager.PlayerIdleState);
-            }
+            _onPlayerEatingComponentFinishedEating = () => manager.SwitchState(manager.PlayerIdleState);
+            
+            manager.playerEatingComponent.OnEatingCompleted += _onPlayerEatingComponentFinishedEating;
+        }
+
+        protected override void OnPlayerStateExited(PlayerStateManager manager)
+        {
+            manager.playerEatingComponent.OnEatingCompleted -= _onPlayerEatingComponentFinishedEating;
+
+            _onPlayerEatingComponentFinishedEating = null;
+            
+            base.OnPlayerStateExited(manager);
         }
         
         #endregion

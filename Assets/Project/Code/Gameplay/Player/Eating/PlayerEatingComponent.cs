@@ -29,7 +29,6 @@ namespace Project.Code.Gameplay.Player.Eating
         [SerializeField] protected float eatingLerpPositionDuration = 0.2f;
 
         [SerializeField] protected Ease eatingEasingPosition = Ease.Linear;  
-        //[SerializeField] protected float eatingTime = 3f;
         [SerializeField] protected float eatingRadius = 10f;
         
         public int currentBiteNumber;
@@ -107,6 +106,7 @@ namespace Project.Code.Gameplay.Player.Eating
                 else
                 {
                     edibleComponent.OnBeingEaten();
+                    OnEatingCompleted?.Invoke();
                 }
 
                 return true;

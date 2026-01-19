@@ -1,20 +1,38 @@
-﻿namespace Project.Code.Gameplay.States.StatesLibrary.Player.Grounded.Base
+﻿using System;
+
+namespace Project.Code.Gameplay.States.StatesLibrary.Player.Grounded.Base
 {
     public abstract class PlayerGroundedState : PlayerBaseState
     {
-        #region Override Methods
+        #region Fields
+
+        private Action _onDashAbilityOnDashStarted;
+        private Action _onPlayerEatingComponentOnEatingStarted;
+
+        #endregion
         
-        protected override void OnPlayerStateUpdate(PlayerStateManager manager)
+        #region Override Methods
+
+        protected override void OnPlayerStateEntered(PlayerStateManager manager)
         {
-            // any grounded to stash
-            if (manager.dashAbility.IsDashing)
-            {
-                manager.SwitchState(manager.PlayerDashState);
-            }
-            else if (manager.playerEatingComponent.IsEating)
-            {
-                manager.SwitchState(manager.PlayerEatingState);
-            }
+            base.OnPlayerStateEntered(manager);
+            
+            _onDashAbilityOnDashStarted = () => manager.SwitchState(manager.PlayerDashState);
+            _onPlayerEatingComponentOnEatingStarted = () => manager.SwitchState(manager.PlayerEatingState);
+            
+            manager.dashAbility.OnDashStarted += _onDashAbilityOnDashStarted;
+            manager.playerEatingComponent.OnEatingStarted += _onPlayerEatingComponentOnEatingStarted;
+        }
+
+        protected override void OnPlayerStateExited(PlayerStateManager manager)
+        {
+            manager.dashAbility.OnDashStarted -= _onDashAbilityOnDashStarted;
+            manager.playerEatingComponent.OnEatingStarted += _onPlayerEatingComponentOnEatingStarted;
+            
+            _onDashAbilityOnDashStarted = null;
+            _onPlayerEatingComponentOnEatingStarted = null;
+            
+            base.OnPlayerStateExited(manager);
         }
         
         #endregion

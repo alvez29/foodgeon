@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Project.Code.Gameplay.Player
@@ -7,6 +8,9 @@ namespace Project.Code.Gameplay.Player
     [RequireComponent(typeof(PlayerInputHandler))]
     public class PlayerDashAbility : MonoBehaviour
     {
+        public event Action OnDashStarted;
+        public event Action OnDashFinished;
+        
         #region Serialized Fields
         
         [Header("Dash Settings")]
@@ -19,8 +23,8 @@ namespace Project.Code.Gameplay.Player
 
         #region Properties
 
-        public bool IsDashing { get; private set; }
-        private bool CanDash => !IsDashing && Time.time >= _lastDashTime + dashCooldown;
+        private bool _isDashing = false;
+        private bool CanDash => !_isDashing && Time.time >= _lastDashTime + dashCooldown;
         
         #endregion
 
@@ -67,9 +71,10 @@ namespace Project.Code.Gameplay.Player
 
         private IEnumerator PerformDash()
         {
-            IsDashing = true;
+            _isDashing = true;
             _lastDashTime = Time.time;
-            
+            OnDashStarted?.Invoke();
+
             var dashDirection = _playerMovementComponent.IsMoving 
                 ? _playerMovementComponent.MoveDirection 
                 : transform.forward;
@@ -88,7 +93,8 @@ namespace Project.Code.Gameplay.Player
                 yield return null;
             }
 
-            IsDashing = false;
+            _isDashing = false;
+            OnDashFinished?.Invoke();
         }
         
         #endregion
