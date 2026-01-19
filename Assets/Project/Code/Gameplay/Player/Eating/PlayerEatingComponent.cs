@@ -94,17 +94,18 @@ namespace Project.Code.Gameplay.Player.Eating
         {
             if (objectToEat.TryGetComponent(out IEdible edibleComponent))
             {
-                OnEatingStarted?.Invoke();
 
                 //If it is an edible enemy   
                 if (objectToEat.TryGetComponent(out EnemyStats enemyStats))
                 {
                     if (!enemyStats.CanBeEaten) return false;
+                    OnEatingStarted?.Invoke();
                     ChangeInputConfigurationToBitingAndBindEvents(enemyStats, edibleComponent);
                     MoveToTarget(objectToEat, enemyStats, edibleComponent);
                 }
                 else
                 {
+                    OnEatingStarted?.Invoke();
                     edibleComponent.OnBeingEaten();
                     OnEatingCompleted?.Invoke();
                 }
