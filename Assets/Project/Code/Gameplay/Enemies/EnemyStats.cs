@@ -1,7 +1,6 @@
 ﻿using Project.Code.Core;
 using Project.Code.Core.Data;
 using Project.Code.Core.Data.Enums;
-using Project.Code.Core.Data.ScriptableObjects;
 using Project.Code.Gameplay.Combat.HitFlash;
 using Project.Code.Gameplay.Stats;
 using UnityEngine;

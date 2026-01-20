@@ -17,16 +17,16 @@ namespace Project.Code.Gameplay.States.StatesLibrary.Player
         {
             _onDashAbilityFinishedDashing += () => manager.SwitchState(manager.PlayerIdleState);
 
-            manager.dashAbility.OnDashFinished += _onDashAbilityFinishedDashing;
+            manager.DashAbility.OnDashFinished += _onDashAbilityFinishedDashing;
             
-            manager.playerStats.SetInvincibility(true);
+            manager.PlayerStats.SetInvincibility(true);
         }
 
         protected override void OnPlayerStateExited(PlayerStateManager manager)
         {
-            manager.playerStats.SetInvincibility(false);
+            manager.PlayerStats.SetInvincibility(false);
 
-            manager.dashAbility.OnDashFinished -= _onDashAbilityFinishedDashing;
+            manager.DashAbility.OnDashFinished -= _onDashAbilityFinishedDashing;
             
             _onDashAbilityFinishedDashing = null;
         }

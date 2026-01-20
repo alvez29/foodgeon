@@ -13,7 +13,7 @@ namespace Project.Code.Gameplay.States.StatesLibrary.Player.Grounded
             base.OnPlayerStateUpdate(manager);
             
             // idle to run
-            if (manager.movementComponent.IsMoving)
+            if (manager.MovementComponent.IsMoving)
             {
                 manager.SwitchState(manager.PlayerRunState);
             }

@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc268cff5373c9447abe7586d0868fad, type: 3}
   m_Name: BiteMeleeAbilityExecutor
   m_EditorClassIdentifier: Assembly-CSharp::Project.Code.Gameplay.Combat.Abilities.Executors.MeleeExecutor
+  angle: 90
+  range: 2

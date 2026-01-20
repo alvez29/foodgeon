@@ -20,14 +20,14 @@ namespace Project.Code.Gameplay.States.StatesLibrary.Player.Grounded.Base
             _onDashAbilityOnDashStarted = () => manager.SwitchState(manager.PlayerDashState);
             _onPlayerEatingComponentOnEatingStarted = () => manager.SwitchState(manager.PlayerEatingState);
             
-            manager.dashAbility.OnDashStarted += _onDashAbilityOnDashStarted;
-            manager.playerEatingComponent.OnEatingStarted += _onPlayerEatingComponentOnEatingStarted;
+            manager.DashAbility.OnDashStarted += _onDashAbilityOnDashStarted;
+            manager.PlayerEatingComponent.OnEatingStarted += _onPlayerEatingComponentOnEatingStarted;
         }
 
         protected override void OnPlayerStateExited(PlayerStateManager manager)
         {
-            manager.dashAbility.OnDashStarted -= _onDashAbilityOnDashStarted;
-            manager.playerEatingComponent.OnEatingStarted += _onPlayerEatingComponentOnEatingStarted;
+            manager.DashAbility.OnDashStarted -= _onDashAbilityOnDashStarted;
+            manager.PlayerEatingComponent.OnEatingStarted += _onPlayerEatingComponentOnEatingStarted;
             
             _onDashAbilityOnDashStarted = null;
             _onPlayerEatingComponentOnEatingStarted = null;

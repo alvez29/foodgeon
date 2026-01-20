@@ -56,7 +56,7 @@ namespace Project.Code.Gameplay.Combat.Knockback
                 var t = elapsedTime / knockbackDuration;
                 var curveValue = knockbackCurve.Evaluate(t);
                 var dashSpeed = (knockbackDistance / knockbackDuration) * curveValue;
-
+                
                 _characterController.Move(knockbackDirection * (dashSpeed * Time.deltaTime));
 
                 elapsedTime += Time.deltaTime;

@@ -8,7 +8,7 @@ namespace Project.Code.Gameplay.States.StatesLibrary.Player.Grounded
         {
             base.OnPlayerStateUpdate(manager);
             
-            if (!manager.movementComponent.IsMoving)
+            if (!manager.MovementComponent.IsMoving)
             {
                 manager.SwitchState(manager.PlayerIdleState);
             }

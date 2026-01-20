@@ -20,12 +20,12 @@ namespace Project.Code.Gameplay.States.StatesLibrary.Player.Grounded
             
             _onPlayerEatingComponentFinishedEating = () => manager.SwitchState(manager.PlayerIdleState);
             
-            manager.playerEatingComponent.OnEatingCompleted += _onPlayerEatingComponentFinishedEating;
+            manager.PlayerEatingComponent.OnEatingCompleted += _onPlayerEatingComponentFinishedEating;
         }
 
         protected override void OnPlayerStateExited(PlayerStateManager manager)
         {
-            manager.playerEatingComponent.OnEatingCompleted -= _onPlayerEatingComponentFinishedEating;
+            manager.PlayerEatingComponent.OnEatingCompleted -= _onPlayerEatingComponentFinishedEating;
 
             _onPlayerEatingComponentFinishedEating = null;
             

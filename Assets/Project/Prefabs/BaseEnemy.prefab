@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3003586180505091940}
   - component: {fileID: 171332834740181274}
   - component: {fileID: 8030311578150230848}
-  - component: {fileID: 8947777968436770417}
   m_Layer: 6
   m_Name: Capsule
   m_TagString: Untagged
@@ -90,29 +89,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &8947777968436770417
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8000644817278731516}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.7
-  m_Height: 3
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8795643183060070249
 GameObject:
   m_ObjectHideFlags: 0
@@ -122,6 +98,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4138404676430748956}
+  - component: {fileID: 5232674813906735962}
   - component: {fileID: 5228467867432667315}
   - component: {fileID: 552116809821826495}
   - component: {fileID: 182040767517528236}
@@ -151,6 +128,29 @@ Transform:
   - {fileID: 7541648700195744151}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &5232674813906735962
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8795643183060070249}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.7
+  m_Height: 3
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!143 &5228467867432667315
 CharacterController:
   m_ObjectHideFlags: 0
@@ -260,7 +260,7 @@ MonoBehaviour:
   flashMaterial: {fileID: 2100000, guid: 0a3de168a8406924f8cea7ae2d1b7b1a, type: 2}
   flashDuration: 0.1
   targetRenderer: {fileID: 8030311578150230848}
-  IsFlashing: 0
+  isFlashing: 0
 --- !u!1001 &3158873753897465908
 PrefabInstance:
   m_ObjectHideFlags: 0

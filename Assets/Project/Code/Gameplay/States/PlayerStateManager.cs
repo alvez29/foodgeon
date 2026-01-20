@@ -1,3 +1,4 @@
+using System;
 using Project.Code.Gameplay.Player;
 using Project.Code.Gameplay.Player.Eating;
 using Project.Code.Gameplay.Player.Stats;
@@ -16,11 +17,11 @@ namespace Project.Code.Gameplay.States
         #region Fields
         
         // Components
-        public PlayerDashAbility dashAbility;
-        public PlayerMovementComponent movementComponent;
-        public PlayerEatingComponent playerEatingComponent;
-        public PlayerStats playerStats;
-        public PlayerInputHandler inputHandler;
+        [NonSerialized] public PlayerDashAbility DashAbility;
+        [NonSerialized] public PlayerMovementComponent MovementComponent;
+        [NonSerialized] public PlayerEatingComponent PlayerEatingComponent;
+        [NonSerialized] public PlayerStats PlayerStats;
+        [NonSerialized] public PlayerInputHandler InputHandler;
 
         // States
         public readonly PlayerIdleState PlayerIdleState = new();
@@ -37,11 +38,11 @@ namespace Project.Code.Gameplay.States
         {
             base.BindComponents();
             
-            dashAbility = GetComponent<PlayerDashAbility>();
-            movementComponent = GetComponent<PlayerMovementComponent>();
-            playerEatingComponent = GetComponent<PlayerEatingComponent>();
-            playerStats = GetComponent<PlayerStats>();
-            inputHandler = GetComponent<PlayerInputHandler>();
+            DashAbility = GetComponent<PlayerDashAbility>();
+            MovementComponent = GetComponent<PlayerMovementComponent>();
+            PlayerEatingComponent = GetComponent<PlayerEatingComponent>();
+            PlayerStats = GetComponent<PlayerStats>();
+            InputHandler = GetComponent<PlayerInputHandler>();
         }
 
         protected override void SetDefaultState()

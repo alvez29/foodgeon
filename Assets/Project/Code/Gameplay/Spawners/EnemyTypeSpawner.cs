@@ -53,12 +53,12 @@ namespace Project.Code.Gameplay.Spawners
 
         private void SpawnEnemy(EnemyType type, Vector3 position)
         {
-            EnemyStats enemyInstance = Instantiate(enemyPrefab, position, Quaternion.identity);
+            var enemyInstance = Instantiate(enemyPrefab, position, Quaternion.identity);
             
             // Initialize with specific type
             enemyInstance.Initialize(1, type);
             
-            System.Action onDeathAction = null;
+            Action onDeathAction = null;
             onDeathAction = () =>
             {
                 enemyInstance.OnDeath -= onDeathAction;

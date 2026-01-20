@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Project.Code.Core.Data.ScriptableObjects
@@ -16,8 +15,6 @@ namespace Project.Code.Core.Data.ScriptableObjects
         [SerializeField] private AbilityExecutor executor;
         
         [Header("Parameters")]
-        [SerializeField] private float range = 1.5f;
-        [SerializeField] private float angle = 90f;
         [SerializeField] private LayerMask targetLayer;
         [SerializeField] private float power = 1f;
         
@@ -29,7 +26,6 @@ namespace Project.Code.Core.Data.ScriptableObjects
         public float Cooldown => cooldown;
         public AbilityExecutor Executor => executor;
         
-        public float Angle => angle;
         public LayerMask TargetLayer => targetLayer;
         public float Power => power;
         
@@ -57,12 +53,6 @@ namespace Project.Code.Core.Data.ScriptableObjects
             }
             
             executor.OnHit(subject, hitObject, this);
-        }
-
-
-        public float GetRangeValue(CharacterController controller)
-        {
-            return Constants.Stats.Radius(controller) + (range * Constants.Stats.RangeBaseUnit(controller));
         }
         #endregion
     }

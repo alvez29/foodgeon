@@ -10,14 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0bfd9dcff9d205e42920639429d9db4e, type: 3}
-  m_Name: BiteAbility
+  m_Name: EmbersAbilityData
   m_EditorClassIdentifier: Assembly-CSharp::Project.Code.Core.Data.ScriptableObjects.AbilityData
-  abilityName: Bite
-  cooldown: 4
-  executor: {fileID: 11400000, guid: 9d4d5622a751dd34facf9dbdaa9a88be, type: 2}
-  range: 3
-  angle: 90
+  abilityName: Embers
+  cooldown: 0.1
+  executor: {fileID: 11400000, guid: 0fca86df7687f694995d8be284552c1c, type: 2}
   targetLayer:
     serializedVersion: 2
     m_Bits: 64
-  power: 5
+  power: 10

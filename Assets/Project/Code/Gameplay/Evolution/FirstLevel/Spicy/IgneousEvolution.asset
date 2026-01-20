@@ -21,8 +21,8 @@ MonoBehaviour:
   speedPrecondition: 25
   enemiesTypePrecondition:
   - amount: 4
-    type: 2
-  specialAbility: {fileID: 0}
+    type: 3
+  specialAbility: {fileID: 11400000, guid: 0a8252f3315f55c438eae5b93e28611e, type: 2}
   evolutionDepth: 1
   possibleNextEvolution:
   - {fileID: 11400000, guid: fc33a145e32e13f4da00bcf4ce89f708, type: 2}

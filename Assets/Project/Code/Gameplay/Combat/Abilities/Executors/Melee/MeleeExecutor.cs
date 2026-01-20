@@ -1,10 +1,11 @@
+using Project.Code.Core;
 using Project.Code.Core.Data.ScriptableObjects;
 using Project.Code.Core.Interfaces;
 using Project.Code.Gameplay.Stats;
 using Project.Code.Utils;
 using UnityEngine;
 
-namespace Project.Code.Gameplay.Combat.Abilities.Executors
+namespace Project.Code.Gameplay.Combat.Abilities.Executors.Melee
 {
     /// <summary>
     /// Executor for melee cone-based attacks.
@@ -15,17 +16,29 @@ namespace Project.Code.Gameplay.Combat.Abilities.Executors
     {
         #region Fields
         
+        [SerializeField] private float angle = 90f;
+        [SerializeField] private float range = 90f;
+        
         private readonly Collider[] _hitResults = new Collider[10];
         
         #endregion
 
+        #region Private Methods
+
+        private float GetRangeValue(CharacterController controller)
+        {
+            return Constants.Stats.Radius(controller) + range * Constants.Stats.RangeBaseUnit(controller);
+        }
+        
+        #endregion
+        
         #region Override Methods
 
         public override void Execute(GameObject caster, CharacterController controller, AbilityData data)
         {
             var origin = caster.transform.position;
             var forward = caster.transform.forward;
-            var abilityRange = data.GetRangeValue(controller);
+            var abilityRange = GetRangeValue(controller);
 
             // Detect all colliders in range
             var hitCount = Physics.OverlapSphereNonAlloc(origin, abilityRange, _hitResults, data.TargetLayer);
@@ -45,9 +58,9 @@ namespace Project.Code.Gameplay.Combat.Abilities.Executors
                 // Check if target is within cone angle
                 var directionToTarget = (hit.transform.position - origin).normalized;
 
-                HitboxDebugger.Instance.DrawCone(origin, forward, abilityRange, data.Angle, Color.red);
+                HitboxDebugger.Instance.DrawCone(origin, forward, abilityRange, angle, Color.red);
                 
-                if (!(Vector3.Angle(forward, directionToTarget) < data.Angle / 2)) continue;
+                if (!(Vector3.Angle(forward, directionToTarget) < angle / 2)) continue;
                 
                 OnHit(caster, hit.gameObject, data);
             }
@@ -56,6 +69,7 @@ namespace Project.Code.Gameplay.Combat.Abilities.Executors
         public override void OnHit(GameObject caster, GameObject target, AbilityData data)
         {
             // Calculate damage based on caster's strength and ability's damage multiplier
+            //TODO: This GetComponent can be optimized with interface
             var userStats = caster.GetComponent<BaseStats>();
             var baseDamage = userStats?.Strength ?? 10f;
             var abilityPower = data.Power;
@@ -63,7 +77,7 @@ namespace Project.Code.Gameplay.Combat.Abilities.Executors
             // Apply damage to target
             if (!target.TryGetComponent(out IDamageable damageable)) return;
             
-            var damageDealt = damageable.TakeDamage(baseDamage, data.Power, caster);
+            var damageDealt = damageable.TakeDamage(baseDamage, abilityPower, caster);
             Debug.Log($"[MeleeExecutor] Damaged {target.name} for {damageDealt} (base: {baseDamage}, power: {abilityPower})");
         }
         
