@@ -348,10 +348,6 @@ PrefabInstance:
       propertyPath: m_PresetInfoIsWorld
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5618588461053617313, guid: bc5b1e50200f8074f87bc6354a3eff18, type: 3}
-      propertyPath: initialEvolution
-      value: 
-      objectReference: {fileID: 11400000, guid: 77877d845eaa7414a9a0c14f39331b1f, type: 2}
     - target: {fileID: 5691796591133314095, guid: bc5b1e50200f8074f87bc6354a3eff18, type: 3}
       propertyPath: m_Name
       value: Healthbar
