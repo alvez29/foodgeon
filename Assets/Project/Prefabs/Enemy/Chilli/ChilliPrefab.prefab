@@ -1,0 +1,148 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &3214439827248376259
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4138404676430748956, guid: cf4934c9d40eb24428b71ef4bb1ebad4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4138404676430748956, guid: cf4934c9d40eb24428b71ef4bb1ebad4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4138404676430748956, guid: cf4934c9d40eb24428b71ef4bb1ebad4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4138404676430748956, guid: cf4934c9d40eb24428b71ef4bb1ebad4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4138404676430748956, guid: cf4934c9d40eb24428b71ef4bb1ebad4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4138404676430748956, guid: cf4934c9d40eb24428b71ef4bb1ebad4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4138404676430748956, guid: cf4934c9d40eb24428b71ef4bb1ebad4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4138404676430748956, guid: cf4934c9d40eb24428b71ef4bb1ebad4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4138404676430748956, guid: cf4934c9d40eb24428b71ef4bb1ebad4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4138404676430748956, guid: cf4934c9d40eb24428b71ef4bb1ebad4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8795643183060070249, guid: cf4934c9d40eb24428b71ef4bb1ebad4, type: 3}
+      propertyPath: m_Name
+      value: ChilliPrefab
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8795643183060070249, guid: cf4934c9d40eb24428b71ef4bb1ebad4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2113404991730704842}
+    - targetCorrespondingSourceObject: {fileID: 8795643183060070249, guid: cf4934c9d40eb24428b71ef4bb1ebad4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7070033544043411248}
+    - targetCorrespondingSourceObject: {fileID: 8795643183060070249, guid: cf4934c9d40eb24428b71ef4bb1ebad4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -2029322921833738423}
+  m_SourcePrefab: {fileID: 100100000, guid: cf4934c9d40eb24428b71ef4bb1ebad4, type: 3}
+--- !u!1 &6236250879962400426 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8795643183060070249, guid: cf4934c9d40eb24428b71ef4bb1ebad4, type: 3}
+  m_PrefabInstance: {fileID: 3214439827248376259}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2113404991730704842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6236250879962400426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Behavior::Unity.Behavior.BehaviorGraphAgent
+  m_Graph: {fileID: -2549386929866975218, guid: 0b566cc73dd8fdd4c867ba36c5bc5c42, type: 2}
+  m_BlackboardVariableOverridesList:
+  - rid: 3884152883865977096
+  m_OriginalGraph: {fileID: -2973794635616825717, guid: 56c284b1ba47c7444813f0615141338c, type: 2}
+  m_IsInitialised: 0
+  m_IsStarted: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 3884152883865977096
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        m_Value: {fileID: 6236250879962400426}
+--- !u!195 &7070033544043411248
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6236250879962400426}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &-2029322921833738423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6236250879962400426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0b75093c4e12364b9756fe00542b1b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Project.Code.Gameplay.Enemies.Implementation.Chili.ChiliReferences
+  patrolRadius: 5
+  detectionRadius: 10
+  randomPointsNumber: 3
+  patrolSpeed: 3
+  patrolWaitTime: 2
+  detectionLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  attackSubgraph: {fileID: 2233790970317569918, guid: 56c284b1ba47c7444813f0615141338c, type: 2}
+  fireTrailPrefab: {fileID: 6236250879962400426, guid: f6bf0c8d4c55f6a48974b40b851777bb, type: 3}
+  fleeDistance: 5
+  fleeRadius: 10

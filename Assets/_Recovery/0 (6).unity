@@ -266,7 +266,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: f902e91a52b38fa49876eb7dd58e4624, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: ec1d83636838dc14a909f6b1c59e0b5c, type: 2}
   m_BuildHeightMesh: 0
 --- !u!64 &188071676
 MeshCollider:
@@ -914,6 +914,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2113404991730704842, guid: 0370d376c836e404f9d84600708719df, type: 3}
+      propertyPath: m_Graph
+      value: 
+      objectReference: {fileID: 2233790970317569918, guid: 56c284b1ba47c7444813f0615141338c, type: 2}
+    - target: {fileID: 2113404991730704842, guid: 0370d376c836e404f9d84600708719df, type: 3}
+      propertyPath: m_OriginalGraph
+      value: 
+      objectReference: {fileID: 2233790970317569918, guid: 56c284b1ba47c7444813f0615141338c, type: 2}
+    - target: {fileID: 2113404991730704842, guid: 0370d376c836e404f9d84600708719df, type: 3}
       propertyPath: 'managedReferences[3884152883865977447]'
       value: 'Unity.Behavior Unity.Behavior.BlackboardVariable`1[[UnityEngine.GameObject,
         UnityEngine.CoreModule]]'
@@ -924,7 +932,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2113404991730704842, guid: 0370d376c836e404f9d84600708719df, type: 3}
       propertyPath: m_BlackboardVariableOverridesList.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2113404991730704842, guid: 0370d376c836e404f9d84600708719df, type: 3}
       propertyPath: managedReferences[3884152883865977447].m_Value

@@ -27,6 +27,22 @@ namespace Project.Code.Core
             public const string Enemy = "Enemy";
         }
 
+        public static class Behavior
+        {
+            public static class Blackboard
+            {
+                public const string PatrolSpeedKey = "PatrolSpeed";
+                public const string PatrolWaitTimeKey = "PatrolWaitTime";
+                public const string AttackSubgraphKey = "AttackSubgraph";
+                public const string DetectorWorkerKey = "DetectorWorker";
+                public const string TargetKey = "Target";
+                public const string AfterFleeWaitTimeKey = "AfterFleeWaitTime";
+                public const string FleeSpeedKey = "FleeSpeed";
+                public const string FleeDistanceToTargetKey = "FleeDistanceToTarget";
+                
+            }
+        }
+        
         public static class Hit
         {
             public const float PlayerHitStunDuration = 0.2f;
