@@ -17,6 +17,7 @@ namespace Project.Code.Gameplay.Enemies.Behavior.Chili.Actions
             
             if (chilliData == null || chilliData.fireTrailPrefab == null) return Status.Failure;
             
+            //TODO: Use pooling
             UnityEngine.Object.Instantiate(chilliData.fireTrailPrefab, GameObject.transform.position, Quaternion.identity);
             return Status.Success;
 

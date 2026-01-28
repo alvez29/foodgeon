@@ -39,7 +39,8 @@ namespace Project.Code.Core
                 public const string AfterFleeWaitTimeKey = "AfterFleeWaitTime";
                 public const string FleeSpeedKey = "FleeSpeed";
                 public const string FleeDistanceToTargetKey = "FleeDistanceToTarget";
-                
+                public const string FireTrailRateKey = "FireTrailRate";
+
             }
         }
         

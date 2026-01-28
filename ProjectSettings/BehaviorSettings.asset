@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Behavior.Authoring::Unity.Behavior.BehaviorProjectSettings
   m_GraphOwnerName: Self
   m_AutoSaveLastSaveLocation: 1
-  m_SaveFolder: Project/Code/Gameplay/Enemies/Behavior/Common/Action
+  m_SaveFolder: Project/Code/Gameplay/Enemies/Behavior/Chili
   m_UseSeparateSaveFolders: 0
   m_SaveFolderAction: 
   m_SaveFolderModifier: 
