@@ -1,4 +1,5 @@
 using System;
+using Project.Code.Gameplay.Enemies.Behavior.Chili.Data;
 using Project.Code.Gameplay.Enemies.Behavior.Common;
 using Unity.Behavior;
 using UnityEngine;
@@ -25,7 +26,7 @@ namespace Project.Code.Gameplay.Enemies.Behavior.Chili.Actions
                 return Status.Failure;
             }
 
-            var chilliData = GameObject.GetComponent<ChilliBehaviourData>();
+            var chilliData = GameObject.GetComponent<ChilliBehaviorComponent>();
             
             if (chilliData == null) 
             {

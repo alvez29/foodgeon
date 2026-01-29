@@ -75,7 +75,7 @@ namespace Project.Code.Gameplay.Combat.Abilities.Executors.Projectile
             // Apply damage to target
             if (!target.TryGetComponent(out IDamageable damageable)) return;
 
-            var damageDealt = damageable.TakeDamage(baseDamage, abilityPower, caster);
+            var damageDealt = damageable.TakeDamage(caster, new BaseStats.DamageData(baseDamage, abilityPower));
             Debug.Log(
                 $"[Projectile Executor] Damaged {target.name} for {damageDealt} (base: {baseDamage}, power: {abilityPower})");
         }

@@ -103,6 +103,7 @@ GameObject:
   - component: {fileID: 2348656589074251675}
   - component: {fileID: 1260340203013677898}
   - component: {fileID: 6861789368435235390}
+  - component: {fileID: 3438634767205071440}
   m_Layer: 7
   m_Name: Sprite
   m_TagString: Untagged
@@ -212,7 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1260eb611724e739a414ffc2875ac4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Code.Utils.SpriteOrientationFixer
-  _playerAimComponent: {fileID: 7412036859904549875}
+  playerAimComponent: {fileID: 0}
 --- !u!114 &6861789368435235390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,6 +226,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69e08df6644453f468e36283130b47c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Code.Gameplay.Player.PlayerInputHandler
+--- !u!114 &3438634767205071440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3509679741584272610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ced27b9a80665364a99b4116e434e68c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Project.Code.Gameplay.Player.PlayerAimComponent
 --- !u!1 &4357263987709397659
 GameObject:
   m_ObjectHideFlags: 0
@@ -556,11 +569,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Code.Gameplay.States.PlayerStateManager
   ownerStats: {fileID: 8627007030139879710}
-  dashAbility: {fileID: 3165333103404173559}
-  movementComponent: {fileID: 6968320629646208548}
-  playerEatingComponent: {fileID: 7247364498119055964}
-  playerStats: {fileID: 0}
-  inputHandler: {fileID: 4285852636140555109}
 --- !u!114 &8627007030139879710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -597,8 +605,8 @@ MonoBehaviour:
   eatingTargetPositionOffest: {x: 0, y: 0, z: -2}
   eatingLerpPositionDuration: 0.4
   eatingEasingPosition: 18
-  eatingTime: 1
   eatingRadius: 10
+  currentBiteNumber: 0
 --- !u!114 &5618588461053617313
 MonoBehaviour:
   m_ObjectHideFlags: 0

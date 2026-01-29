@@ -142,8 +142,6 @@ namespace Project.Code.Utils
                             shape.Color
                         );
                         break;
-
-                        break;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }

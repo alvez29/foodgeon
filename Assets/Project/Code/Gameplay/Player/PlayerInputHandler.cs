@@ -23,16 +23,29 @@ namespace Project.Code.Gameplay.Player
         
         #region Events
         
+        // Dash
         public event Action OnDashPerformed;
+        
+        // Simple ability
         public event Action OnSimpleAbilityPerformed;
+        
+        // Special ability
         public event Action OnSpecialAbilityPerformed;
+        
+        // Moving
         public event Action<Vector2> OnMoveInputChanged;
         public event Action<Vector2> OnMousePositionChanged;
+        
+        // Aiming
         public event Action<Vector2> OnGamepadAimChanged;
         public event Action OnGamepadAimStopped;
+        
+        // Eating
         public event Action OnEatPerformed;
         public event Action OnBitePerformed;
         public event Action OnCancelBitePerformed;
+        
+        // Zoom camera
         public event Action OnZoomStarted;
         public event Action OnZoomStopped;
 

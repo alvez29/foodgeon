@@ -1,4 +1,5 @@
 using System;
+using Project.Code.Gameplay.Enemies.Behavior.Chili.Data;
 using Unity.Behavior;
 using UnityEngine;
 using Action = Unity.Behavior.Action;
@@ -13,7 +14,7 @@ namespace Project.Code.Gameplay.Enemies.Behavior.Chili.Actions
         {
             if (GameObject == null) return Status.Failure;
 
-            var chilliData = GameObject.GetComponent<ChilliBehaviourData>();
+            var chilliData = GameObject.GetComponent<ChilliBehaviorComponent>();
             
             if (chilliData == null || chilliData.fireTrailPrefab == null) return Status.Failure;
             

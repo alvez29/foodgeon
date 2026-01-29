@@ -11,6 +11,7 @@ namespace Project.Code.Gameplay.Spawners
     {
         [Header("Configuration")]
         [SerializeField] private EnemyStats enemyPrefab;
+        [SerializeField] private EnemyStats chiliPrefab;
         [SerializeField] private float spawnDistance = 20f;
         [SerializeField] private int gridColumns = 5;
         [SerializeField] private float respawnDelay = 1f;
@@ -53,7 +54,16 @@ namespace Project.Code.Gameplay.Spawners
 
         private void SpawnEnemy(EnemyType type, Vector3 position)
         {
-            var enemyInstance = Instantiate(enemyPrefab, position, Quaternion.identity);
+            var finalEnemyPrefab = enemyPrefab;
+
+            switch (type)
+            {
+                case EnemyType.Chilli:
+                    finalEnemyPrefab = chiliPrefab;
+                    break;
+            }
+            
+            var enemyInstance = Instantiate(finalEnemyPrefab, position, Quaternion.identity);
             
             // Initialize with specific type
             enemyInstance.Initialize(1, type);

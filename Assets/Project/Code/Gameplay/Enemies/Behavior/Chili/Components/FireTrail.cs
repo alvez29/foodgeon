@@ -1,6 +1,7 @@
 using System;
 using Project.Code.Core;
 using Project.Code.Core.Interfaces;
+using Project.Code.Gameplay.Stats;
 using Project.Code.Utils;
 using UnityEngine;
 
@@ -29,7 +30,7 @@ namespace Project.Code.Gameplay.Enemies.Behavior.Chili.Components
         {
             if (other.CompareTag(Constants.Tags.Player) && other.TryGetComponent<IDamageable>(out var damageable))
             {
-                damageable.TakeDamage(damage, 0f, gameObject);
+                damageable.TakeDamage(gameObject, new BaseStats.DamageData(damage, 0));
             }
         }
     }

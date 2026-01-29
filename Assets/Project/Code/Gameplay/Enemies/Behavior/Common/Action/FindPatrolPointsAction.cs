@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Project.Code.Gameplay.Enemies.Behavior.Common.Data;
 using Unity.Behavior;
 using Unity.Properties;
 using UnityEngine;
@@ -14,7 +15,7 @@ namespace Project.Code.Gameplay.Enemies.Behavior.Common.Action
         
         protected override Status OnStart()
         {
-            var behaviourData = GameObject.GetComponent<BehaviourData>();
+            var behaviourData = GameObject.GetComponent<BehaviorComponent>();
             
             if (behaviourData == null)
             {

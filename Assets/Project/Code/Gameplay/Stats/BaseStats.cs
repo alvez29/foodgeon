@@ -8,6 +8,22 @@ namespace Project.Code.Gameplay.Stats
 {
     public abstract class BaseStats : MonoBehaviour, IDamageable
     {
+        #region Struct
+
+        public struct DamageData
+        {
+            public readonly float Amount;
+            public readonly float AbilityPower;
+
+            public DamageData(float amount, float abilityPower)
+            {
+                Amount = amount;
+                AbilityPower = abilityPower;
+            }
+        }
+        
+        #endregion
+        
         #region Events
 
         public event System.Action<float, float> OnHealthChanged;
@@ -64,11 +80,11 @@ namespace Project.Code.Gameplay.Stats
         
         #region Public Methods
         
-        public virtual float TakeDamage(float amount, float abilityPower, GameObject source)
+        public virtual float TakeDamage(GameObject source, DamageData damageData)
         {
             if (_isInvincible || IsDead) return 0f;
 
-            var damageTaken = Constants.Stats.GetDamageValue(amount, Defense, abilityPower);
+            var damageTaken = Constants.Stats.GetDamageValue(damageData.Amount, Defense, damageData.AbilityPower);
             var hitStopDuration = Mathf.Clamp(damageTaken * 0.02f, 0.1f, 0.7f);
             
             CurrentHealth = Mathf.Clamp(CurrentHealth - damageTaken, 0, MaxHealth);
@@ -143,7 +159,7 @@ namespace Project.Code.Gameplay.Stats
         [ContextMenu("Test Damage (10)")]
         private void TestDamage()
         {
-            TakeDamage(1f, 2f, gameObject);
+            TakeDamage(gameObject, new DamageData(1f, 1f));
         }
         
         #endregion
